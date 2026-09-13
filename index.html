@@ -1,0 +1,1184 @@
+<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'></head><body>
+<title>The Starch Trap</title>
+<meta name="description" content="Which countries have traded their way into a starch-rich, micronutrient-poor food supply, and does it show up in women's anemia?">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+:root{
+  --ground:#f6f0f3; --surface:#fffafc; --sunk:#eee3e9;
+  --ink:#27141f; --ink-soft:#57434f; --muted:#86707f;
+  --line:#e3d4dc; --line-strong:#c9b3c1;
+  --plum:#6b2a58; --plum-wash:#efdce8;
+  --grain:#a0660c; --grain-wash:#f4e4c8;
+  --leaf:#1b7260; --leaf-wash:#d5eae3;
+  --blood:#ad2438; --blood-wash:#f6d8dc;
+  --slate:#35658a;
+  --seq-lo:#f7dccf; --seq-hi:#8a0f25;
+  --display:"Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#160f14; --surface:#1f161c; --sunk:#291e25;
+    --ink:#f6ecf2; --ink-soft:#cbb6c3; --muted:#967f8e;
+    --line:#382a33; --line-strong:#523f4b;
+    --plum:#dc9fca; --plum-wash:#3b2236;
+    --grain:#e5ab4d; --grain-wash:#3a2b14;
+    --leaf:#63c4ae; --leaf-wash:#16332c;
+    --blood:#f27183; --blood-wash:#3f1a21;
+    --slate:#8fbadb;
+    --seq-lo:#4a3238; --seq-hi:#ff806c;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#160f14; --surface:#1f161c; --sunk:#291e25;
+  --ink:#f6ecf2; --ink-soft:#cbb6c3; --muted:#967f8e;
+  --line:#382a33; --line-strong:#523f4b;
+  --plum:#dc9fca; --plum-wash:#3b2236;
+  --grain:#e5ab4d; --grain-wash:#3a2b14;
+  --leaf:#63c4ae; --leaf-wash:#16332c;
+  --blood:#f27183; --blood-wash:#3f1a21;
+  --slate:#8fbadb;
+  --seq-lo:#4a3238; --seq-hi:#ff806c;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:64px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--serif); font-size:17px; line-height:1.6; font-optical-sizing:auto}
+a{color:var(--plum); text-underline-offset:3px}
+a:focus-visible, button:focus-visible{outline:2px solid var(--plum); outline-offset:3px; border-radius:2px}
+h1,h2,h3,h4{font-family:var(--display); color:var(--ink); text-wrap:balance; margin:0; line-height:1.08}
+p{margin:0}
+strong{font-weight:600; color:var(--ink)}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:1120px; margin:0 auto; padding:0 28px}
+.prose{max-width:68ch; display:flex; flex-direction:column; gap:1em; color:var(--ink-soft)}
+.label{font-family:var(--mono); font-size:11.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted)}
+
+/* ---------- top nav ---------- */
+.nav{position:sticky; top:0; z-index:20; background:color-mix(in oklab, var(--ground) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex; align-items:center; gap:22px; height:52px; overflow-x:auto; scrollbar-width:none}
+.nav .brand{font-family:var(--display); font-weight:800; font-size:16px; white-space:nowrap; color:var(--ink); text-decoration:none; letter-spacing:-.01em}
+.nav ol{display:flex; gap:4px; list-style:none; margin:0; padding:0}
+.nav li a{display:block; white-space:nowrap; font-family:var(--mono); font-size:12px; color:var(--ink-soft); text-decoration:none; padding:5px 9px; border-radius:4px}
+.nav li a:hover{background:var(--sunk); color:var(--ink)}
+.nav li a span{color:var(--muted); margin-right:5px}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 40px}
+.hero-grid{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:48px; align-items:start}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--plum); font-weight:600}
+.hero h1{font-size:clamp(40px,6.2vw,74px); font-weight:800; letter-spacing:-.025em; margin:16px 0 22px; font-variation-settings:"opsz" 96}
+.hero h1 .cal{color:var(--grain)}
+.hero h1 .nut{color:var(--leaf)}
+.question{font-size:19px; line-height:1.55; color:var(--ink-soft); border-left:3px solid var(--plum); padding:2px 0 2px 18px}
+.question em{color:var(--ink)}
+
+/* nutrition labels */
+.labels{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+@media (max-width:520px){.labels{grid-template-columns:1fr}}
+.nf{background:var(--surface); border:2px solid var(--ink); padding:10px 12px 12px; font-family:var(--display); color:var(--ink)}
+.nf h3{font-size:27px; font-weight:800; letter-spacing:-.02em; line-height:1}
+.nf .sub{font-family:var(--serif); font-size:13.5px; color:var(--ink-soft); margin-top:3px}
+.nf .bar8{height:9px; background:var(--ink); margin:7px 0 4px}
+.nf .bar3{height:4px; background:var(--ink); margin:5px 0 3px}
+.nf .hdr{display:flex; justify-content:space-between; font-size:11.5px; font-weight:800}
+.nf .row{display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid var(--ink); padding:4px 0; font-size:14.5px}
+.nf .row b{font-weight:800}
+.nf .row .v{font-family:var(--mono); font-size:13px; font-variant-numeric:tabular-nums}
+.nf .row .dv{font-family:var(--mono); font-weight:600; font-size:13px; min-width:44px; text-align:right}
+.nf.imp .tag{color:var(--grain)} .nf.dom .tag{color:var(--leaf)}
+.nf .tag{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; font-weight:600}
+.nf .foot{font-family:var(--serif); font-size:11.5px; color:var(--ink-soft); margin-top:6px; line-height:1.4}
+.labels-note{font-size:13.5px; color:var(--muted); margin-top:12px; grid-column:1/-1; line-height:1.5}
+
+/* verdict up front */
+.answers{margin-top:44px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--line-strong); border:1px solid var(--line-strong)}
+@media (max-width:900px){.answers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.answers{grid-template-columns:1fr}}
+.answer{background:var(--surface); padding:18px 18px 20px; display:flex; flex-direction:column; gap:8px}
+.answer .q{font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.answer .a{font-family:var(--display); font-weight:800; font-size:21px; line-height:1.15; letter-spacing:-.01em}
+.answer p{font-size:14.5px; color:var(--ink-soft); line-height:1.5}
+.verdict-chip{align-self:flex-start; font-family:var(--mono); font-size:11px; font-weight:600; padding:2px 8px; border-radius:20px}
+.chip-yes{background:var(--leaf-wash); color:var(--leaf)}
+.chip-part{background:var(--grain-wash); color:var(--grain)}
+.chip-no{background:var(--blood-wash); color:var(--blood)}
+
+/* ---------- chapters ---------- */
+.chapter{padding:72px 0 24px; border-top:1px solid var(--line)}
+.ch-head{display:grid; grid-template-columns:140px minmax(0,1fr); gap:24px; margin-bottom:32px; align-items:baseline}
+@media (max-width:760px){.ch-head{grid-template-columns:1fr; gap:6px}}
+.ch-no{font-family:var(--mono); font-size:12px; color:var(--plum); letter-spacing:.08em; text-transform:uppercase; font-weight:600}
+.ch-head h2{font-size:clamp(30px,4vw,46px); font-weight:800; letter-spacing:-.02em}
+.ch-head .kicker{font-size:18px; color:var(--ink-soft); margin-top:12px; max-width:62ch}
+.body{margin-left:164px}
+@media (max-width:760px){.body{margin-left:0}}
+.block{margin:36px 0}
+h3.step{font-size:23px; font-weight:600; letter-spacing:-.01em; margin-bottom:12px}
+
+figure{margin:26px 0 0}
+.fig{background:var(--surface); border:1px solid var(--line); padding:20px 18px 14px}
+.fig-title{font-family:var(--display); font-weight:600; font-size:17px; color:var(--ink)}
+.fig-sub{font-size:13.5px; color:var(--muted); margin-top:2px}
+figcaption{font-size:13px; color:var(--muted); margin-top:9px; max-width:80ch; line-height:1.5}
+.scroll{overflow-x:auto}
+.scroll svg{min-width:580px}
+svg{display:block; width:100%; height:auto}
+svg text{font-family:var(--mono); font-size:11px; fill:var(--ink-soft)}
+.fig-legend{display:flex; flex-wrap:wrap; gap:16px; font-size:12.5px; color:var(--ink-soft); font-family:var(--mono); margin-top:10px}
+.fig-legend span{display:inline-flex; align-items:center; gap:6px}
+.sw{width:11px; height:11px; border-radius:2px; display:inline-block}
+.sw-line{width:18px; height:2px; display:inline-block}
+.grad{width:120px; height:10px; border-radius:2px; background:linear-gradient(90deg,var(--seq-lo),var(--seq-hi))}
+
+.two{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.three{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line)}
+@media (max-width:640px){.three{grid-template-columns:1fr}}
+.stat{background:var(--surface); padding:16px 18px}
+.stat .big{font-family:var(--display); font-weight:800; font-size:36px; letter-spacing:-.02em; line-height:1; font-variant-numeric:tabular-nums}
+.stat .big small{font-size:17px; color:var(--muted); font-weight:600; margin-left:2px}
+.stat p{font-size:14px; color:var(--ink-soft); margin-top:8px; line-height:1.45}
+
+.so-what{margin-top:34px; background:var(--plum-wash); padding:16px 20px; display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:baseline}
+.so-what .label{color:var(--plum); font-weight:600}
+.so-what p{color:var(--ink); font-size:16px}
+.prose p.define{font-family:var(--mono); font-size:13.5px; line-height:1.5; color:var(--ink); background:var(--sunk); border-left:3px solid var(--grain); padding:9px 14px}
+.prose p.define strong{color:var(--grain)}
+.cases{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin-top:20px}
+@media (max-width:640px){.cases{grid-template-columns:1fr}}
+.case{background:var(--surface); border:1px solid var(--line); padding:16px 18px; display:flex; flex-direction:column; gap:8px}
+.case h4{font-size:22px; font-weight:800; letter-spacing:-.01em}
+.case-row{display:flex; justify-content:space-between; gap:12px; align-items:baseline; border-top:1px solid var(--line); padding-top:7px; font-size:14.5px; color:var(--ink-soft)}
+.case p{font-size:14.5px; color:var(--ink-soft); line-height:1.5; margin-top:4px}
+.trend{font-family:var(--mono); font-size:13px; font-weight:600; white-space:nowrap}
+.trend.good{color:var(--leaf)} .trend.bad{color:var(--blood)}
+
+/* tables */
+.tbl-wrap{overflow-x:auto; background:var(--surface); border:1px solid var(--line)}
+table{width:100%; border-collapse:collapse; font-size:14px}
+th,td{padding:9px 12px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap}
+th{font-family:var(--mono); font-weight:600; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); background:var(--sunk)}
+td{font-family:var(--serif)}
+td.n, th.n{text-align:right; font-family:var(--mono); font-size:13px; font-variant-numeric:tabular-nums}
+th.n{font-size:11px}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:color-mix(in oklab, var(--plum-wash) 45%, transparent)}
+.minibar{display:inline-block; height:8px; vertical-align:middle; border-radius:0 2px 2px 0; margin-right:8px}
+.corr td{text-align:center; font-family:var(--mono); font-size:12.5px; padding:9px 6px}
+.corr th{text-align:center}
+.corr th:first-child{text-align:left}
+
+/* verdict ledger */
+.ledger{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px}
+@media (max-width:760px){.ledger{grid-template-columns:1fr}}
+.ledger-col{background:var(--surface); border:1px solid var(--line)}
+.ledger-col h4{font-family:var(--mono); font-size:12px; letter-spacing:.07em; text-transform:uppercase; padding:12px 16px; border-bottom:1px solid var(--line)}
+.ledger-col.held h4{color:var(--leaf)} .ledger-col.failed h4{color:var(--blood)}
+.ledger-col ul{list-style:none; margin:0; padding:0}
+.ledger-col li{padding:12px 16px; border-bottom:1px solid var(--line); font-size:15px; color:var(--ink-soft); line-height:1.5}
+.ledger-col li:last-child{border-bottom:none}
+.ledger-col li b{display:block; color:var(--ink); font-family:var(--display); font-weight:600; font-size:16px; margin-bottom:2px}
+
+.thesis{margin:40px 0 0; font-family:var(--display); font-weight:600; font-size:clamp(22px,2.8vw,31px); line-height:1.25; letter-spacing:-.01em; max-width:30ch; color:var(--ink)}
+.thesis em{font-style:normal; color:var(--plum)}
+
+/* recommendations */
+.recs{display:flex; flex-direction:column; gap:0; border-top:2px solid var(--ink)}
+.rec{display:grid; grid-template-columns:62px minmax(0,1.3fr) minmax(0,1fr); gap:22px; padding:22px 0; border-bottom:1px solid var(--line-strong)}
+@media (max-width:820px){.rec{grid-template-columns:44px 1fr} .rec .evidence{grid-column:2}}
+.rec .idx{font-family:var(--display); font-weight:800; font-size:34px; color:var(--plum); line-height:1}
+.rec h4{font-size:21px; font-weight:600; letter-spacing:-.01em; margin-bottom:6px}
+.rec .who{font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; margin-bottom:8px}
+.rec p{font-size:15.5px; color:var(--ink-soft)}
+.rec ul{margin:8px 0 0; padding-left:18px; font-size:15px; color:var(--ink-soft)}
+.rec ul li{margin:3px 0}
+.evidence{background:var(--sunk); padding:12px 14px; font-size:14px; color:var(--ink-soft); align-self:start; line-height:1.5}
+.evidence .label{display:block; margin-bottom:5px}
+.strength{display:inline-block; font-family:var(--mono); font-size:10.5px; font-weight:600; padding:1px 7px; border-radius:20px; margin-left:6px; vertical-align:2px}
+
+.archetypes{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line)}
+@media (max-width:980px){.archetypes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:540px){.archetypes{grid-template-columns:1fr}}
+.arch{background:var(--surface); padding:14px 16px; display:flex; flex-direction:column; gap:6px}
+.arch h4{font-size:16.5px; font-weight:600}
+.arch .ex{font-family:var(--mono); font-size:11.5px; color:var(--muted); line-height:1.5}
+.arch p{font-size:14px; color:var(--ink-soft); line-height:1.45}
+.arch .pri{font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase}
+
+.caveats{counter-reset:c; list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 32px}
+@media (max-width:760px){.caveats{grid-template-columns:1fr}}
+.caveats li{counter-increment:c; font-size:15px; color:var(--ink-soft); padding-left:34px; position:relative; line-height:1.5}
+.caveats li::before{content:counter(c); position:absolute; left:0; top:0; font-family:var(--mono); font-size:12px; font-weight:600; color:var(--plum); border:1px solid var(--plum); width:22px; height:22px; border-radius:50%; display:grid; place-items:center}
+
+.files{columns:2 340px; column-gap:32px; font-size:14px}
+.files div{break-inside:avoid; padding:8px 0; border-bottom:1px solid var(--line); color:var(--ink-soft); line-height:1.45}
+.files code{font-family:var(--mono); font-size:12px; color:var(--ink); word-break:break-all}
+
+footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px solid var(--line); margin-top:56px}
+
+.tip{position:fixed; pointer-events:none; z-index:50; background:var(--ink); color:var(--ground); font-family:var(--mono); font-size:12px; line-height:1.5; padding:8px 11px; border-radius:4px; max-width:280px; opacity:0; transition:opacity .08s}
+.tip b{font-family:var(--display); font-size:14px; font-weight:600; display:block; margin-bottom:2px}
+</style>
+
+<nav class="nav" aria-label="Chapters">
+  <div class="wrap">
+    <a class="brand" href="#top">The Starch Trap</a>
+    <ol>
+      <li><a href="#premise"><span>1</span>Premise</a></li>
+      <li><a href="#who"><span>2</span>Who's trapped</a></li>
+      <li><a href="#women"><span>3</span>Women's outcomes</a></li>
+      <li><a href="#refused"><span>4</span>What didn't hold</a></li>
+      <li><a href="#outlook"><span>5</span>2030 outlook</a></li>
+      <li><a href="#act"><span>6</span>What to do</a></li>
+      <li><a href="#sources"><span>7</span>Sources &amp; limits</a></li>
+    </ol>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Women in Data Datathon 2026 · “What’s Cooking?”</div>
+        <h1>The world trades <span class="cal">calories</span>, not <span class="nut">nutrition</span>.</h1>
+        <p class="question">Half of all dietary energy now crosses a border before it’s eaten. <em>Which countries have traded their way into a starch-rich, micronutrient-poor food supply — does it show up in women’s anemia — and who is heading there by 2030?</em></p>
+      </div>
+      <div class="labels" aria-label="Nutrient density of imported versus home-grown calories">
+        <div class="nf imp">
+          <div class="tag">Imported</div>
+          <h3>Nutrition Facts</h3>
+          <div class="sub">Serving size 1,000 kcal of <strong>imported</strong> food</div>
+          <div class="bar8"></div>
+          <div class="hdr"><span>Amount per serving</span><span>% need*</span></div>
+          <div class="bar3"></div>
+          <div class="row"><span><b>Iron</b> <span class="v">4.6 mg</span></span><span class="dv">16%</span></div>
+          <div class="row"><span><b>Zinc</b> <span class="v">3.4 mg</span></span><span class="dv">70%</span></div>
+          <div class="row"><span><b>Vitamin A</b> <span class="v">187 µg</span></span><span class="dv">37%</span></div>
+          <div class="row"><span><b>Vitamin C</b> <span class="v">27 mg</span></span><span class="dv">61%</span></div>
+          <div class="row"><span><b>Vitamin B12</b> <span class="v">0.48 µg</span></span><span class="dv">20%</span></div>
+          <div class="bar3"></div>
+          <div class="foot">Mostly: cereals, oils, sugar</div>
+        </div>
+        <div class="nf dom">
+          <div class="tag">Home-grown</div>
+          <h3>Nutrition Facts</h3>
+          <div class="sub">Serving size 1,000 kcal of <strong>domestic</strong> food</div>
+          <div class="bar8"></div>
+          <div class="hdr"><span>Amount per serving</span><span>% need*</span></div>
+          <div class="bar3"></div>
+          <div class="row"><span><b>Iron</b> <span class="v">5.6 mg</span></span><span class="dv">19%</span></div>
+          <div class="row"><span><b>Zinc</b> <span class="v">4.2 mg</span></span><span class="dv">86%</span></div>
+          <div class="row"><span><b>Vitamin A</b> <span class="v">294 µg</span></span><span class="dv">59%</span></div>
+          <div class="row"><span><b>Vitamin C</b> <span class="v">67 mg</span></span><span class="dv">149%</span></div>
+          <div class="row"><span><b>Vitamin B12</b> <span class="v">0.41 µg</span></span><span class="dv">17%</span></div>
+          <div class="bar3"></div>
+          <div class="foot">Mostly: vegetables, pulses, roots, eggs</div>
+        </div>
+        <p class="labels-note">Pooled across 178 national food supplies, latest year. Home-grown calories win on four of five micronutrients; only B12 goes the other way, because meat and dairy travel too. *Share of a woman’s daily requirement (WHO/FAO RNI) delivered per 1,000 kcal.</p>
+      </div>
+    </div>
+
+    <div class="answers">
+      <div class="answer">
+        <div class="q">Which countries?</div>
+        <span class="verdict-chip chip-yes">12 identified</span>
+        <div class="a">Lesotho, Gambia, Mauritania, Liberia, Yemen, Djibouti &amp; six more</div>
+        <p>Import-heavy, starch-heavy <em>and</em> micronutrient-poor all at once.</p>
+      </div>
+      <div class="answer">
+        <div class="q">Does it show up in women?</div>
+        <span class="verdict-chip chip-yes">Yes — between countries</span>
+        <div class="a">32.8% of women anemic in trap countries, vs 24.7% elsewhere</div>
+        <p>Typical (median) rate for women aged 15–49. Starchier food supplies go with more anemia even after accounting for income, malaria and clean water, but only when comparing countries, not within one country over time.</p>
+      </div>
+      <div class="answer">
+        <div class="q">Who’s next by 2030?</div>
+        <span class="verdict-chip chip-part">Watch list, not a forecast</span>
+        <div class="a">Morocco, Cabo Verde, Haiti</div>
+        <p>Each already meets 2 of the 3 trap conditions and is very close to crossing the third.</p>
+      </div>
+      <div class="answer">
+        <div class="q">An early-warning signal?</div>
+        <span class="verdict-chip chip-no">For “who”, not “when”</span>
+        <div class="a">Trade composition flags risk; it doesn’t time it</div>
+        <p>It shows which countries are exposed, but a change in a country’s import mix doesn’t predict its anemia three years later.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= CHAPTER 1 ================= -->
+<section class="chapter" id="premise">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-no">Chapter 1 of 7</div>
+      <div>
+        <h2>First, test the premise</h2>
+        <p class="kicker">Before asking who is trapped, we checked the two claims the question takes for granted: that half the world’s calories cross a border, and that those calories are less nourishing.</p>
+      </div>
+    </div>
+    <div class="body">
+
+      <div class="block">
+        <h3 class="step">Claim one holds: the average diet crossed the 50% line in 2020</h3>
+        <div class="prose"><p class="define"><strong>Imported share</strong> = the share of the food calories people eat that comes from imports.</p><p>For each of 178 countries we divided the calories that come from imports by the total food calories supplied, then averaged across countries year by year. The share rose every few years without reversal — from <strong>43.0% in 2010 to 50.4% in 2023</strong>, a trend of +0.64 points per year (r = 0.98, p &lt; 10⁻⁸). Weighting countries by population gives the same direction, +0.40 points a year, while the population-weighted starch share <em>fell</em> by 0.14 points a year (both p &lt; 0.001). On average, more trade has not meant starchier diets. The problem is where the two overlap.</p></div>
+        <figure>
+          <div class="fig">
+            <div class="fig-title">Share of dietary calories that are imported</div>
+            <div class="fig-sub">Unweighted mean of 178 countries, 2010–2023</div>
+            <div class="scroll"><svg id="chTrend" viewBox="0 0 760 290" role="img" aria-label="Line chart: mean imported share of calories rising from 43.0% in 2010 to 50.4% in 2023"></svg></div>
+          </div>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Claim two holds too: the world ships what keeps</h3>
+        <div class="prose">
+          <p>Split the world’s food supply into groups and a pattern appears. The groups traded most heavily — sugar (68% of calories imported), oils (64%), cereals (56%) — carry little iron per calorie. The groups that stay home — vegetables, eggs, roots — carry the most. Sugar, oil and grain travel well and don’t spoil; leafy greens and eggs don’t.</p>
+          <p><strong>Cereals, oils and sugar make up 60% of the average country’s calories but only 37% of its iron.</strong> Vegetables are 2% of calories yet deliver 13% of iron and 26% of vitamin A.</p>
+        </div>
+        <figure>
+          <div class="fig">
+            <div class="fig-title">How traded each food group is — and how much iron it carries</div>
+            <div class="fig-sub">Sorted by import share. Two measures, two scales, shared rows. Hover a row for calorie and nutrient shares.</div>
+            <div class="scroll"><svg id="chGroups" viewBox="0 0 760 360" role="img" aria-label="Paired bar chart of 11 food groups: import share of calories and iron milligrams per 1,000 kcal"></svg></div>
+            <div class="fig-legend"><span><i class="sw" style="background:var(--grain)"></i>Import share of the group’s calories</span><span><i class="sw" style="background:var(--leaf)"></i>Iron, mg per 1,000 kcal</span></div>
+          </div>
+          <figcaption>Pooled across 178 countries, latest year each. Minor groups (beverages, spices, miscellaneous) omitted.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Carbohydrates cross borders most, and trap countries import far more of everything</h3>
+        <div class="prose"><p>Splitting the food supply by macronutrient instead of food group gives the same picture. In the typical country, the imported share of carbohydrates rose from 46.6% to 55.0% between 2010 and 2023, the fastest rise of the three. In the 12 trap countries (Chapter 2), about three-quarters of carbohydrates and fat are imported.</p></div>
+        <figure>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Share imported (median)</th><th class="n">2010</th><th class="n">2023</th><th class="n">Change, pts</th><th class="n">Trap countries</th><th class="n">All other countries</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Carbohydrates</strong></td><td class="n">46.6%</td><td class="n">55.0%</td><td class="n">+8.4</td><td class="n">75.5%</td><td class="n">52.5%</td></tr>
+              <tr><td><strong>Fat</strong></td><td class="n">42.7%</td><td class="n">50.0%</td><td class="n">+7.3</td><td class="n">77.4%</td><td class="n">48.9%</td></tr>
+              <tr><td><strong>Protein</strong></td><td class="n">39.5%</td><td class="n">47.0%</td><td class="n">+7.5</td><td class="n">69.4%</td><td class="n">45.2%</td></tr>
+            </tbody>
+          </table></div>
+          <figcaption>Imports as a share of each nutrient’s national supply. Trap and other-country columns use each country’s latest year. Djibouti’s ratios exceed 100% because it re-exports food; the median is not affected.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h3 class="step">In 82% of countries, home-grown calories are the denser half</h3>
+        <div class="prose">
+          <p>No FAO file labels a calorie as imported <em>and</em> reports its nutrients, so the team built a new metric. Each food group’s calories and nutrients are split using that group’s own import share; the pieces are summed; and nutrient density per 1,000 kcal is compared between the imported and domestic halves. Iron, zinc, vitamins A, B12 and C are each scaled to a woman’s daily requirement, then averaged.</p>
+          <p><strong>146 of 178 countries</strong> show a positive gap (median <strong>+33% of daily need per 1,000 kcal</strong>). Protein, measured separately, tells the same story: imported food carries 26.7 g per 1,000 kcal vs 32.9 g for home-grown, less dense in 131 of 177 countries. Measured by starch, the pattern is stronger still: in <strong>84% of countries</strong>, imported calories are more starch-heavy than home-grown ones.</p>
+        </div>
+        <figure>
+          <div class="fig">
+            <div class="fig-title">Density gap: domestic minus imported nutrient density</div>
+            <div class="fig-sub">Number of countries per 20-point bin, % of daily requirement per 1,000 kcal</div>
+            <div class="scroll"><svg id="chGap" viewBox="0 0 760 260" role="img" aria-label="Histogram of composite density gap across 178 countries, 146 positive, median plus 33"></svg></div>
+            <div class="fig-legend"><span><i class="sw" style="background:var(--leaf)"></i>Home-grown denser</span><span><i class="sw" style="background:var(--grain)"></i>Imported denser (e.g. Argentina, Netherlands)</span></div>
+          </div>
+          <figcaption>The gap is compositional — it measures <em>which</em> food groups get imported, not whether imported wheat is worse than local wheat. Vitamins A and C dominate the average.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h3 class="step">The first surprise in the data: importing a lot is not the same as eating starch</h3>
+        <div class="prose"><p>The correlation matrix across 178 countries shows that the obvious chain — more imports, starchier diet, more anemia — does not run in a straight line. Import share is <em>negatively</em> linked to starch share (r = −0.45) and barely linked to anemia at all (r = −0.18). Starch share is the variable that tracks anemia (+0.64), though it is tangled with income (−0.76). The next chapters have to separate those threads.</p></div>
+        <figure>
+          <div class="tbl-wrap">
+            <table class="corr" id="corrTable" aria-label="Correlation matrix"></table>
+          </div>
+          <figcaption>Pearson r, 2023 snapshot. Plum = positive, slate = negative; intensity = strength.</figcaption>
+        </figure>
+      </div>
+
+      <div class="so-what"><span class="label">So what</span><p>The premise is real: trade has pushed half the world’s plate across borders, and what crosses is the nutritionally thinner half. But trade alone doesn’t make a diet starchy. We need to find where the two overlap.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 2 ================= -->
+<section class="chapter" id="who">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-no">Chapter 2 of 7</div>
+      <div>
+        <h2>Who has traded their way in</h2>
+        <p class="kicker">We call it the starch trap: a country in the top third for imported calories, the top third for starch share, <em>and</em> the bottom third for micronutrient supply — all three at once.</p>
+      </div>
+    </div>
+    <div class="body">
+      <div class="prose">
+        <p>Each condition alone points at the wrong countries. <strong>High imports alone</strong> catch Macao, the Netherlands and Belgium, which buy a diverse, low-starch diet from abroad. <strong>High starch alone</strong> catches DR Congo (83% starch, 7% imported) and Madagascar, which grow their own staples, so trade isn’t the mechanism. Only the intersection isolates the story the question asks about: countries where trade plausibly <em>is</em> the route into a starchy, thin diet.</p>
+      </div>
+      <figure>
+        <div class="fig">
+          <div class="fig-title">Starch share vs import share, coloured by anemia in women 15–49</div>
+          <div class="fig-sub">One dot per country, latest year. Dashed lines = top-tercile thresholds (starch 50.2%, imports 63.7%). Ringed = in the starch trap.</div>
+          <div class="scroll"><svg id="chScatter" viewBox="0 0 760 520" role="img" aria-label="Scatter plot of 178 countries, starch share against import share, coloured by anemia, with 12 starch-trap countries ringed"></svg></div>
+          <div class="fig-legend"><span>Anemia 10% <i class="grad"></i> 60%</span><span><i class="sw" style="border:2px solid var(--ink);border-radius:50%;background:transparent"></i>Starch trap (also micronutrient-poor)</span><span><i class="sw" style="border:1.5px solid var(--muted);border-radius:50%;background:transparent"></i>No anemia estimate</span></div>
+        </div>
+        <figcaption>The trap list is identical in the latest-available and 2023-only snapshots.</figcaption>
+      </figure>
+
+      <div class="block">
+        <h3 class="step">The twelve</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Country</th><th class="n">Calories imported</th><th class="n">Starch share</th><th class="n">Micronutrient index</th><th class="n">Density gap</th><th class="n">Anemia, women</th></tr></thead>
+            <tbody id="trapBody"></tbody>
+          </table>
+        </div>
+        <figcaption>Micronutrient index: average of iron, zinc, vitamin A, B12 and C supply as a multiple of need (bottom tercile ≤ 1.50). Density gap as in Chapter 1. Sorted by anemia.</figcaption>
+      </div>
+
+      <div class="three">
+        <div class="stat"><div class="big num">97.7<small>%</small></div><p><strong>Djibouti</strong> imports nearly all its calories, and its imported food carries only a third of the protein density of what it grows (0.34×).</p></div>
+        <div class="stat"><div class="big num">0.66</div><p><strong>Yemen</strong> has the thinnest micronutrient supply of all 178 countries. Its food supply provides only about half the iron women need, a third of the vitamin A and less than a tenth of the vitamin B12.</p></div>
+        <div class="stat"><div class="big num">54.5<small>%</small></div><p><strong>Mauritania</strong>: 70% of calories imported and more than half of women anemic, the second-highest rate in the panel.</p></div>
+      </div>
+
+      <div class="block">
+        <h3 class="step">What’s on the boat</h3>
+        <div class="prose"><p>The team traced imports item by item for the trap and watch-list countries with the heaviest burdens. More than nine-tenths of what they import is classed as starchy: rice, wheat and maize, with palm oil and sugar riding alongside. These are the calories that keep, ship cheaply, and carry little iron.</p></div>
+        <figure>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Country</th><th>Group</th><th>Imports that are starchy</th><th>Leading starchy imports (share of supply imported)</th><th class="n">Anemia, women</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Liberia</strong></td><td>Trap</td><td class="n" style="text-align:left"><span class="minibar" style="width:96px;background:var(--grain)"></span>96.0%</td><td>Rice (100%) · palm oil (57%)</td><td class="n">42.5%</td></tr>
+              <tr><td><strong>Afghanistan</strong></td><td>Watch list</td><td class="n" style="text-align:left"><span class="minibar" style="width:95.9px;background:var(--grain)"></span>95.9%</td><td>Wheat (46%) · palm oil (100%)</td><td class="n">45.4%</td></tr>
+              <tr><td><strong>Haiti</strong></td><td>Watch list</td><td class="n" style="text-align:left"><span class="minibar" style="width:93.7px;background:var(--grain)"></span>93.7%</td><td>Rice (83%) · wheat (100%)</td><td class="n">45.9%</td></tr>
+              <tr><td><strong>Gambia</strong></td><td>Trap</td><td class="n" style="text-align:left"><span class="minibar" style="width:92.3px;background:var(--grain)"></span>92.3%</td><td>Rice (100%) · sugar (59%)</td><td class="n">46.1%</td></tr>
+              <tr><td><strong>Lesotho</strong></td><td>Trap</td><td class="n" style="text-align:left"><span class="minibar" style="width:91.3px;background:var(--grain)"></span>91.3%</td><td>Maize (88%) · wheat (100%)</td><td class="n">34.2%</td></tr>
+            </tbody>
+          </table></div>
+        </figure>
+      </div>
+
+      <div class="so-what"><span class="label">So what</span><p>The trap is concentrated in small, arid or land-constrained economies in West and Southern Africa, plus Yemen, Iraq, Bhutan and Timor-Leste. Now: do the women living there pay for it?</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 3 ================= -->
+<section class="chapter" id="women">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-no">Chapter 3 of 7</div>
+      <div>
+        <h2>Does it show up in women?</h2>
+        <p class="kicker">Across countries, yes, and it survives the obvious alternative explanations. Anemia in women 15–49 is where a thin diet becomes measurable.</p>
+      </div>
+    </div>
+    <div class="body">
+
+      <div class="three">
+        <div class="stat"><div class="big num">19.4<small>%</small></div><p>median anemia in countries with the <strong>least</strong> starchy diets (bottom tercile)</p></div>
+        <div class="stat"><div class="big num">34.2<small>%</small></div><p>median anemia in the <strong>starchiest</strong> third, 1.8× higher</p></div>
+        <div class="stat"><div class="big num">+3.2<small>pts</small></div><p>anemia per +10 points of starch share, <strong>holding income, imports and micronutrients fixed</strong> (p &lt; 0.001, R² = 0.46, n = 167)</p></div>
+      </div>
+      <figcaption>Cross-country regression (OLS, robust standard errors).</figcaption>
+
+      <div class="block">
+        <h3 class="step">Three more tests, same answer</h3>
+        <div class="prose"><p>A second strand of the team’s work used FAO’s food-security indicators and different statistical tests, and reached the same conclusion. The third result reframes the role of money: richer countries have less anemia partly <em>because</em> income buys a less starchy plate.</p></div>
+        <div class="three" style="margin-top:20px">
+          <div class="stat"><div class="big num">1.35</div><p><strong>Effect size</strong> (Cohen’s d) separating starch-heavy from diversified-diet countries, conventionally a large effect. t-test and Mann-Whitney both p &lt; 10⁻⁹.</p></div>
+          <div class="stat"><div class="big num">F = 29.1</div><p>Grouping countries by <strong>income × diet</strong>, diet, not import dependence, is what separates their anemia levels (ANOVA, p &lt; 10⁻¹⁴).</p></div>
+          <div class="stat"><div class="big num">26<small>%</small></div><p>of income’s <strong>protective effect</strong> on anemia runs through a less starchy diet (Sobel mediation test, p = 0.004).</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Is it really diet, or is starch standing in for poverty or disease?</h3>
+        <div class="prose">
+          <p>Starchy diets go with poverty, and poverty goes with malaria, dirty water and weak health systems. So we added WHO and DHS controls one at a time. Adding malaria leaves <strong>86%</strong> of the starch effect in place. Water, sanitation, adolescent fertility and child stunting leave <strong>74%</strong>.</p>
+          <p>The sharpest check is the <strong>poverty test</strong>. Within the 53 lower-income DHS countries, income stops predicting anemia at all (−1.19, not significant), but starch keeps almost its full-sample effect (+0.298 vs +0.315). Diet composition carries signal exactly where income does not.</p>
+        </div>
+        <figure>
+          <div class="fig">
+            <div class="fig-title">The starch effect as controls are added</div>
+            <div class="fig-sub">Coefficient on starch share (points of anemia per point of starch), with 95% confidence intervals</div>
+            <div class="scroll"><svg id="chForest" viewBox="0 0 760 350" role="img" aria-label="Forest plot: starch coefficient stays positive from 0.315 to 0.235 as controls are added"></svg></div>
+            <div class="fig-legend"><span><i class="sw" style="background:var(--plum)"></i>All countries (n varies with control coverage)</span><span><i class="sw" style="background:var(--slate)"></i>Same 53 lower-income countries in every model</span></div>
+          </div>
+          <figcaption>With iron supplementation added, the 53-country interval just touches zero (p ≈ 0.07), so the effect size holds but the sample is small.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Malaria splits the high-anemia countries into two groups</h3>
+        <div class="prose"><p>Malaria destroys red blood cells, so it causes anemia whatever people eat. If malaria were quietly driving the trap countries’ anemia, the diet story would fall apart. It isn’t: of the seven trap countries with a malaria figure, six have low rates. The countries combining very high anemia with heavy malaria (Mozambique, Niger, Côte d’Ivoire, Gabon) sit outside the trap. Liberia is the one trap country where malaria is clearly part of the picture, and India has neither a trade nor a malaria explanation.</p></div>
+        <figure>
+          <div class="two">
+            <div class="tbl-wrap"><table><thead><tr><th>Trap countries</th><th style="white-space:normal">Malaria cases per 1,000 at risk</th><th class="n">Anemia</th></tr></thead><tbody id="malTrap"></tbody></table></div>
+            <div class="tbl-wrap"><table><thead><tr><th>High anemia, outside trap</th><th style="white-space:normal">Malaria cases per 1,000 at risk</th><th class="n">Anemia</th></tr></thead><tbody id="malOther"></tbody></table></div>
+          </div>
+          <figcaption>Malaria incidence, 2021 only. Gambia, Lesotho, Bhutan, Djibouti and Yemen have no value, which is not the same as having no malaria.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h3 class="step">It’s not how much iron — it’s what the iron comes attached to</h3>
+        <div class="prose">
+          <p>Niger’s food supply delivers <strong>24.2 mg of iron per person per day</strong>, above the commonly cited 18 mg target, yet 47% of its women are anemic. Only 4% of that iron comes from meat, fish, eggs or dairy. The rest comes from cereals and beans, and the body absorbs non-heme iron far less well. Across countries, total iron supply barely tracks anemia (r = −0.21). The <em>share</em> of iron from animal sources tracks it 2.7× more strongly (r = −0.55).</p>
+          <p>The same pattern shows up over time. Between 2010 and 2023 the typical country’s iron supply edged up from 15.4 to 16.0 mg a day, and it rose in 102 of 162 countries. <strong>Anemia rose anyway in 73 of those 102.</strong> Burkina Faso (24.8 mg a day, 44% anemia) matches Niger’s pattern.</p>
+        </div>
+        <figure>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Country</th><th>Iron supplied, mg/day</th><th>From animal sources</th><th>Anemia, women</th><th class="n">GDP per person (PPP)</th></tr></thead>
+              <tbody id="ironBody"></tbody>
+            </table>
+          </div>
+          <figcaption>Guatemala is one-fifth as rich as Australia and has lower anemia. Income is not destiny.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Why this is a women’s story, not just a national one</h3>
+        <div class="prose"><p>National food supply is an average, and women often don’t receive the average. Iron needs peak during the reproductive years, nutrient-dense foods cost more, and women are more likely to go without them.</p></div>
+        <div class="three" style="margin-top:20px">
+          <div class="stat"><div class="big num">98<small>/135</small></div><p>countries where <strong>women are more food-insecure than men</strong> (73%)</p></div>
+          <div class="stat"><div class="big num">1.8<small>×</small></div><p>cost of animal-source foods vs starchy staples (vegetables 1.4×). Unaffordability of a healthy diet correlates with anemia at <strong>r = +0.63</strong></p></div>
+          <div class="stat"><div class="big num">123<small>/162</small></div><p>countries where anemia in women <strong>rose</strong> between 2010 and 2023 (mean 25.2% → 27.2%)</p></div>
+        </div>
+      </div>
+
+      <div class="so-what"><span class="label">So what</span><p>Countries with starchier food supplies have markedly more anemic women, and not simply because they are poorer or have more malaria. Global anemia is also moving the wrong way, so this is not a problem solving itself.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 4 ================= -->
+<section class="chapter" id="refused">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-no">Chapter 4 of 7</div>
+      <div>
+        <h2>What the data refused to say</h2>
+        <p class="kicker">Across three notebooks and fifteen scripts, the team tested roughly nine explanations. Some held and some collapsed. Saying which is which is what makes the rest credible.</p>
+      </div>
+    </div>
+    <div class="body">
+      <div class="ledger">
+        <div class="ledger-col held">
+          <h4>Held up</h4>
+          <ul>
+            <li><b>Imported calories are thinner</b>Domestic calories are denser in 146 of 178 countries.</li>
+            <li><b>Starch share predicts anemia across countries</b>+0.315, still +0.235 with every control; survives the poverty test.</li>
+            <li><b>Malaria is a major co-driver</b>r = 0.525 with anemia; adding it cuts the income coefficient from −2.85 to −0.35 in the extended notebook.</li>
+            <li><b>Iron form matters more than iron amount</b>Animal-source share r = −0.55 vs total iron r = −0.21.</li>
+          </ul>
+        </div>
+        <div class="ledger-col failed">
+          <h4>Did not hold</h4>
+          <ul>
+            <li><b>Import dependence alone</b>r = −0.18 with anemia. Belgium and Bahrain both import over 96% of calories; their anemia rates are 15% and 38%.</li>
+            <li><b>Change within a country over time</b>Country + year fixed effects, 2,276 country-years: no diet variable significant (all p &gt; 0.13).</li>
+            <li><b>Diet as a 3-year early warning</b>Lagged fixed-effects model: p = 0.22–0.72.</li>
+            <li><b>Food prices as the channel</b>Local staple prices are <em>falling</em> in Lesotho (−6%) and Mauritania (−7%). Iron-dense foods got cheaper relative to cereals in 9 of 10 checkable countries.</li>
+            <li><b>Iron on paper, or iron shipped abroad</b>Total iron supply doesn’t predict anemia once income is held fixed (p = 0.75), and neither does exporting iron-rich harvests (p = 0.45).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="prose">
+          <p>Some of the highest burdens sit outside the trap altogether. <strong>India</strong> (53.7% anemia) imports only 6.8% of its calories, mainly edible oils, sugar and pulses, even though it is the world’s largest vegetable-oil importer. <strong>Gabon</strong> has the worst rate in the panel (59.9%) at $18,700 per person, with imports below the threshold. Their drivers are domestic diets, malaria, sanitation and health access, not trade.</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Two trap countries, moving in opposite directions</h3>
+        <div class="prose"><p>If diet were a quick lever on anemia, a trap country cutting its starch should see anemia fall. Lesotho and Gambia show why the within-country test came up empty.</p></div>
+        <div class="cases">
+          <div class="case">
+            <h4>Lesotho</h4>
+            <div class="case-row"><span>Starch share of calories</span><span class="trend good">↓ 1.04 pts a year</span></div>
+            <div class="case-row"><span>Anemia in women</span><span class="trend bad">↑ 0.81 pts a year</span></div>
+            <p>The fastest diet improvement of any trap country, yet the second-fastest anemia rise in the panel: 34.2% today, forecast 39.4% by 2030.</p>
+          </div>
+          <div class="case">
+            <h4>Gambia</h4>
+            <div class="case-row"><span>Starch share of calories</span><span class="trend good">↓ 0.17 pts a year</span></div>
+            <div class="case-row"><span>Anemia in women</span><span class="trend good">↓ 0.68 pts a year</span></div>
+            <p>Only a slight diet change, yet the only trap country where anemia is falling: 46.1% today, forecast 41.9% by 2030.</p>
+          </div>
+        </div>
+        <figcaption>Per-country trends, 2010–2023.</figcaption>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Economic growth alone doesn’t get a country out</h3>
+        <div class="prose"><p>Income is falling in several countries this story flags, most sharply Afghanistan, where GDP per person fell by nearly a third. But growth is no escape either: Bhutan and Botswana grew fast and are still in the trap.</p></div>
+        <figure>
+          <div class="tbl-wrap"><table><thead><tr><th>Country</th><th>Group</th><th class="n">GDP per person, 2010</th><th class="n">2023</th><th>Change</th></tr></thead><tbody id="gdpBody"></tbody></table></div>
+          <figcaption>GDP per capita, PPP. Yemen and Djibouti lack a full series.</figcaption>
+        </figure>
+      </div>
+
+      <p class="thesis">Trade isn’t the villain; it’s an <em>amplifier</em>. Importing is safe when a country can afford to import diversity. It becomes a trap where imports reinforce an already starchy plate.</p>
+
+      <div class="so-what"><span class="label">So what</span><p>The finding is a structural portrait: it shows <em>which</em> countries are at risk today. It does not show that nudging a country’s import mix will move its anemia rate next year. That shapes both the forecast and the recommendations.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 5 ================= -->
+<section class="chapter" id="outlook">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-no">Chapter 5 of 7</div>
+      <div>
+        <h2>Who’s heading there by 2030</h2>
+        <p class="kicker">A straight-line extrapolation named two new trap countries. We back-tested it, found it did worse than assuming no change, and replaced the forecast with a watch list.</p>
+      </div>
+    </div>
+    <div class="body">
+
+      <div class="block">
+        <h3 class="step">Step 1 — the naive forecast, and why we didn’t trust it</h3>
+        <div class="prose">
+          <p>Fitting each country’s 2010–2023 line and extending it to 2030 puts <strong>Haiti</strong> and <strong>Cabo Verde</strong> across all three thresholds. A rolling-origin back-test (fit up to 2016…2021, predict later years) showed the full linear trend is <em>worse than assuming nothing changes</em>. For import share, mean error was 4.45 points vs 3.73; for starch share, 2.37 vs 2.01. The best model damps the trend to 10% of its slope. Under it, <strong>no country confidently crosses by 2030</strong>, and uncertainty by 2030 is about ±6.7 points on imports and ±4.4 on starch.</p>
+        </div>
+        <figure>
+          <div class="fig">
+            <div class="fig-title">Haiti and Cabo Verde: observed path and damped projection</div>
+            <div class="fig-sub">Solid = observed 2010–2023. Dashed + band = damped trend with back-test RMSE. Red dashed = trap threshold.</div>
+            <div class="two" style="margin-top:10px">
+              <div class="scroll"><svg id="chFcImp" viewBox="0 0 380 260" role="img" aria-label="Import share for Haiti and Cabo Verde with 2030 projection"></svg></div>
+              <div class="scroll"><svg id="chFcSt" viewBox="0 0 380 260" role="img" aria-label="Starch share for Haiti and Cabo Verde with 2030 projection"></svg></div>
+            </div>
+            <div class="fig-legend"><span><i class="sw-line" style="background:var(--plum)"></i>Haiti</span><span><i class="sw-line" style="background:var(--ink-soft)"></i>Cabo Verde</span><span><i class="sw-line" style="background:var(--blood)"></i>Threshold</span></div>
+          </div>
+          <figcaption>Haiti already meets the starch and micronutrient conditions and needs about 3 more import points. Cabo Verde meets import and micronutrient conditions and hovers 1.3 points under the starch line.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Step 2 — the watch list: distance to the trap, measured not guessed</h3>
+        <div class="prose"><p>Instead of extrapolating, we measure how far each country is from its <em>last unmet</em> condition, in cross-country standard deviations, and report drift only where it is statistically significant. Morocco, Cabo Verde and Haiti each sit within about a tenth of a standard deviation.</p><p>A wider lens finds <strong>47 countries</strong> moving toward the trap on two fronts at once, with starch share and import dependence both rising. They include Afghanistan, Samoa, Papua New Guinea, the Philippines and Namibia. Afghanistan shows what that path can look like: anemia in women climbed from 31.6% in 2000 to 45.4% in 2023 as its import dependence grew.</p></div>
+        <figure>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Country</th><th>Distance to trap (SD)</th><th>Still missing</th><th class="n">Conditions met</th><th>Observed drift</th></tr></thead>
+              <tbody id="watchBody"></tbody>
+            </table>
+          </div>
+          <figcaption>“Closes in ~N years” = remaining gap ÷ observed drift (p &lt; 0.05). That is arithmetic on history, not a validated forecast.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Where diets are still getting starchier</h3>
+        <div class="prose"><p>Globally, starch is slowly leaving the plate: its share of calories is falling in 102 of 156 countries. In three trap countries and one watch-list country it is still rising. On current trends Liberia, already the starchiest trap country, reaches 77% of calories from starch by 2030.</p></div>
+        <figure>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Country</th><th>Group</th><th class="n">Starch share, latest</th><th class="n">Trend a year</th><th class="n">2030 on trend</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Liberia</strong></td><td>Trap</td><td class="n">72.0%</td><td class="n" style="color:var(--blood)">↑ 0.65</td><td class="n">77.0%</td></tr>
+              <tr><td><strong>Eswatini</strong></td><td>Trap</td><td class="n">56.9%</td><td class="n" style="color:var(--blood)">↑ 0.46</td><td class="n">59.1%</td></tr>
+              <tr><td><strong>Haiti</strong></td><td>Watch list</td><td class="n">57.9%</td><td class="n" style="color:var(--blood)">↑ 0.42</td><td class="n">58.5%</td></tr>
+              <tr><td><strong>Mauritania</strong></td><td>Trap</td><td class="n">52.6%</td><td class="n" style="color:var(--blood)">↑ 0.29</td><td class="n">56.2%</td></tr>
+            </tbody>
+          </table></div>
+          <figcaption>Per-country linear trends from a separate team pipeline, so starch values differ slightly from Chapter 2. Step 1’s back-test shows plain trends overshoot, so read these as direction, not destination.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Step 3 — where anemia itself is heading</h3>
+        <div class="prose"><p>For the outcome, the team tested four forecasting models on held-out 2019–2023 data. A per-country trend anchored at the last observation won (RMSE 1.14 points), beating naive persistence (1.45), fitted-line extrapolation (1.37), a random forest (1.49–2.22) and cross-sectional regression (~8.0). On that model, several watch-list and trap countries are still rising.</p></div>
+        <figure>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Country</th><th class="n">Anemia, latest</th><th class="n">Trend / yr</th><th class="n">2030 forecast</th><th>Why it matters</th></tr></thead>
+              <tbody>
+                <tr><td>Mauritius</td><td class="n">32.8%</td><td class="n" style="color:var(--blood)">+1.01</td><td class="n">39.3%</td><td>Fastest rise in the panel; #1 on the team’s exposure score (87% import dependence)</td></tr>
+                <tr><td>Lesotho</td><td class="n">34.2%</td><td class="n" style="color:var(--blood)">+0.81</td><td class="n">39.4%</td><td>In the starch trap and rising fast</td></tr>
+                <tr><td>Afghanistan</td><td class="n">45.4%</td><td class="n" style="color:var(--blood)">+0.81</td><td class="n">50.6%</td><td>Watch list; imported share climbing toward the threshold</td></tr>
+                <tr><td>Haiti</td><td class="n">45.9%</td><td class="n" style="color:var(--blood)">+0.29</td><td class="n">47.8%</td><td>Watch list #3</td></tr>
+                <tr><td>Mauritania</td><td class="n">54.5%</td><td class="n" style="color:var(--blood)">+0.10</td><td class="n">55.2%</td><td>In the trap; highest trap-country anemia</td></tr>
+                <tr><td>India</td><td class="n">53.7%</td><td class="n" style="color:var(--blood)">+0.29</td><td class="n">55.6%</td><td>Not trade-driven. A reminder that one lens isn’t enough</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figcaption>Mauritius, Lesotho and Afghanistan have the three steepest rising trends of 156 countries. Diet drift alone implies the largest rise for São Tomé and Príncipe (starch 54.7% → 71.3%, ≈ +5 anemia points).</figcaption>
+        </figure>
+        <div class="three" style="margin-top:22px">
+          <div class="stat"><div class="big num">20<small>→ 18</small></div><p>countries at WHO’s <strong>severe</strong> level (anemia ≥ 40%), now vs 2030. Only <strong>Myanmar</strong> newly crosses into it.</p></div>
+          <div class="stat"><div class="big num">39.4<small>%</small></div><p><strong>Lesotho</strong> in 2030: a trap country forecast just below the severe line</p></div>
+          <div class="stat"><div class="big num">118<small>/156</small></div><p>countries whose anemia trend is still <strong>rising</strong></p></div>
+        </div>
+        <figcaption>WHO public-health bands for anemia prevalence: 20–39.9% moderate, 40% or more severe.</figcaption>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Step 4 — what imported staples may cost by 2030</h3>
+        <div class="prose">
+          <p>Trap countries buy most of their grain abroad, so world prices reach them through the import bill. If the last decade’s pattern continues, wheat rises 17–57% by 2030 depending on grade and method, maize 20–41% and rice 14–19%. Chicken is the exception, falling about 14%, which would make one well-absorbed source of iron cheaper.</p>
+          <p>Local markets are calmer today: staple prices are falling in six of the eight trap and watch-list countries with current data, and prices showed no link to anemia (Chapter 4). History backs that up: between 2010 and 2023, world prices showed no measurable link to what countries ate (r ≈ −0.14, not significant), and only for beef did trade volumes and prices rise together. Read this as budget pressure on import-dependent governments, not as a cause of anemia.</p>
+        </div>
+        <figure>
+          <div class="fig">
+            <div class="fig-title">World export prices of iron-relevant foods, projected to 2030</div>
+            <div class="fig-sub">Two simple projections per food. Where the dots sit far apart, the methods disagree.</div>
+            <div class="scroll"><svg id="chPrice" viewBox="0 0 760 345" role="img" aria-label="Dot plot of projected price change to 2030 for nine commodities under two methods"></svg></div>
+            <div class="fig-legend"><span><i class="sw" style="background:var(--plum);border-radius:50%"></i>Trend line fitted to 2015–2025 prices</span><span><i class="sw" style="background:var(--slate);border-radius:50%"></i>Average yearly growth, 2015–17 → 2023–25</span></div>
+          </div>
+          <figcaption>Global export prices in US dollars, <strong>not adjusted for inflation</strong>, averaged to annual values and projected from their 2023–25 average to 2030. The trend method runs higher for wheat and maize because the 2021–22 price spike sits inside its fitted years; if you quote one number, use the more cautious growth-rate figure. These show where prices go if the last decade continues. They are not forecasts of what any country will pay. The foods covered carry about 57% of dietary iron; no world price series exists for vegetables or roots.</figcaption>
+        </figure>
+        <figure>
+          <div class="tbl-wrap"><table><thead><tr><th>Local staple prices today</th><th>Group</th><th>Change vs a year earlier</th></tr></thead><tbody id="wfpBody"></tbody></table></div>
+          <figcaption>Average year-on-year change across each country’s tracked staples, readings from June 2026. Too old to count as current: El Salvador +72.5% (Aug 2022), Lebanon +263% (Feb 2023), Liberia +11% (Oct 2020), Haiti −6.5% (Feb 2025).</figcaption>
+        </figure>
+      </div>
+
+      <div class="so-what"><span class="label">So what</span><p><strong>Can trade composition serve as an early-warning signal?</strong> As a <em>screen</em>, yes: it reliably flags which countries are structurally exposed. As a <em>timer</em>, no: in this data, shifts in a country’s import mix do not precede shifts in its anemia. Use it to decide where to look, then track anemia directly.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 6 ================= -->
+<section class="chapter" id="act">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-no">Chapter 6 of 7</div>
+      <div>
+        <h2>What to do about it</h2>
+        <p class="kicker">The evidence says the risk is structural, concentrated and gendered. So the fixes should target the imported plate where it enters a country, protect what’s grown at home, and reach women directly.</p>
+      </div>
+    </div>
+    <div class="body">
+
+      <div class="block" style="margin-top:0">
+        <h3 class="step">Start by sorting countries — one policy doesn’t fit all</h3>
+        <div class="archetypes">
+          <div class="arch"><span class="pri" style="color:var(--blood)">Act now</span><h4>In the starch trap</h4><div class="ex">Lesotho · Gambia · Mauritania · Liberia · Yemen · Djibouti · Botswana · Eswatini · Namibia · Iraq · Bhutan · Timor-Leste</div><p>Fix the imported basket. Actions 1, 2, 4, 5</p></div>
+          <div class="arch"><span class="pri" style="color:var(--grain)">Prevent</span><h4>On the watch list</h4><div class="ex">Morocco · Cabo Verde · Haiti · El Salvador · Comoros · Afghanistan</div><p>Monitor, and hold the last unmet condition. Actions 3, 5</p></div>
+          <div class="arch"><span class="pri" style="color:var(--grain)">Diversify</span><h4>Home-grown starch</h4><div class="ex">DR Congo · Madagascar · Ethiopia · India · Cambodia</div><p>Trade isn’t the route; the local diet is. Actions 3, 4</p></div>
+          <div class="arch"><span class="pri" style="color:var(--slate)">Treat other causes</span><h4>High anemia, other drivers</h4><div class="ex">Gabon · Côte d’Ivoire · Niger · Mozambique</div><p>Malaria (190–312 cases per 1,000 at risk), sanitation, health access. Actions 4, 6</p></div>
+          <div class="arch"><span class="pri" style="color:var(--leaf)">Low priority</span><h4>Imports diversity</h4><div class="ex">Belgium · Netherlands · Luxembourg · Malta</div><p>High imports, but a diverse, low-starch plate.</p></div>
+        </div>
+      </div>
+
+      <div class="recs">
+        <div class="rec">
+          <div class="idx">1</div>
+          <div>
+            <div class="who">Governments of trap countries · port &amp; standards authorities</div>
+            <h4>Fortify the imported staples at the border</h4>
+            <p>Make iron, folic acid and vitamin A fortification a condition of import for wheat flour, rice, maize and edible oil. These are the calories trap countries import most, so the imported half can deliver micronutrients instead of diluting them.</p>
+            <ul><li>Supply is concentrated. The top three exporters ship 68–78% of traded rice, 61–66% of maize and 83–86% of palm oil, so a handful of supplier standards reach most plates.</li><li>First movers: Gambia and Liberia (rice ≈100% imported), Lesotho (maize and wheat), Djibouti (≈98% of calories).</li></ul>
+          </div>
+          <div class="evidence"><span class="label">Evidence<span class="strength chip-yes">Strong</span></span>Cereals, oils and sugar = 60% of calories but 37% of iron (Ch. 1). The trap is defined by exactly these imports (Ch. 2). Trade concentration: <span class="mono">Analysis.xlsx › Trade concentration</span>. Price outlook: wheat +17% to +57% and maize +20% to +41% by 2030 in US dollars if recent trends continue, a growing bill for grain-importing trap countries (Ch. 5).</div>
+        </div>
+        <div class="rec">
+          <div class="idx">2</div>
+          <div>
+            <div class="who">Trade &amp; finance ministries · public food procurement</div>
+            <h4>Rebalance the import basket toward iron-rich foods</h4>
+            <p>Cut tariffs and VAT on pulses, dried fish, eggs and milk powder. Use state procurement and food-aid contracts to buy these, not only grain. Spread purchases across several suppliers so a single shock can’t empty the shelf. Chicken is the one iron-rich import projected to get cheaper (about −14% by 2030), a chance to widen access to well-absorbed iron.</p>
+            <ul><li>Watch concentration risk: 78% of traded lentils come from three exporters, and India buys 79% of its imported beans from Myanmar.</li></ul>
+          </div>
+          <div class="evidence"><span class="label">Evidence<span class="strength chip-part">Moderate</span></span>Animal-source iron share tracks anemia 2.7× better than iron quantity (Ch. 3). Price levers are uncertain: relative prices of iron-dense foods already fell in most checked countries (Ch. 4), so access, not price alone, is the barrier. <span class="mono">Analysis.xlsx › Supplier dependency</span>.</div>
+        </div>
+        <div class="rec">
+          <div class="idx">3</div>
+          <div>
+            <div class="who">Agriculture ministries · development partners</div>
+            <h4>Protect the nutrient-dense half grown at home</h4>
+            <p>Invest in vegetables, pulses, small livestock and eggs: home and school gardens, cold chains, extension services. Screen trade and food-security policies so cheap imported staples don’t push out diverse local crops. For watch-list countries this is how to hold the last unmet threshold.</p>
+          </div>
+          <div class="evidence"><span class="label">Evidence<span class="strength chip-yes">Strong</span></span>Domestic calories are denser in 82% of countries; vegetables are 2% of calories but 26% of vitamin A (Ch. 1). Morocco, Cabo Verde and Haiti each have one condition left (Ch. 5).</div>
+        </div>
+        <div class="rec">
+          <div class="idx">4</div>
+          <div>
+            <div class="who">Health &amp; social-protection ministries · NGOs</div>
+            <h4>Put women 15–49 first, directly</h4>
+            <p>National supply averages hide who goes without. Reach women directly with weekly iron–folic acid supplementation through antenatal care, schools and workplaces, plus cash or vouchers earmarked for eggs, fish, meat and pulses. Measure intake by sex, not just by household.</p>
+          </div>
+          <div class="evidence"><span class="label">Evidence<span class="strength chip-yes">Strong</span></span>Women are more food-insecure than men in 73% of countries; animal-source foods cost 1.8× staples; unaffordability ↔ anemia r = +0.63; anemia rose in 123 of 162 countries (Ch. 3).</div>
+        </div>
+        <div class="rec">
+          <div class="idx">5</div>
+          <div>
+            <div class="who">FAO · WHO · WFP · national statistics offices</div>
+            <h4>Run the starch-trap monitor every year</h4>
+            <p>Turn this analysis into a standing screen using the FAO Food Balance Sheets FAO already publishes. Recompute the three conditions each year, and flag any country within 0.25 SD of its last threshold for a nutrition review (today: Morocco, Cabo Verde, Haiti, El Salvador). Pair the screen with the anchored anemia forecast and the WFP price feed.</p>
+            <ul><li>Use it to decide <em>where</em> to act. Confirm <em>when</em> with anemia data itself.</li></ul>
+          </div>
+          <div class="evidence"><span class="label">Evidence<span class="strength chip-part">Screening only</span></span>Proximity measure and anchored anemia model (RMSE 1.14) are back-tested (Ch. 5). The lag-3 test shows trade mix doesn’t time anemia shifts, hence “screen”, not “alarm”.</div>
+        </div>
+        <div class="rec">
+          <div class="idx">6</div>
+          <div>
+            <div class="who">Health ministries · researchers</div>
+            <h4>Treat the non-food causes, and close the data gaps</h4>
+            <p>Where anemia is high but trade isn’t the route, pair nutrition with malaria control (bed nets, seasonal chemoprevention) and water and sanitation. To sharpen this analysis next: split anemia by cause with IHME GBD data, pull a malaria time series, and study when fortification mandates were adopted as a natural experiment.</p>
+          </div>
+          <div class="evidence"><span class="label">Evidence<span class="strength chip-yes">Strong</span></span>Malaria r = 0.525 with anemia and remains significant alongside starch (Ch. 3–4). Mozambique, Niger, Côte d’Ivoire and Gabon combine very high anemia with 190–312 malaria cases per 1,000 at risk, while most trap countries have almost none (Ch. 3).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 7 ================= -->
+<section class="chapter" id="sources">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-no">Chapter 7 of 7</div>
+      <div>
+        <h2>Sources, method notes &amp; limits</h2>
+        <p class="kicker">Every number above traces to a file in the team’s findings folder. Here is what to read before citing one.</p>
+      </div>
+    </div>
+    <div class="body">
+
+      <div class="block" style="margin-top:0">
+        <h3 class="step">Limits of this analysis</h3>
+        <ol class="caveats">
+          <li><strong>Supply ≠ intake.</strong> FAO data are national per-capita food supply, not what women actually eat, and they miss who gets what within a household.</li>
+          <li><strong>Associations, not causes.</strong> The starch–anemia link is cross-country. Within-country and lagged tests found no effect.</li>
+          <li><strong>The density gap is compositional.</strong> It reflects which food groups are traded, not the quality of imported wheat vs local wheat. Vitamins A and C dominate it.</li>
+          <li><strong>Missing countries.</strong> FAO balance sheets omit several high-anemia countries: Mali (56.5%), Benin (50.0%), Chad (46.5%), Togo (41.5%), Burundi (39.0%). Measured relationships are likely a floor.</li>
+          <li><strong>Modelled outcome.</strong> The World Bank anemia series is partly model-interpolated between surveys, which blunts year-to-year signal. DHS measured anemia covers 49 countries.</li>
+          <li><strong>Hand-built crosswalk.</strong> 99 FBS item codes were mapped to 15 SUA food groups by the team, not by FAO. Every decision is documented in the pipeline doc.</li>
+          <li><strong>Many tests.</strong> Around nine variables were tried; malaria and starch are large enough effects to be unlikely flukes, but they deserve held-out validation.</li>
+          <li><strong>Malaria is one year (2021)</strong> and missing for five trap countries, so it explains differences between countries, not change over time.</li>
+          <li><strong>Price projections are simple extrapolations</strong> of world US-dollar prices, not adjusted for inflation and not what any country pays.</li>
+        </ol>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Public datasets</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Dataset</th><th>Used for</th><th>Coverage</th></tr></thead>
+            <tbody>
+              <tr><td>FAOSTAT Food Balance Sheets (FBS)</td><td>Imports, production, calories by item → import share, starch share</td><td class="mono" style="font-size:12.5px">4.82M rows · 178 countries · 2010–23</td></tr>
+              <tr><td>FAOSTAT Supply Utilization Accounts — Food &amp; Diet (SUA)</td><td>Iron, zinc, vitamins A/B12/C, protein by food group</td><td class="mono" style="font-size:12.5px">743K rows · 179 countries</td></tr>
+              <tr><td>World Bank WDI — anemia, women 15–49 (SH.ANM.ALLW.ZS)</td><td>Outcome variable</td><td class="mono" style="font-size:12.5px">2010–23</td></tr>
+              <tr><td>World Bank WDI — GDP per capita PPP (NY.GDP.PCAP.PP.KD)</td><td>Income control</td><td class="mono" style="font-size:12.5px">2010–23</td></tr>
+              <tr><td>World Bank / WHO GHO — malaria, water, sanitation, fertility, stunting</td><td>Confounder controls; anemia uncertainty bounds</td><td class="mono" style="font-size:12.5px">195 countries</td></tr>
+              <tr><td>DHS Program — measured anemia &amp; iron supplementation</td><td>Poverty test (53 countries)</td><td class="mono" style="font-size:12.5px">49–59 countries</td></tr>
+              <tr><td>FAOSTAT Food Security Indicators &amp; Cost of a Healthy Diet</td><td>Gendered food insecurity, food-group costs</td><td class="mono" style="font-size:12.5px">118–135 countries</td></tr>
+              <tr><td>FAOSTAT Detailed Trade Matrix</td><td>Exporter concentration, supplier dependency</td><td class="mono" style="font-size:12.5px">bilateral flows</td></tr>
+              <tr><td>WFP Global Market Monitor (HDX) · World Bank Pink Sheet</td><td>Local and global food-price checks</td><td class="mono" style="font-size:12.5px">81 countries · 1960–2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Team files this story draws on</h3>
+        <div class="files">
+          <div><code>analysis/scripts/00–14_*.py</code><br>Full pipeline: crosswalk, features, density gap, classification, forecasts, validation, proximity, confounders</div>
+          <div><code>analysis/trade_and_nutrition_analysis.ipynb</code><br>End-to-end narrative notebook (Steps 1–6)</div>
+          <div><code>analysis/outputs/country_snapshot_classified.csv</code><br>Trap classification, scatter, correlations</div>
+          <div><code>analysis/outputs/nutrient_density_gap_latest.csv</code><br>Imported vs domestic nutrient labels, density histogram</div>
+          <div><code>analysis/outputs/global_import_share_trend.csv · global_trend_stats.txt</code><br>Chapter 1 trend</div>
+          <div><code>analysis/outputs/regression_cross_section_2023.txt · regression_with_confounders.txt</code><br>Starch effect and controls</div>
+          <div><code>analysis/outputs/regression_panel_fe_summary.csv · regression_early_warning_lag3_summary.csv</code><br>Within-country and early-warning tests</div>
+          <div><code>analysis/outputs/forecast_2030*.csv · forecast_validation.txt · trap_proximity*.{csv,txt}</code><br>2030 outlook and watch list</div>
+          <div><code>analysis/data/master_panel*.csv · data/external/*</code><br>Country-year panel; WHO/DHS merges and coverage reports</div>
+          <div><code>datathon_summary_ah/README.md · notebooks/*.ipynb · data/*.csv</code><br>Malaria, price tests, anemia forecast model comparison, exposure ranking</div>
+          <div><code>datathon_summary_ah/source_documents/*.docx</code><br>Extended submission write-up; FBS/SUA pipeline documentation</div>
+          <div><code>Analysis.xlsx</code><br>Gendered food insecurity, protein density, diet cost, trade concentration, supplier dependency</div>
+          <div><code>Analysis (1).docx</code><br>Interpretation of rankings, regressions and correlation matrix; iron-form framing</div>
+          <div><code>WiD_Hackathon_Findings.pptx · correlation_matrix_snapshot_2023.xlsx</code><br>Findings deck: item-level import profiles, starch tests (effect size, ANOVA, mediation), population-weighted trends, countries on a dual starch-and-import trend, price–diet and volume–price checks; correlation matrix</div>
+          <div><code>datathon_summary_ah/data/: FBS_country_year_macro_trade_share · iron_export_anemia_country_year · malaria_incidence_2021 · starch_share_trend_forecast_2030 · anemia_trend_forecast_2030 · iron_food_price_forecast_2030 · wfp_country_iron_food_price_signal · gdp_percapita_ppp_2010_2023</code><br>Macronutrient imports, iron-supply trend, malaria split, Lesotho vs Gambia, starch and anemia outlook, price outlook, local prices, income</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">The Starch Trap — a data story for the Women in Data “What’s Cooking?” Datathon 2026.</div>
+</footer>
+
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+const DATA = {"trend": [{"year": 2010, "import_share_of_kcal": 0.4305}, {"year": 2011, "import_share_of_kcal": 0.434}, {"year": 2012, "import_share_of_kcal": 0.4455}, {"year": 2013, "import_share_of_kcal": 0.445}, {"year": 2014, "import_share_of_kcal": 0.4653}, {"year": 2015, "import_share_of_kcal": 0.4667}, {"year": 2016, "import_share_of_kcal": 0.4743}, {"year": 2017, "import_share_of_kcal": 0.4845}, {"year": 2018, "import_share_of_kcal": 0.4792}, {"year": 2019, "import_share_of_kcal": 0.4964}, {"year": 2020, "import_share_of_kcal": 0.5033}, {"year": 2021, "import_share_of_kcal": 0.5042}, {"year": 2022, "import_share_of_kcal": 0.5076}, {"year": 2023, "import_share_of_kcal": 0.5042}], "scatter": [{"country": "Democratic People's Republic of Korea", "iso3": "PRK", "starch_share_of_kcal": 0.6727, "import_share_of_kcal": 0.2099, "anemia_prev_women_pct": 27.3, "starch_trap": false, "gdp_per_capita_ppp": null, "micronutrient_adequacy_index": 1.7231, "composite_density_gap": 77.5617}, {"country": "Cuba", "iso3": "CUB", "starch_share_of_kcal": 0.4002, "import_share_of_kcal": 0.4382, "anemia_prev_women_pct": 20.1, "starch_trap": false, "gdp_per_capita_ppp": null, "micronutrient_adequacy_index": 2.5937, "composite_density_gap": 79.2433}, {"country": "South Africa", "iso3": "ZAF", "starch_share_of_kcal": 0.4744, "import_share_of_kcal": 0.3004, "anemia_prev_women_pct": 31.2, "starch_trap": false, "gdp_per_capita_ppp": 13695.3756, "micronutrient_adequacy_index": 1.1699, "composite_density_gap": 16.8712}, {"country": "Albania", "iso3": "ALB", "starch_share_of_kcal": 0.281, "import_share_of_kcal": 0.3424, "anemia_prev_women_pct": 24.7, "starch_trap": false, "gdp_per_capita_ppp": 20501.6471, "micronutrient_adequacy_index": 2.8399, "composite_density_gap": 43.3344}, {"country": "Yemen", "iso3": "YEM", "starch_share_of_kcal": 0.5351, "import_share_of_kcal": 0.7843, "anemia_prev_women_pct": 36.4, "starch_trap": true, "gdp_per_capita_ppp": null, "micronutrient_adequacy_index": 0.6555, "composite_density_gap": 72.1659}, {"country": "Viet Nam", "iso3": "VNM", "starch_share_of_kcal": 0.5229, "import_share_of_kcal": 0.3637, "anemia_prev_women_pct": 20.5, "starch_trap": false, "gdp_per_capita_ppp": 13534.7998, "micronutrient_adequacy_index": 2.8261, "composite_density_gap": 74.3994}, {"country": "Saint Vincent and the Grenadines", "iso3": "VCT", "starch_share_of_kcal": 0.3013, "import_share_of_kcal": 0.7238, "anemia_prev_women_pct": 18.8, "starch_trap": false, "gdp_per_capita_ppp": 17858.2446, "micronutrient_adequacy_index": 1.8454, "composite_density_gap": 56.0846}, {"country": "United Arab Emirates", "iso3": "ARE", "starch_share_of_kcal": 0.3816, "import_share_of_kcal": 0.9825, "anemia_prev_women_pct": 28.2, "starch_trap": false, "gdp_per_capita_ppp": 70239.8328, "micronutrient_adequacy_index": 1.2303, "composite_density_gap": -4.6481}, {"country": "Uruguay", "iso3": "URY", "starch_share_of_kcal": 0.3628, "import_share_of_kcal": 0.4842, "anemia_prev_women_pct": 24.5, "starch_trap": false, "gdp_per_capita_ppp": 31100.9697, "micronutrient_adequacy_index": 1.61, "composite_density_gap": 10.5074}, {"country": "Zambia", "iso3": "ZMB", "starch_share_of_kcal": 0.6941, "import_share_of_kcal": 0.0933, "anemia_prev_women_pct": 27.1, "starch_trap": false, "gdp_per_capita_ppp": 3673.4842, "micronutrient_adequacy_index": 0.6729, "composite_density_gap": -8.6093}, {"country": "Samoa", "iso3": "WSM", "starch_share_of_kcal": 0.3794, "import_share_of_kcal": 0.6893, "anemia_prev_women_pct": 21.9, "starch_trap": false, "gdp_per_capita_ppp": 7384.6916, "micronutrient_adequacy_index": 1.7027, "composite_density_gap": 38.4333}, {"country": "Uzbekistan", "iso3": "UZB", "starch_share_of_kcal": 0.4444, "import_share_of_kcal": 0.2929, "anemia_prev_women_pct": 30.4, "starch_trap": false, "gdp_per_capita_ppp": 10514.0956, "micronutrient_adequacy_index": 2.5284, "composite_density_gap": 56.9499}, {"country": "Afghanistan", "iso3": "AFG", "starch_share_of_kcal": 0.729, "import_share_of_kcal": 0.4905, "anemia_prev_women_pct": 45.4, "starch_trap": false, "gdp_per_capita_ppp": 1983.8126, "micronutrient_adequacy_index": 0.7949, "composite_density_gap": 23.8151}, {"country": "United States of America", "iso3": "USA", "starch_share_of_kcal": 0.2409, "import_share_of_kcal": 0.2045, "anemia_prev_women_pct": 15.0, "starch_trap": false, "gdp_per_capita_ppp": 74351.6718, "micronutrient_adequacy_index": 1.7863, "composite_density_gap": -25.0349}, {"country": "Argentina", "iso3": "ARG", "starch_share_of_kcal": 0.3475, "import_share_of_kcal": 0.0174, "anemia_prev_women_pct": 23.5, "starch_trap": false, "gdp_per_capita_ppp": 27230.3968, "micronutrient_adequacy_index": 1.7758, "composite_density_gap": -56.5371}, {"country": "Vanuatu", "iso3": "VUT", "starch_share_of_kcal": 0.4392, "import_share_of_kcal": 0.5586, "anemia_prev_women_pct": 30.4, "starch_trap": false, "gdp_per_capita_ppp": 3782.8265, "micronutrient_adequacy_index": 2.1058, "composite_density_gap": 83.293}, {"country": "Venezuela (Bolivarian Republic of)", "iso3": "VEN", "starch_share_of_kcal": 0.4203, "import_share_of_kcal": 0.3521, "anemia_prev_women_pct": 25.2, "starch_trap": false, "gdp_per_capita_ppp": null, "micronutrient_adequacy_index": 1.3166, "composite_density_gap": 30.3069}, {"country": "Angola", "iso3": "AGO", "starch_share_of_kcal": 0.6418, "import_share_of_kcal": 0.1724, "anemia_prev_women_pct": 43.8, "starch_trap": false, "gdp_per_capita_ppp": 8597.5388, "micronutrient_adequacy_index": 1.7191, "composite_density_gap": 57.3718}, {"country": "Gambia", "iso3": "GMB", "starch_share_of_kcal": 0.5802, "import_share_of_kcal": 0.7925, "anemia_prev_women_pct": 46.1, "starch_trap": true, "gdp_per_capita_ppp": 2963.5987, "micronutrient_adequacy_index": 0.7529, "composite_density_gap": 25.574}, {"country": "Ukraine", "iso3": "UKR", "starch_share_of_kcal": 0.4267, "import_share_of_kcal": 0.0817, "anemia_prev_women_pct": 19.4, "starch_trap": false, "gdp_per_capita_ppp": 15916.958, "micronutrient_adequacy_index": 1.8517, "composite_density_gap": -31.9987}, {"country": "Luxembourg", "iso3": "LUX", "starch_share_of_kcal": 0.2893, "import_share_of_kcal": 0.973, "anemia_prev_women_pct": 15.4, "starch_trap": false, "gdp_per_capita_ppp": 130048.9223, "micronutrient_adequacy_index": 1.9564, "composite_density_gap": 38.0879}, {"country": "Germany", "iso3": "DEU", "starch_share_of_kcal": 0.2433, "import_share_of_kcal": 0.4784, "anemia_prev_women_pct": 14.0, "starch_trap": false, "gdp_per_capita_ppp": 63140.1949, "micronutrient_adequacy_index": 1.6275, "composite_density_gap": -20.5439}, {"country": "Lithuania", "iso3": "LTU", "starch_share_of_kcal": 0.2908, "import_share_of_kcal": 0.6943, "anemia_prev_women_pct": 23.7, "starch_trap": false, "gdp_per_capita_ppp": 46333.9007, "micronutrient_adequacy_index": 1.8111, "composite_density_gap": -12.287}, {"country": "Lesotho", "iso3": "LSO", "starch_share_of_kcal": 0.6588, "import_share_of_kcal": 0.7935, "anemia_prev_women_pct": 34.2, "starch_trap": true, "gdp_per_capita_ppp": 2592.457, "micronutrient_adequacy_index": 0.944, "composite_density_gap": 42.4161}, {"country": "Djibouti", "iso3": "DJI", "starch_share_of_kcal": 0.5258, "import_share_of_kcal": 0.9775, "anemia_prev_women_pct": 31.8, "starch_trap": true, "gdp_per_capita_ppp": 6510.6786, "micronutrient_adequacy_index": 1.1754, "composite_density_gap": 158.7989}, {"country": "Sri Lanka", "iso3": "LKA", "starch_share_of_kcal": 0.5862, "import_share_of_kcal": 0.3414, "anemia_prev_women_pct": 20.9, "starch_trap": false, "gdp_per_capita_ppp": 13065.0698, "micronutrient_adequacy_index": 1.2352, "composite_density_gap": 19.7517}, {"country": "Saint Lucia", "iso3": "LCA", "starch_share_of_kcal": 0.3655, "import_share_of_kcal": 0.8148, "anemia_prev_women_pct": 19.9, "starch_trap": false, "gdp_per_capita_ppp": 23636.0266, "micronutrient_adequacy_index": 1.6485, "composite_density_gap": 60.4028}, {"country": "Latvia", "iso3": "LVA", "starch_share_of_kcal": 0.2818, "import_share_of_kcal": 0.8639, "anemia_prev_women_pct": 21.4, "starch_trap": false, "gdp_per_capita_ppp": 37277.7217, "micronutrient_adequacy_index": 1.7628, "composite_density_gap": -8.5975}, {"country": "Denmark", "iso3": "DNK", "starch_share_of_kcal": 0.2801, "import_share_of_kcal": 0.5649, "anemia_prev_women_pct": 17.0, "starch_trap": false, "gdp_per_capita_ppp": 68993.9031, "micronutrient_adequacy_index": 1.8733, "composite_density_gap": -22.7792}, {"country": "Liberia", "iso3": "LBR", "starch_share_of_kcal": 0.7163, "import_share_of_kcal": 0.6826, "anemia_prev_women_pct": 42.5, "starch_trap": true, "gdp_per_capita_ppp": 1616.9237, "micronutrient_adequacy_index": 1.1893, "composite_density_gap": 77.847}, {"country": "Dominican Republic", "iso3": "DOM", "starch_share_of_kcal": 0.2621, "import_share_of_kcal": 0.4104, "anemia_prev_women_pct": 22.4, "starch_trap": false, "gdp_per_capita_ppp": 23282.4895, "micronutrient_adequacy_index": 2.6672, "composite_density_gap": 65.3866}, {"country": "Lebanon", "iso3": "LBN", "starch_share_of_kcal": 0.4074, "import_share_of_kcal": 0.6462, "anemia_prev_women_pct": 34.0, "starch_trap": false, "gdp_per_capita_ppp": 11330.2687, "micronutrient_adequacy_index": 1.5814, "composite_density_gap": 64.1955}, {"country": "Lao People's Democratic Republic", "iso3": "LAO", "starch_share_of_kcal": 0.6702, "import_share_of_kcal": 0.1421, "anemia_prev_women_pct": 28.6, "starch_trap": false, "gdp_per_capita_ppp": 8372.1559, "micronutrient_adequacy_index": 2.4779, "composite_density_gap": 41.0609}, {"country": "Algeria", "iso3": "DZA", "starch_share_of_kcal": 0.4685, "import_share_of_kcal": 0.569, "anemia_prev_women_pct": 31.6, "starch_trap": false, "gdp_per_capita_ppp": 15159.3242, "micronutrient_adequacy_index": 1.8703, "composite_density_gap": 68.7653}, {"country": "Kuwait", "iso3": "KWT", "starch_share_of_kcal": 0.4061, "import_share_of_kcal": 0.91, "anemia_prev_women_pct": 27.7, "starch_trap": false, "gdp_per_capita_ppp": 47790.1933, "micronutrient_adequacy_index": 1.6203, "composite_density_gap": 51.5289}, {"country": "Republic of Korea", "iso3": "KOR", "starch_share_of_kcal": 0.3316, "import_share_of_kcal": 0.638, "anemia_prev_women_pct": 15.7, "starch_trap": false, "gdp_per_capita_ppp": 54029.3435, "micronutrient_adequacy_index": 2.4597, "composite_density_gap": 65.0885}, {"country": "Libya", "iso3": "LBY", "starch_share_of_kcal": 0.3244, "import_share_of_kcal": 0.6904, "anemia_prev_women_pct": 29.3, "starch_trap": false, "gdp_per_capita_ppp": 12476.5975, "micronutrient_adequacy_index": 1.9572, "composite_density_gap": 48.5967}, {"country": "Ecuador", "iso3": "ECU", "starch_share_of_kcal": 0.3705, "import_share_of_kcal": 0.2411, "anemia_prev_women_pct": 20.2, "starch_trap": false, "gdp_per_capita_ppp": 14321.1648, "micronutrient_adequacy_index": 0.9481, "composite_density_gap": 13.2974}, {"country": "Czechia", "iso3": "CZE", "starch_share_of_kcal": 0.2263, "import_share_of_kcal": 0.5383, "anemia_prev_women_pct": 24.6, "starch_trap": false, "gdp_per_capita_ppp": 47558.4107, "micronutrient_adequacy_index": 1.42, "composite_density_gap": -24.4129}, {"country": "Morocco", "iso3": "MAR", "starch_share_of_kcal": 0.5809, "import_share_of_kcal": 0.6183, "anemia_prev_women_pct": 29.5, "starch_trap": false, "gdp_per_capita_ppp": 8915.3516, "micronutrient_adequacy_index": 1.4604, "composite_density_gap": 56.337}, {"country": "Colombia", "iso3": "COL", "starch_share_of_kcal": 0.3548, "import_share_of_kcal": 0.2594, "anemia_prev_women_pct": 22.4, "starch_trap": false, "gdp_per_capita_ppp": 18406.6242, "micronutrient_adequacy_index": 1.8407, "composite_density_gap": 33.2268}, {"country": "Mozambique", "iso3": "MOZ", "starch_share_of_kcal": 0.7514, "import_share_of_kcal": 0.2993, "anemia_prev_women_pct": 47.0, "starch_trap": false, "gdp_per_capita_ppp": 1512.6673, "micronutrient_adequacy_index": 1.5028, "composite_density_gap": 67.7821}, {"country": "Mongolia", "iso3": "MNG", "starch_share_of_kcal": 0.3367, "import_share_of_kcal": 0.3309, "anemia_prev_women_pct": 19.1, "starch_trap": false, "gdp_per_capita_ppp": 16222.8639, "micronutrient_adequacy_index": 2.7059, "composite_density_gap": 50.4697}, {"country": "Comoros", "iso3": "COM", "starch_share_of_kcal": 0.5577, "import_share_of_kcal": 0.5353, "anemia_prev_women_pct": 29.9, "starch_trap": false, "gdp_per_capita_ppp": 3508.1586, "micronutrient_adequacy_index": 1.1912, "composite_density_gap": 45.8181}, {"country": "Montenegro", "iso3": "MNE", "starch_share_of_kcal": 0.3306, "import_share_of_kcal": 0.7614, "anemia_prev_women_pct": 25.8, "starch_trap": false, "gdp_per_capita_ppp": 27243.4042, "micronutrient_adequacy_index": 2.0474, "composite_density_gap": 9.2239}, {"country": "Myanmar", "iso3": "MMR", "starch_share_of_kcal": 0.6275, "import_share_of_kcal": 0.0594, "anemia_prev_women_pct": 39.7, "starch_trap": false, "gdp_per_capita_ppp": 5364.138, "micronutrient_adequacy_index": 1.7085, "composite_density_gap": 44.4944}, {"country": "Cabo Verde", "iso3": "CPV", "starch_share_of_kcal": 0.4886, "import_share_of_kcal": 0.8846, "anemia_prev_women_pct": 40.6, "starch_trap": false, "gdp_per_capita_ppp": 9228.4605, "micronutrient_adequacy_index": 1.3476, "composite_density_gap": 72.8942}, {"country": "China, Macao SAR", "iso3": "MAC", "starch_share_of_kcal": 0.2985, "import_share_of_kcal": 0.9926, "anemia_prev_women_pct": null, "starch_trap": false, "gdp_per_capita_ppp": 104815.2, "micronutrient_adequacy_index": 2.3525, "composite_density_gap": 82.2746}, {"country": "Malta", "iso3": "MLT", "starch_share_of_kcal": 0.3583, "import_share_of_kcal": 0.8829, "anemia_prev_women_pct": 15.7, "starch_trap": false, "gdp_per_capita_ppp": 60459.7655, "micronutrient_adequacy_index": 1.677, "composite_density_gap": 35.2183}, {"country": "Costa Rica", "iso3": "CRI", "starch_share_of_kcal": 0.3259, "import_share_of_kcal": 0.4928, "anemia_prev_women_pct": 13.7, "starch_trap": false, "gdp_per_capita_ppp": 26378.541, "micronutrient_adequacy_index": 1.4714, "composite_density_gap": 5.3852}, {"country": "Marshall Islands", "iso3": "MHL", "starch_share_of_kcal": 0.3104, "import_share_of_kcal": 0.7252, "anemia_prev_women_pct": 23.5, "starch_trap": false, "gdp_per_capita_ppp": 6774.7827, "micronutrient_adequacy_index": 1.3959, "composite_density_gap": 0.3032}, {"country": "Mexico", "iso3": "MEX", "starch_share_of_kcal": 0.4096, "import_share_of_kcal": 0.3004, "anemia_prev_women_pct": 13.2, "starch_trap": false, "gdp_per_capita_ppp": 21864.9236, "micronutrient_adequacy_index": 1.8839, "composite_density_gap": 29.5811}, {"country": "Maldives", "iso3": "MDV", "starch_share_of_kcal": 0.392, "import_share_of_kcal": 0.9286, "anemia_prev_women_pct": 43.4, "starch_trap": false, "gdp_per_capita_ppp": 22333.0477, "micronutrient_adequacy_index": 2.2017, "composite_density_gap": 280.4515}, {"country": "Madagascar", "iso3": "MDG", "starch_share_of_kcal": 0.8173, "import_share_of_kcal": 0.1665, "anemia_prev_women_pct": 37.2, "starch_trap": false, "gdp_per_capita_ppp": 1629.6055, "micronutrient_adequacy_index": 1.0536, "composite_density_gap": 35.759}, {"country": "Republic of Moldova", "iso3": "MDA", "starch_share_of_kcal": 0.3818, "import_share_of_kcal": 0.2962, "anemia_prev_women_pct": 28.5, "starch_trap": false, "gdp_per_capita_ppp": 15980.5669, "micronutrient_adequacy_index": 1.5956, "composite_density_gap": 4.3324}, {"country": "Cyprus", "iso3": "CYP", "starch_share_of_kcal": 0.3527, "import_share_of_kcal": 0.7543, "anemia_prev_women_pct": 16.4, "starch_trap": false, "gdp_per_capita_ppp": 51674.9023, "micronutrient_adequacy_index": 1.289, "composite_density_gap": 11.8636}, {"country": "North Macedonia", "iso3": "MKD", "starch_share_of_kcal": 0.3627, "import_share_of_kcal": 0.5717, "anemia_prev_women_pct": 21.5, "starch_trap": false, "gdp_per_capita_ppp": 23455.2221, "micronutrient_adequacy_index": 3.3571, "composite_density_gap": 109.7792}, {"country": "Mauritania", "iso3": "MRT", "starch_share_of_kcal": 0.5366, "import_share_of_kcal": 0.7019, "anemia_prev_women_pct": 54.5, "starch_trap": true, "gdp_per_capita_ppp": 6276.4752, "micronutrient_adequacy_index": 1.0389, "composite_density_gap": 19.8628}, {"country": "Saint Kitts and Nevis", "iso3": "KNA", "starch_share_of_kcal": 0.2772, "import_share_of_kcal": 0.9129, "anemia_prev_women_pct": 19.4, "starch_trap": false, "gdp_per_capita_ppp": 30616.5773, "micronutrient_adequacy_index": 1.4612, "composite_density_gap": 56.034}, {"country": "Egypt", "iso3": "EGY", "starch_share_of_kcal": 0.6562, "import_share_of_kcal": 0.3465, "anemia_prev_women_pct": 32.7, "starch_trap": false, "gdp_per_capita_ppp": 16691.3874, "micronutrient_adequacy_index": 1.6025, "composite_density_gap": 42.4009}, {"country": "Indonesia", "iso3": "IDN", "starch_share_of_kcal": 0.5396, "import_share_of_kcal": 0.1906, "anemia_prev_women_pct": 26.7, "starch_trap": false, "gdp_per_capita_ppp": 13889.9495, "micronutrient_adequacy_index": 1.7254, "composite_density_gap": 41.7527}, {"country": "Hungary", "iso3": "HUN", "starch_share_of_kcal": 0.2934, "import_share_of_kcal": 0.499, "anemia_prev_women_pct": 24.1, "starch_trap": false, "gdp_per_capita_ppp": 40333.2547, "micronutrient_adequacy_index": 1.2473, "composite_density_gap": 9.0747}, {"country": "Gabon", "iso3": "GAB", "starch_share_of_kcal": 0.5129, "import_share_of_kcal": 0.4777, "anemia_prev_women_pct": 59.9, "starch_trap": false, "gdp_per_capita_ppp": 18701.4228, "micronutrient_adequacy_index": 1.6011, "composite_density_gap": 15.813}, {"country": "Haiti", "iso3": "HTI", "starch_share_of_kcal": 0.5764, "import_share_of_kcal": 0.6042, "anemia_prev_women_pct": 45.9, "starch_trap": false, "gdp_per_capita_ppp": 2939.1238, "micronutrient_adequacy_index": 0.9672, "composite_density_gap": 66.0231}, {"country": "Croatia", "iso3": "HRV", "starch_share_of_kcal": 0.2843, "import_share_of_kcal": 0.6356, "anemia_prev_women_pct": 23.3, "starch_trap": false, "gdp_per_capita_ppp": 41320.258, "micronutrient_adequacy_index": 1.8243, "composite_density_gap": -3.8855}, {"country": "United Kingdom of Great Britain and Northern Ireland", "iso3": "GBR", "starch_share_of_kcal": 0.3325, "import_share_of_kcal": 0.5249, "anemia_prev_women_pct": 13.6, "starch_trap": false, "gdp_per_capita_ppp": 53423.4226, "micronutrient_adequacy_index": 1.6294, "composite_density_gap": -15.306}, {"country": "Honduras", "iso3": "HND", "starch_share_of_kcal": 0.4095, "import_share_of_kcal": 0.5011, "anemia_prev_women_pct": 18.8, "starch_trap": false, "gdp_per_capita_ppp": 6467.88, "micronutrient_adequacy_index": 0.8878, "composite_density_gap": 3.4365}, {"country": "Micronesia (Federated States of)", "iso3": "FSM", "starch_share_of_kcal": 0.318, "import_share_of_kcal": 0.4484, "anemia_prev_women_pct": 22.1, "starch_trap": false, "gdp_per_capita_ppp": 3841.2712, "micronutrient_adequacy_index": 1.5531, "composite_density_gap": 43.1052}, {"country": "China, Hong Kong SAR", "iso3": "HKG", "starch_share_of_kcal": 0.2862, "import_share_of_kcal": 0.9688, "anemia_prev_women_pct": null, "starch_trap": false, "gdp_per_capita_ppp": 64387.6654, "micronutrient_adequacy_index": 2.3722, "composite_density_gap": -45.1783}, {"country": "Guyana", "iso3": "GUY", "starch_share_of_kcal": 0.3573, "import_share_of_kcal": 0.345, "anemia_prev_women_pct": 37.5, "starch_trap": false, "gdp_per_capita_ppp": 49312.3603, "micronutrient_adequacy_index": 2.9739, "composite_density_gap": 56.5527}, {"country": "Guatemala", "iso3": "GTM", "starch_share_of_kcal": 0.4211, "import_share_of_kcal": 0.4039, "anemia_prev_women_pct": 10.5, "starch_trap": false, "gdp_per_capita_ppp": 12380.3715, "micronutrient_adequacy_index": 1.1307, "composite_density_gap": 19.2073}, {"country": "Ghana", "iso3": "GHA", "starch_share_of_kcal": 0.6864, "import_share_of_kcal": 0.153, "anemia_prev_women_pct": 36.0, "starch_trap": false, "gdp_per_capita_ppp": 6808.5378, "micronutrient_adequacy_index": 2.5475, "composite_density_gap": 31.1556}, {"country": "Grenada", "iso3": "GRD", "starch_share_of_kcal": 0.2118, "import_share_of_kcal": 0.8158, "anemia_prev_women_pct": 20.9, "starch_trap": false, "gdp_per_capita_ppp": 17093.1563, "micronutrient_adequacy_index": 1.9698, "composite_density_gap": 79.7568}, {"country": "Greece", "iso3": "GRC", "starch_share_of_kcal": 0.2797, "import_share_of_kcal": 0.6687, "anemia_prev_women_pct": 15.6, "starch_trap": false, "gdp_per_capita_ppp": 36700.5135, "micronutrient_adequacy_index": 1.8761, "composite_density_gap": 28.1074}, {"country": "Guinea", "iso3": "GIN", "starch_share_of_kcal": 0.6376, "import_share_of_kcal": 0.2593, "anemia_prev_women_pct": 45.7, "starch_trap": false, "gdp_per_capita_ppp": 3904.824, "micronutrient_adequacy_index": 1.7366, "composite_density_gap": 52.2644}, {"country": "Guinea-Bissau", "iso3": "GNB", "starch_share_of_kcal": 0.6327, "import_share_of_kcal": 0.344, "anemia_prev_women_pct": 45.7, "starch_trap": false, "gdp_per_capita_ppp": 2660.8144, "micronutrient_adequacy_index": 1.0677, "composite_density_gap": 28.5297}, {"country": "Georgia", "iso3": "GEO", "starch_share_of_kcal": 0.4449, "import_share_of_kcal": 0.6487, "anemia_prev_women_pct": 30.2, "starch_trap": false, "gdp_per_capita_ppp": 22590.5294, "micronutrient_adequacy_index": 1.332, "composite_density_gap": 26.4355}, {"country": "Kiribati", "iso3": "KIR", "starch_share_of_kcal": 0.3365, "import_share_of_kcal": 0.5919, "anemia_prev_women_pct": 26.9, "starch_trap": false, "gdp_per_capita_ppp": 3175.0248, "micronutrient_adequacy_index": 1.5126, "composite_density_gap": 65.5929}, {"country": "India", "iso3": "IND", "starch_share_of_kcal": 0.5323, "import_share_of_kcal": 0.0678, "anemia_prev_women_pct": 53.7, "starch_trap": false, "gdp_per_capita_ppp": 8870.5503, "micronutrient_adequacy_index": 1.5211, "composite_density_gap": 35.2633}, {"country": "Ireland", "iso3": "IRL", "starch_share_of_kcal": 0.2748, "import_share_of_kcal": 0.6833, "anemia_prev_women_pct": 14.0, "starch_trap": false, "gdp_per_capita_ppp": 117659.7286, "micronutrient_adequacy_index": 2.1088, "composite_density_gap": 0.3245}, {"country": "Cambodia", "iso3": "KHM", "starch_share_of_kcal": 0.72, "import_share_of_kcal": 0.1673, "anemia_prev_women_pct": 38.0, "starch_trap": false, "gdp_per_capita_ppp": 6695.2919, "micronutrient_adequacy_index": 1.3725, "composite_density_gap": 26.0094}, {"country": "Kyrgyzstan", "iso3": "KGZ", "starch_share_of_kcal": 0.4369, "import_share_of_kcal": 0.2937, "anemia_prev_women_pct": 32.9, "starch_trap": false, "gdp_per_capita_ppp": 6575.7754, "micronutrient_adequacy_index": 1.8243, "composite_density_gap": 27.5572}, {"country": "Spain", "iso3": "ESP", "starch_share_of_kcal": 0.2562, "import_share_of_kcal": 0.6283, "anemia_prev_women_pct": 15.6, "starch_trap": false, "gdp_per_capita_ppp": 47322.5937, "micronutrient_adequacy_index": 1.9961, "composite_density_gap": 32.0824}, {"country": "Kenya", "iso3": "KEN", "starch_share_of_kcal": 0.509, "import_share_of_kcal": 0.3592, "anemia_prev_women_pct": 32.2, "starch_trap": false, "gdp_per_capita_ppp": 5691.8251, "micronutrient_adequacy_index": 1.2498, "composite_density_gap": 54.9105}, {"country": "Kazakhstan", "iso3": "KAZ", "starch_share_of_kcal": 0.3081, "import_share_of_kcal": 0.4053, "anemia_prev_women_pct": 30.5, "starch_trap": false, "gdp_per_capita_ppp": 34703.2349, "micronutrient_adequacy_index": 2.1683, "composite_density_gap": 24.2821}, {"country": "Estonia", "iso3": "EST", "starch_share_of_kcal": 0.2197, "import_share_of_kcal": 0.5714, "anemia_prev_women_pct": 24.7, "starch_trap": false, "gdp_per_capita_ppp": 41284.7747, "micronutrient_adequacy_index": 1.79, "composite_density_gap": -21.7446}, {"country": "Jordan", "iso3": "JOR", "starch_share_of_kcal": 0.4049, "import_share_of_kcal": 0.7087, "anemia_prev_women_pct": 33.0, "starch_trap": false, "gdp_per_capita_ppp": 10308.7822, "micronutrient_adequacy_index": 1.1133, "composite_density_gap": 44.3102}, {"country": "France", "iso3": "FRA", "starch_share_of_kcal": 0.2869, "import_share_of_kcal": 0.364, "anemia_prev_women_pct": 13.1, "starch_trap": false, "gdp_per_capita_ppp": 54296.7231, "micronutrient_adequacy_index": 1.8758, "composite_density_gap": -19.0545}, {"country": "Jamaica", "iso3": "JAM", "starch_share_of_kcal": 0.3773, "import_share_of_kcal": 0.6274, "anemia_prev_women_pct": 21.5, "starch_trap": false, "gdp_per_capita_ppp": 11398.812, "micronutrient_adequacy_index": 2.048, "composite_density_gap": 75.6435}, {"country": "Italy", "iso3": "ITA", "starch_share_of_kcal": 0.3077, "import_share_of_kcal": 0.6536, "anemia_prev_women_pct": 16.4, "starch_trap": false, "gdp_per_capita_ppp": 52842.6289, "micronutrient_adequacy_index": 1.8002, "composite_density_gap": 18.0567}, {"country": "Israel", "iso3": "ISR", "starch_share_of_kcal": 0.3074, "import_share_of_kcal": 0.583, "anemia_prev_women_pct": 14.6, "starch_trap": false, "gdp_per_capita_ppp": 47671.2477, "micronutrient_adequacy_index": 2.1757, "composite_density_gap": 41.7353}, {"country": "Finland", "iso3": "FIN", "starch_share_of_kcal": 0.3513, "import_share_of_kcal": 0.3515, "anemia_prev_women_pct": 13.6, "starch_trap": false, "gdp_per_capita_ppp": 56051.7701, "micronutrient_adequacy_index": 1.866, "composite_density_gap": -12.9355}, {"country": "Iceland", "iso3": "ISL", "starch_share_of_kcal": 0.298, "import_share_of_kcal": 0.5757, "anemia_prev_women_pct": 14.7, "starch_trap": false, "gdp_per_capita_ppp": 69268.1221, "micronutrient_adequacy_index": 2.7454, "composite_density_gap": -23.3701}, {"country": "Iraq", "iso3": "IRQ", "starch_share_of_kcal": 0.5859, "import_share_of_kcal": 0.6829, "anemia_prev_women_pct": 27.1, "starch_trap": true, "gdp_per_capita_ppp": 13202.3228, "micronutrient_adequacy_index": 1.0452, "composite_density_gap": 2.9147}, {"country": "Fiji", "iso3": "FJI", "starch_share_of_kcal": 0.4195, "import_share_of_kcal": 0.5738, "anemia_prev_women_pct": 29.9, "starch_trap": false, "gdp_per_capita_ppp": 13194.8048, "micronutrient_adequacy_index": 1.954, "composite_density_gap": 34.6183}, {"country": "Iran (Islamic Republic of)", "iso3": "IRN", "starch_share_of_kcal": 0.5123, "import_share_of_kcal": 0.2783, "anemia_prev_women_pct": 25.5, "starch_trap": false, "gdp_per_capita_ppp": 17044.8173, "micronutrient_adequacy_index": 1.6823, "composite_density_gap": 49.016}, {"country": "Ethiopia", "iso3": "ETH", "starch_share_of_kcal": 0.7381, "import_share_of_kcal": 0.0937, "anemia_prev_women_pct": 23.1, "starch_trap": false, "gdp_per_capita_ppp": 2757.9592, "micronutrient_adequacy_index": 0.9091, "composite_density_gap": 24.0503}, {"country": "Armenia", "iso3": "ARM", "starch_share_of_kcal": 0.3994, "import_share_of_kcal": 0.5688, "anemia_prev_women_pct": 18.7, "starch_trap": false, "gdp_per_capita_ppp": 19402.7511, "micronutrient_adequacy_index": 2.0678, "composite_density_gap": 62.4188}, {"country": "Mauritius", "iso3": "MUS", "starch_share_of_kcal": 0.4105, "import_share_of_kcal": 0.8806, "anemia_prev_women_pct": 32.8, "starch_trap": false, "gdp_per_capita_ppp": 26471.0351, "micronutrient_adequacy_index": 1.6365, "composite_density_gap": 77.9437}, {"country": "Malawi", "iso3": "MWI", "starch_share_of_kcal": 0.6349, "import_share_of_kcal": 0.0363, "anemia_prev_women_pct": 32.4, "starch_trap": false, "gdp_per_capita_ppp": 1649.2987, "micronutrient_adequacy_index": 2.1182, "composite_density_gap": 63.6808}, {"country": "Eswatini", "iso3": "SWZ", "starch_share_of_kcal": 0.5834, "import_share_of_kcal": 0.6893, "anemia_prev_women_pct": 28.3, "starch_trap": true, "gdp_per_capita_ppp": 10181.5041, "micronutrient_adequacy_index": 1.1986, "composite_density_gap": 40.3633}, {"country": "Bangladesh", "iso3": "BGD", "starch_share_of_kcal": 0.7156, "import_share_of_kcal": 0.2097, "anemia_prev_women_pct": 37.6, "starch_trap": false, "gdp_per_capita_ppp": 8242.398, "micronutrient_adequacy_index": 1.3042, "composite_density_gap": 22.9813}, {"country": "Sweden", "iso3": "SWE", "starch_share_of_kcal": 0.2959, "import_share_of_kcal": 0.5846, "anemia_prev_women_pct": 16.8, "starch_trap": false, "gdp_per_capita_ppp": 62122.5117, "micronutrient_adequacy_index": 1.8623, "composite_density_gap": -14.5733}, {"country": "Slovenia", "iso3": "SVN", "starch_share_of_kcal": 0.3943, "import_share_of_kcal": 0.8815, "anemia_prev_women_pct": 25.7, "starch_trap": false, "gdp_per_capita_ppp": 47986.4196, "micronutrient_adequacy_index": 1.6311, "composite_density_gap": -15.3978}, {"country": "Bulgaria", "iso3": "BGR", "starch_share_of_kcal": 0.2895, "import_share_of_kcal": 0.5967, "anemia_prev_women_pct": 25.8, "starch_trap": false, "gdp_per_capita_ppp": 33073.6803, "micronutrient_adequacy_index": 1.3661, "composite_density_gap": 3.6603}, {"country": "Slovakia", "iso3": "SVK", "starch_share_of_kcal": 0.2841, "import_share_of_kcal": 0.7781, "anemia_prev_women_pct": 25.3, "starch_trap": false, "gdp_per_capita_ppp": 39501.9474, "micronutrient_adequacy_index": 1.373, "composite_density_gap": -21.8356}, {"country": "Bahrain", "iso3": "BHR", "starch_share_of_kcal": 0.3325, "import_share_of_kcal": 0.9618, "anemia_prev_women_pct": 38.4, "starch_trap": false, "gdp_per_capita_ppp": 57819.9052, "micronutrient_adequacy_index": 1.7909, "composite_density_gap": 42.8734}, {"country": "Seychelles", "iso3": "SYC", "starch_share_of_kcal": 0.3921, "import_share_of_kcal": 0.8981, "anemia_prev_women_pct": 25.8, "starch_trap": false, "gdp_per_capita_ppp": 28713.6672, "micronutrient_adequacy_index": 1.9812, "composite_density_gap": 19.8044}, {"country": "Suriname", "iso3": "SUR", "starch_share_of_kcal": 0.4378, "import_share_of_kcal": 0.5844, "anemia_prev_women_pct": 22.2, "starch_trap": false, "gdp_per_capita_ppp": 19020.8664, "micronutrient_adequacy_index": 1.0594, "composite_density_gap": 19.1479}, {"country": "Bahamas", "iso3": "BHS", "starch_share_of_kcal": 0.1841, "import_share_of_kcal": 0.8807, "anemia_prev_women_pct": 18.8, "starch_trap": false, "gdp_per_capita_ppp": 35221.2697, "micronutrient_adequacy_index": 2.2477, "composite_density_gap": 101.217}, {"country": "Serbia", "iso3": "SRB", "starch_share_of_kcal": 0.5122, "import_share_of_kcal": 0.1878, "anemia_prev_women_pct": 24.9, "starch_trap": false, "gdp_per_capita_ppp": 25735.1335, "micronutrient_adequacy_index": 2.3553, "composite_density_gap": -11.3723}, {"country": "El Salvador", "iso3": "SLV", "starch_share_of_kcal": 0.4717, "import_share_of_kcal": 0.6484, "anemia_prev_women_pct": 14.4, "starch_trap": false, "gdp_per_capita_ppp": 11404.3342, "micronutrient_adequacy_index": 1.4656, "composite_density_gap": 4.0714}, {"country": "Bosnia and Herzegovina", "iso3": "BIH", "starch_share_of_kcal": 0.3786, "import_share_of_kcal": 0.4935, "anemia_prev_women_pct": 26.0, "starch_trap": false, "gdp_per_capita_ppp": 19804.9181, "micronutrient_adequacy_index": 2.903, "composite_density_gap": 63.0247}, {"country": "Sierra Leone", "iso3": "SLE", "starch_share_of_kcal": 0.7297, "import_share_of_kcal": 0.2235, "anemia_prev_women_pct": 44.6, "starch_trap": false, "gdp_per_capita_ppp": 3034.9461, "micronutrient_adequacy_index": 1.6981, "composite_density_gap": 34.4953}, {"country": "Solomon Islands", "iso3": "SLB", "starch_share_of_kcal": 0.6283, "import_share_of_kcal": 0.452, "anemia_prev_women_pct": 32.6, "starch_trap": false, "gdp_per_capita_ppp": 2339.8747, "micronutrient_adequacy_index": 2.0575, "composite_density_gap": 124.1235}, {"country": "Belarus", "iso3": "BLR", "starch_share_of_kcal": 0.3181, "import_share_of_kcal": 0.0543, "anemia_prev_women_pct": 22.1, "starch_trap": false, "gdp_per_capita_ppp": 27782.438, "micronutrient_adequacy_index": 2.5122, "composite_density_gap": -32.0189}, {"country": "Sao Tome and Principe", "iso3": "STP", "starch_share_of_kcal": 0.4256, "import_share_of_kcal": 0.5781, "anemia_prev_women_pct": 39.7, "starch_trap": false, "gdp_per_capita_ppp": 5541.3017, "micronutrient_adequacy_index": 1.4229, "composite_density_gap": 75.82}, {"country": "Senegal", "iso3": "SEN", "starch_share_of_kcal": 0.6277, "import_share_of_kcal": 0.4791, "anemia_prev_women_pct": 43.1, "starch_trap": false, "gdp_per_capita_ppp": 4304.7615, "micronutrient_adequacy_index": 1.276, "composite_density_gap": 32.4172}, {"country": "Burkina Faso", "iso3": "BFA", "starch_share_of_kcal": 0.5778, "import_share_of_kcal": 0.2439, "anemia_prev_women_pct": 44.3, "starch_trap": false, "gdp_per_capita_ppp": 2486.2067, "micronutrient_adequacy_index": 2.3119, "composite_density_gap": 56.7165}, {"country": "Thailand", "iso3": "THA", "starch_share_of_kcal": 0.5071, "import_share_of_kcal": 0.2016, "anemia_prev_women_pct": 20.7, "starch_trap": false, "gdp_per_capita_ppp": 21245.2707, "micronutrient_adequacy_index": 1.4463, "composite_density_gap": -42.982}, {"country": "Uganda", "iso3": "UGA", "starch_share_of_kcal": 0.4672, "import_share_of_kcal": 0.1397, "anemia_prev_women_pct": 27.2, "starch_trap": false, "gdp_per_capita_ppp": 2791.0558, "micronutrient_adequacy_index": 1.3825, "composite_density_gap": 32.4432}, {"country": "Antigua and Barbuda", "iso3": "ATG", "starch_share_of_kcal": 0.2541, "import_share_of_kcal": 0.9216, "anemia_prev_women_pct": 20.3, "starch_trap": false, "gdp_per_capita_ppp": 28712.397, "micronutrient_adequacy_index": 2.2584, "composite_density_gap": 130.7397}, {"country": "United Republic of Tanzania", "iso3": "TZA", "starch_share_of_kcal": 0.6195, "import_share_of_kcal": 0.1253, "anemia_prev_women_pct": 38.8, "starch_trap": false, "gdp_per_capita_ppp": 3620.7935, "micronutrient_adequacy_index": 1.1848, "composite_density_gap": 35.7565}, {"country": "China, Taiwan Province of", "iso3": "TWN", "starch_share_of_kcal": 0.2984, "import_share_of_kcal": 0.6019, "anemia_prev_women_pct": null, "starch_trap": false, "gdp_per_capita_ppp": null, "micronutrient_adequacy_index": 1.845, "composite_density_gap": 40.2066}, {"country": "Australia", "iso3": "AUS", "starch_share_of_kcal": 0.24, "import_share_of_kcal": 0.2292, "anemia_prev_women_pct": 11.1, "starch_trap": false, "gdp_per_capita_ppp": 60684.9596, "micronutrient_adequacy_index": 1.9803, "composite_density_gap": -13.0482}, {"country": "Tuvalu", "iso3": "TUV", "starch_share_of_kcal": 0.3545, "import_share_of_kcal": 0.6371, "anemia_prev_women_pct": 23.2, "starch_trap": false, "gdp_per_capita_ppp": 5315.163, "micronutrient_adequacy_index": 1.9234, "composite_density_gap": 80.8745}, {"country": "T\u00fcrkiye", "iso3": "TUR", "starch_share_of_kcal": 0.3891, "import_share_of_kcal": 0.3946, "anemia_prev_women_pct": 29.3, "starch_trap": false, "gdp_per_capita_ppp": 35069.1702, "micronutrient_adequacy_index": 2.7398, "composite_density_gap": 68.0215}, {"country": "Syrian Arab Republic", "iso3": "SYR", "starch_share_of_kcal": 0.5813, "import_share_of_kcal": 0.2855, "anemia_prev_women_pct": 31.0, "starch_trap": false, "gdp_per_capita_ppp": null, "micronutrient_adequacy_index": 1.2414, "composite_density_gap": 28.6202}, {"country": "Tunisia", "iso3": "TUN", "starch_share_of_kcal": 0.4705, "import_share_of_kcal": 0.4837, "anemia_prev_women_pct": 27.7, "starch_trap": false, "gdp_per_capita_ppp": 12650.9615, "micronutrient_adequacy_index": 2.4, "composite_density_gap": 80.7169}, {"country": "Trinidad and Tobago", "iso3": "TTO", "starch_share_of_kcal": 0.3992, "import_share_of_kcal": 0.9101, "anemia_prev_women_pct": 22.1, "starch_trap": false, "gdp_per_capita_ppp": 31196.6036, "micronutrient_adequacy_index": 1.5665, "composite_density_gap": 70.0102}, {"country": "Tonga", "iso3": "TON", "starch_share_of_kcal": 0.3404, "import_share_of_kcal": 0.7167, "anemia_prev_women_pct": 20.7, "starch_trap": false, "gdp_per_capita_ppp": 7031.3202, "micronutrient_adequacy_index": 2.665, "composite_density_gap": 121.1588}, {"country": "Timor-Leste", "iso3": "TLS", "starch_share_of_kcal": 0.62, "import_share_of_kcal": 0.6921, "anemia_prev_women_pct": 29.7, "starch_trap": true, "gdp_per_capita_ppp": 4331.0779, "micronutrient_adequacy_index": 1.218, "composite_density_gap": 61.9956}, {"country": "Azerbaijan", "iso3": "AZE", "starch_share_of_kcal": 0.5219, "import_share_of_kcal": 0.3164, "anemia_prev_women_pct": 35.6, "starch_trap": false, "gdp_per_capita_ppp": 21310.7387, "micronutrient_adequacy_index": 2.076, "composite_density_gap": 35.8241}, {"country": "Turkmenistan", "iso3": "TKM", "starch_share_of_kcal": 0.4931, "import_share_of_kcal": 0.1584, "anemia_prev_women_pct": 34.8, "starch_trap": false, "gdp_per_capita_ppp": 17685.8586, "micronutrient_adequacy_index": 1.5689, "composite_density_gap": 25.495}, {"country": "Tajikistan", "iso3": "TJK", "starch_share_of_kcal": 0.5068, "import_share_of_kcal": 0.4027, "anemia_prev_women_pct": 37.3, "starch_trap": false, "gdp_per_capita_ppp": 4472.3241, "micronutrient_adequacy_index": 1.7171, "composite_density_gap": 67.4884}, {"country": "Belgium", "iso3": "BEL", "starch_share_of_kcal": 0.2236, "import_share_of_kcal": 0.9886, "anemia_prev_women_pct": 15.0, "starch_trap": false, "gdp_per_capita_ppp": 63042.01, "micronutrient_adequacy_index": 2.2219, "composite_density_gap": 9.2309}, {"country": "Austria", "iso3": "AUT", "starch_share_of_kcal": 0.2557, "import_share_of_kcal": 0.5732, "anemia_prev_women_pct": 16.7, "starch_trap": false, "gdp_per_capita_ppp": 64536.2076, "micronutrient_adequacy_index": 1.7856, "composite_density_gap": -23.08}, {"country": "Congo", "iso3": "COG", "starch_share_of_kcal": 0.5777, "import_share_of_kcal": 0.456, "anemia_prev_women_pct": 46.7, "starch_trap": false, "gdp_per_capita_ppp": 6172.2878, "micronutrient_adequacy_index": 1.3351, "composite_density_gap": 31.3614}, {"country": "Saudi Arabia", "iso3": "SAU", "starch_share_of_kcal": 0.4475, "import_share_of_kcal": 0.8192, "anemia_prev_women_pct": 17.6, "starch_trap": false, "gdp_per_capita_ppp": 64481.8442, "micronutrient_adequacy_index": 1.4501, "composite_density_gap": 38.3616}, {"country": "Rwanda", "iso3": "RWA", "starch_share_of_kcal": 0.565, "import_share_of_kcal": 0.2517, "anemia_prev_women_pct": 16.1, "starch_trap": false, "gdp_per_capita_ppp": 3168.0308, "micronutrient_adequacy_index": 1.4796, "composite_density_gap": 49.9733}, {"country": "New Zealand", "iso3": "NZL", "starch_share_of_kcal": 0.338, "import_share_of_kcal": 0.498, "anemia_prev_women_pct": 12.4, "starch_trap": false, "gdp_per_capita_ppp": 49592.5876, "micronutrient_adequacy_index": 2.3399, "composite_density_gap": 54.3271}, {"country": "Chile", "iso3": "CHL", "starch_share_of_kcal": 0.3779, "import_share_of_kcal": 0.5303, "anemia_prev_women_pct": 15.7, "starch_trap": false, "gdp_per_capita_ppp": 29600.4189, "micronutrient_adequacy_index": 1.2984, "composite_density_gap": 28.8941}, {"country": "Nauru", "iso3": "NRU", "starch_share_of_kcal": 0.2749, "import_share_of_kcal": 0.8869, "anemia_prev_women_pct": 22.5, "starch_trap": false, "gdp_per_capita_ppp": 11858.5185, "micronutrient_adequacy_index": 1.5846, "composite_density_gap": 23.4364}, {"country": "Nepal", "iso3": "NPL", "starch_share_of_kcal": 0.6388, "import_share_of_kcal": 0.1733, "anemia_prev_women_pct": 33.2, "starch_trap": false, "gdp_per_capita_ppp": 4861.2303, "micronutrient_adequacy_index": 2.2025, "composite_density_gap": 39.6239}, {"country": "Norway", "iso3": "NOR", "starch_share_of_kcal": 0.3161, "import_share_of_kcal": 0.6259, "anemia_prev_women_pct": 16.3, "starch_trap": false, "gdp_per_capita_ppp": 94364.9642, "micronutrient_adequacy_index": 1.7973, "composite_density_gap": 1.3944}, {"country": "China, mainland", "iso3": "CHN", "starch_share_of_kcal": 0.4979, "import_share_of_kcal": 0.1388, "anemia_prev_women_pct": 15.6, "starch_trap": false, "gdp_per_capita_ppp": 22687.252, "micronutrient_adequacy_index": 3.3925, "composite_density_gap": 49.5109}, {"country": "Netherlands (Kingdom of the)", "iso3": "NLD", "starch_share_of_kcal": 0.2462, "import_share_of_kcal": 0.9895, "anemia_prev_women_pct": 16.5, "starch_trap": false, "gdp_per_capita_ppp": 70198.9546, "micronutrient_adequacy_index": 2.1722, "composite_density_gap": -39.4289}, {"country": "Oman", "iso3": "OMN", "starch_share_of_kcal": 0.3305, "import_share_of_kcal": 0.8551, "anemia_prev_women_pct": 34.4, "starch_trap": false, "gdp_per_capita_ppp": 37793.6164, "micronutrient_adequacy_index": 2.917, "composite_density_gap": 211.5169}, {"country": "Nicaragua", "iso3": "NIC", "starch_share_of_kcal": 0.5209, "import_share_of_kcal": 0.3852, "anemia_prev_women_pct": null, "starch_trap": false, "gdp_per_capita_ppp": 7496.5306, "micronutrient_adequacy_index": 1.0766, "composite_density_gap": 13.8918}, {"country": "Nigeria", "iso3": "NGA", "starch_share_of_kcal": 0.627, "import_share_of_kcal": 0.1412, "anemia_prev_women_pct": 37.9, "starch_trap": false, "gdp_per_capita_ppp": 7843.004, "micronutrient_adequacy_index": 1.4641, "composite_density_gap": 48.6804}, {"country": "Niger", "iso3": "NER", "starch_share_of_kcal": 0.5541, "import_share_of_kcal": 0.1749, "anemia_prev_women_pct": 47.1, "starch_trap": false, "gdp_per_capita_ppp": 1712.9703, "micronutrient_adequacy_index": 1.6957, "composite_density_gap": 38.3382}, {"country": "Cameroon", "iso3": "CMR", "starch_share_of_kcal": 0.5882, "import_share_of_kcal": 0.2067, "anemia_prev_women_pct": 38.9, "starch_trap": false, "gdp_per_capita_ppp": 4875.2512, "micronutrient_adequacy_index": 1.9532, "composite_density_gap": 47.8831}, {"country": "New Caledonia", "iso3": "NCL", "starch_share_of_kcal": 0.3571, "import_share_of_kcal": 0.8421, "anemia_prev_women_pct": null, "starch_trap": false, "gdp_per_capita_ppp": null, "micronutrient_adequacy_index": 1.8647, "composite_density_gap": 39.7745}, {"country": "Namibia", "iso3": "NAM", "starch_share_of_kcal": 0.5325, "import_share_of_kcal": 0.6781, "anemia_prev_women_pct": 24.9, "starch_trap": true, "gdp_per_capita_ppp": 10126.236, "micronutrient_adequacy_index": 1.2187, "composite_density_gap": 26.5602}, {"country": "Democratic Republic of the Congo", "iso3": "COD", "starch_share_of_kcal": 0.828, "import_share_of_kcal": 0.0724, "anemia_prev_women_pct": 40.0, "starch_trap": false, "gdp_per_capita_ppp": 1559.3381, "micronutrient_adequacy_index": 2.1674, "composite_density_gap": 68.4705}, {"country": "Malaysia", "iso3": "MYS", "starch_share_of_kcal": 0.3811, "import_share_of_kcal": 0.6992, "anemia_prev_women_pct": 31.3, "starch_trap": false, "gdp_per_capita_ppp": 32857.6677, "micronutrient_adequacy_index": 1.5204, "composite_density_gap": 25.6667}, {"country": "C\u00f4te d'Ivoire", "iso3": "CIV", "starch_share_of_kcal": 0.7064, "import_share_of_kcal": 0.2382, "anemia_prev_women_pct": 51.4, "starch_trap": false, "gdp_per_capita_ppp": 6520.8989, "micronutrient_adequacy_index": 2.0993, "composite_density_gap": 15.2119}, {"country": "Belize", "iso3": "BLZ", "starch_share_of_kcal": 0.386, "import_share_of_kcal": 0.4329, "anemia_prev_women_pct": 21.3, "starch_trap": false, "gdp_per_capita_ppp": 12371.0087, "micronutrient_adequacy_index": 1.2494, "composite_density_gap": 3.0075}, {"country": "Switzerland", "iso3": "CHE", "starch_share_of_kcal": 0.2738, "import_share_of_kcal": 0.5025, "anemia_prev_women_pct": 16.6, "starch_trap": false, "gdp_per_capita_ppp": 85383.3565, "micronutrient_adequacy_index": 1.739, "composite_density_gap": -5.4825}, {"country": "Panama", "iso3": "PAN", "starch_share_of_kcal": 0.4071, "import_share_of_kcal": 0.4839, "anemia_prev_women_pct": 25.5, "starch_trap": false, "gdp_per_capita_ppp": 35872.9719, "micronutrient_adequacy_index": 1.5907, "composite_density_gap": 32.7074}, {"country": "Russian Federation", "iso3": "RUS", "starch_share_of_kcal": 0.3704, "import_share_of_kcal": 0.0892, "anemia_prev_women_pct": 24.1, "starch_trap": false, "gdp_per_capita_ppp": 39881.4492, "micronutrient_adequacy_index": 1.8012, "composite_density_gap": -35.7471}, {"country": "Bolivia (Plurinational State of)", "iso3": "BOL", "starch_share_of_kcal": 0.485, "import_share_of_kcal": 0.0655, "anemia_prev_women_pct": 24.9, "starch_trap": false, "gdp_per_capita_ppp": 11616.1576, "micronutrient_adequacy_index": 1.2785, "composite_density_gap": 13.4403}, {"country": "Romania", "iso3": "ROU", "starch_share_of_kcal": 0.3702, "import_share_of_kcal": 0.3929, "anemia_prev_women_pct": 24.3, "starch_trap": false, "gdp_per_capita_ppp": 40116.6891, "micronutrient_adequacy_index": 1.6833, "composite_density_gap": -8.9534}, {"country": "Qatar", "iso3": "QAT", "starch_share_of_kcal": 0.4351, "import_share_of_kcal": 0.9024, "anemia_prev_women_pct": 23.6, "starch_trap": false, "gdp_per_capita_ppp": 116159.1426, "micronutrient_adequacy_index": 1.6873, "composite_density_gap": 25.5226}, {"country": "French Polynesia", "iso3": "PYF", "starch_share_of_kcal": 0.3437, "import_share_of_kcal": 0.8794, "anemia_prev_women_pct": null, "starch_trap": false, "gdp_per_capita_ppp": null, "micronutrient_adequacy_index": 1.8797, "composite_density_gap": 89.8772}, {"country": "Brazil", "iso3": "BRA", "starch_share_of_kcal": 0.305, "import_share_of_kcal": 0.0589, "anemia_prev_women_pct": 21.3, "starch_trap": false, "gdp_per_capita_ppp": 19079.8122, "micronutrient_adequacy_index": 1.6951, "composite_density_gap": 7.9686}, {"country": "Paraguay", "iso3": "PRY", "starch_share_of_kcal": 0.5316, "import_share_of_kcal": 0.1011, "anemia_prev_women_pct": 23.2, "starch_trap": false, "gdp_per_capita_ppp": 15831.585, "micronutrient_adequacy_index": 1.6398, "composite_density_gap": -1.626}, {"country": "Pakistan", "iso3": "PAK", "starch_share_of_kcal": 0.4498, "import_share_of_kcal": 0.1343, "anemia_prev_women_pct": 46.5, "starch_trap": false, "gdp_per_capita_ppp": 5418.7693, "micronutrient_adequacy_index": 0.9552, "composite_density_gap": 7.9827}, {"country": "Portugal", "iso3": "PRT", "starch_share_of_kcal": 0.323, "import_share_of_kcal": 0.7104, "anemia_prev_women_pct": 15.0, "starch_trap": false, "gdp_per_capita_ppp": 41768.2583, "micronutrient_adequacy_index": 2.1086, "composite_density_gap": 10.8445}, {"country": "Bhutan", "iso3": "BTN", "starch_share_of_kcal": 0.6578, "import_share_of_kcal": 0.7297, "anemia_prev_women_pct": 33.8, "starch_trap": true, "gdp_per_capita_ppp": 14610.2959, "micronutrient_adequacy_index": 1.2794, "composite_density_gap": 31.0218}, {"country": "Poland", "iso3": "POL", "starch_share_of_kcal": 0.3151, "import_share_of_kcal": 0.2799, "anemia_prev_women_pct": 23.4, "starch_trap": false, "gdp_per_capita_ppp": 43672.7668, "micronutrient_adequacy_index": 1.6921, "composite_density_gap": -17.4329}, {"country": "Papua New Guinea", "iso3": "PNG", "starch_share_of_kcal": 0.4601, "import_share_of_kcal": 0.3398, "anemia_prev_women_pct": 28.8, "starch_trap": false, "gdp_per_capita_ppp": 4206.3783, "micronutrient_adequacy_index": 3.0013, "composite_density_gap": 167.2741}, {"country": "Botswana", "iso3": "BWA", "starch_share_of_kcal": 0.5154, "import_share_of_kcal": 0.8404, "anemia_prev_women_pct": 30.9, "starch_trap": true, "gdp_per_capita_ppp": 18932.4803, "micronutrient_adequacy_index": 1.1847, "composite_density_gap": 82.3039}, {"country": "Philippines", "iso3": "PHL", "starch_share_of_kcal": 0.6104, "import_share_of_kcal": 0.3314, "anemia_prev_women_pct": 12.0, "starch_trap": false, "gdp_per_capita_ppp": 9898.5329, "micronutrient_adequacy_index": 1.4698, "composite_density_gap": 30.7953}, {"country": "Peru", "iso3": "PER", "starch_share_of_kcal": 0.5016, "import_share_of_kcal": 0.3076, "anemia_prev_women_pct": 21.0, "starch_trap": false, "gdp_per_capita_ppp": 15342.2741, "micronutrient_adequacy_index": 1.7321, "composite_density_gap": 48.9136}, {"country": "Canada", "iso3": "CAN", "starch_share_of_kcal": 0.2846, "import_share_of_kcal": 0.4004, "anemia_prev_women_pct": 14.0, "starch_trap": false, "gdp_per_capita_ppp": 58088.3778, "micronutrient_adequacy_index": 1.6235, "composite_density_gap": -18.044}, {"country": "Barbados", "iso3": "BRB", "starch_share_of_kcal": 0.3402, "import_share_of_kcal": 0.82, "anemia_prev_women_pct": 20.1, "starch_trap": false, "gdp_per_capita_ppp": 20865.0155, "micronutrient_adequacy_index": 1.8506, "composite_density_gap": 13.103}, {"country": "Zimbabwe", "iso3": "ZWE", "starch_share_of_kcal": 0.4573, "import_share_of_kcal": 0.3224, "anemia_prev_women_pct": 27.5, "starch_trap": false, "gdp_per_capita_ppp": 5218.0453, "micronutrient_adequacy_index": 1.6038, "composite_density_gap": 71.1713}], "groups": [{"food_group": "Cereals and their products", "import_share": 0.5618, "kcal_share": 0.3513, "iron_share": 0.3261, "vita_share": 0.0039, "iron_per_1000": 5.1746}, {"food_group": "Eggs and their products", "import_share": 0.2611, "kcal_share": 0.0097, "iron_share": 0.0218, "vita_share": 0.0386, "iron_per_1000": 12.6098}, {"food_group": "Fats and oils", "import_share": 0.641, "kcal_share": 0.1372, "iron_share": 0.0021, "vita_share": 0.1026, "iron_per_1000": 0.0852}, {"food_group": "Fish, shellfish and their products", "import_share": 0.5613, "kcal_share": 0.0122, "iron_share": 0.0193, "vita_share": 0.0208, "iron_per_1000": 8.8376}, {"food_group": "Fruits and their products", "import_share": 0.3269, "kcal_share": 0.0369, "iron_share": 0.0368, "vita_share": 0.0401, "iron_per_1000": 5.5592}, {"food_group": "Meat and meat products", "import_share": 0.4449, "kcal_share": 0.0879, "iron_share": 0.1355, "vita_share": 0.3061, "iron_per_1000": 8.5866}, {"food_group": "Milk and milk products", "import_share": 0.4547, "kcal_share": 0.0665, "iron_share": 0.0159, "vita_share": 0.1314, "iron_per_1000": 1.3341}, {"food_group": "Pulses, seeds and nuts and their products", "import_share": 0.3523, "kcal_share": 0.0471, "iron_share": 0.0998, "vita_share": 0.0006, "iron_per_1000": 11.8026}, {"food_group": "Roots, tubers, plantains and their products", "import_share": 0.1365, "kcal_share": 0.0628, "iron_share": 0.0787, "vita_share": 0.0489, "iron_per_1000": 6.9923}, {"food_group": "Sweets and sugars", "import_share": 0.6778, "kcal_share": 0.115, "iron_share": 0.0387, "vita_share": 0.009, "iron_per_1000": 1.8764}, {"food_group": "Vegetables and their products", "import_share": 0.3533, "kcal_share": 0.0227, "iron_share": 0.125, "vita_share": 0.2645, "iron_per_1000": 30.6913}], "gaps": [-56.5, -45.2, -43.0, -39.4, -35.7, -32.0, -32.0, -25.0, -24.4, -23.4, -23.1, -22.8, -21.8, -21.7, -20.5, -19.1, -18.0, -17.4, -15.4, -15.3, -14.6, -13.0, -12.9, -12.3, -11.4, -9.0, -8.6, -8.6, -5.5, -4.6, -3.9, -1.6, 0.3, 0.3, 1.4, 2.9, 3.0, 3.4, 3.7, 4.1, 4.3, 5.4, 8.0, 8.0, 9.1, 9.2, 9.2, 10.5, 10.8, 11.9, 13.1, 13.3, 13.4, 13.9, 15.2, 15.8, 16.9, 18.1, 19.1, 19.2, 19.8, 19.8, 19.9, 23.0, 23.4, 23.8, 24.1, 24.3, 25.5, 25.5, 25.6, 25.7, 26.0, 26.4, 26.6, 27.6, 28.1, 28.5, 28.6, 28.9, 29.6, 30.3, 30.8, 31.0, 31.2, 31.4, 32.1, 32.4, 32.4, 32.7, 33.2, 34.5, 34.6, 35.2, 35.3, 35.8, 35.8, 35.8, 38.1, 38.3, 38.4, 38.4, 39.6, 39.8, 40.2, 40.4, 41.1, 41.7, 41.8, 42.4, 42.4, 42.9, 43.1, 43.3, 44.3, 44.5, 45.8, 47.9, 48.6, 48.7, 48.9, 49.0, 49.5, 50.0, 50.5, 51.5, 52.3, 54.3, 54.9, 56.0, 56.1, 56.3, 56.6, 56.7, 56.9, 57.4, 60.4, 62.0, 62.4, 63.0, 63.7, 64.2, 65.1, 65.4, 65.6, 66.0, 67.5, 67.8, 68.0, 68.5, 68.8, 70.0, 71.2, 72.2, 72.9, 74.4, 75.6, 75.8, 77.6, 77.8, 77.9, 79.2, 79.8, 80.7, 80.9, 82.3, 82.3, 83.3, 89.9, 101.2, 109.8, 121.2, 124.1, 130.7, 158.8, 167.3, 211.5, 280.5], "series": [{"country": "Haiti", "year": 2010, "kind": "actual", "import_share_of_kcal": 0.5416, "starch_share_of_kcal": 0.5169}, {"country": "Haiti", "year": 2011, "kind": "actual", "import_share_of_kcal": 0.4279, "starch_share_of_kcal": 0.4927}, {"country": "Haiti", "year": 2012, "kind": "actual", "import_share_of_kcal": 0.4699, "starch_share_of_kcal": 0.4958}, {"country": "Haiti", "year": 2013, "kind": "actual", "import_share_of_kcal": 0.4331, "starch_share_of_kcal": 0.5015}, {"country": "Haiti", "year": 2014, "kind": "actual", "import_share_of_kcal": 0.5326, "starch_share_of_kcal": 0.4999}, {"country": "Haiti", "year": 2015, "kind": "actual", "import_share_of_kcal": 0.5562, "starch_share_of_kcal": 0.5249}, {"country": "Haiti", "year": 2016, "kind": "actual", "import_share_of_kcal": 0.5471, "starch_share_of_kcal": 0.5189}, {"country": "Haiti", "year": 2017, "kind": "actual", "import_share_of_kcal": 0.6239, "starch_share_of_kcal": 0.5276}, {"country": "Haiti", "year": 2018, "kind": "actual", "import_share_of_kcal": 0.568, "starch_share_of_kcal": 0.5165}, {"country": "Haiti", "year": 2019, "kind": "actual", "import_share_of_kcal": 0.5705, "starch_share_of_kcal": 0.5311}, {"country": "Haiti", "year": 2020, "kind": "actual", "import_share_of_kcal": 0.644, "starch_share_of_kcal": 0.5369}, {"country": "Haiti", "year": 2021, "kind": "actual", "import_share_of_kcal": 0.575, "starch_share_of_kcal": 0.5477}, {"country": "Haiti", "year": 2022, "kind": "actual", "import_share_of_kcal": 0.5644, "starch_share_of_kcal": 0.543}, {"country": "Haiti", "year": 2023, "kind": "actual", "import_share_of_kcal": 0.6042, "starch_share_of_kcal": 0.5764}, {"country": "Haiti", "year": 2024, "kind": "forecast", "import_share_of_kcal": 0.6301, "starch_share_of_kcal": 0.5595}, {"country": "Haiti", "year": 2030, "kind": "forecast", "import_share_of_kcal": 0.6965, "starch_share_of_kcal": 0.5883}, {"country": "Cabo Verde", "year": 2010, "kind": "actual", "import_share_of_kcal": 0.8255, "starch_share_of_kcal": 0.509}, {"country": "Cabo Verde", "year": 2011, "kind": "actual", "import_share_of_kcal": 0.7897, "starch_share_of_kcal": 0.4987}, {"country": "Cabo Verde", "year": 2012, "kind": "actual", "import_share_of_kcal": 0.808, "starch_share_of_kcal": 0.5045}, {"country": "Cabo Verde", "year": 2013, "kind": "actual", "import_share_of_kcal": 0.8388, "starch_share_of_kcal": 0.5108}, {"country": "Cabo Verde", "year": 2014, "kind": "actual", "import_share_of_kcal": 0.8192, "starch_share_of_kcal": 0.4843}, {"country": "Cabo Verde", "year": 2015, "kind": "actual", "import_share_of_kcal": 0.8088, "starch_share_of_kcal": 0.4915}, {"country": "Cabo Verde", "year": 2016, "kind": "actual", "import_share_of_kcal": 0.8427, "starch_share_of_kcal": 0.4843}, {"country": "Cabo Verde", "year": 2017, "kind": "actual", "import_share_of_kcal": 0.855, "starch_share_of_kcal": 0.4872}, {"country": "Cabo Verde", "year": 2018, "kind": "actual", "import_share_of_kcal": 0.8793, "starch_share_of_kcal": 0.5082}, {"country": "Cabo Verde", "year": 2019, "kind": "actual", "import_share_of_kcal": 0.886, "starch_share_of_kcal": 0.5125}, {"country": "Cabo Verde", "year": 2020, "kind": "actual", "import_share_of_kcal": 0.8873, "starch_share_of_kcal": 0.521}, {"country": "Cabo Verde", "year": 2021, "kind": "actual", "import_share_of_kcal": 0.8551, "starch_share_of_kcal": 0.5329}, {"country": "Cabo Verde", "year": 2022, "kind": "actual", "import_share_of_kcal": 0.8563, "starch_share_of_kcal": 0.5139}, {"country": "Cabo Verde", "year": 2023, "kind": "actual", "import_share_of_kcal": 0.8846, "starch_share_of_kcal": 0.4886}, {"country": "Cabo Verde", "year": 2024, "kind": "forecast", "import_share_of_kcal": 0.892, "starch_share_of_kcal": 0.5104}, {"country": "Cabo Verde", "year": 2030, "kind": "forecast", "import_share_of_kcal": 0.9292, "starch_share_of_kcal": 0.5159}, {"country": "Mauritania", "year": 2010, "kind": "actual", "import_share_of_kcal": 0.642, "starch_share_of_kcal": 0.5252}, {"country": "Mauritania", "year": 2011, "kind": "actual", "import_share_of_kcal": 0.6277, "starch_share_of_kcal": 0.5231}, {"country": "Mauritania", "year": 2012, "kind": "actual", "import_share_of_kcal": 0.7022, "starch_share_of_kcal": 0.4962}, {"country": "Mauritania", "year": 2013, "kind": "actual", "import_share_of_kcal": 0.6507, "starch_share_of_kcal": 0.5112}, {"country": "Mauritania", "year": 2014, "kind": "actual", "import_share_of_kcal": 0.7964, "starch_share_of_kcal": 0.5189}, {"country": "Mauritania", "year": 2015, "kind": "actual", "import_share_of_kcal": 0.8137, "starch_share_of_kcal": 0.53}, {"country": "Mauritania", "year": 2016, "kind": "actual", "import_share_of_kcal": 0.6483, "starch_share_of_kcal": 0.5323}, {"country": "Mauritania", "year": 2017, "kind": "actual", "import_share_of_kcal": 0.7219, "starch_share_of_kcal": 0.5291}, {"country": "Mauritania", "year": 2018, "kind": "actual", "import_share_of_kcal": 0.7616, "starch_share_of_kcal": 0.5382}, {"country": "Mauritania", "year": 2019, "kind": "actual", "import_share_of_kcal": 0.739, "starch_share_of_kcal": 0.5393}, {"country": "Mauritania", "year": 2020, "kind": "actual", "import_share_of_kcal": 0.7277, "starch_share_of_kcal": 0.5487}, {"country": "Mauritania", "year": 2021, "kind": "actual", "import_share_of_kcal": 0.7184, "starch_share_of_kcal": 0.5481}, {"country": "Mauritania", "year": 2022, "kind": "actual", "import_share_of_kcal": 0.7301, "starch_share_of_kcal": 0.5551}, {"country": "Mauritania", "year": 2023, "kind": "actual", "import_share_of_kcal": 0.7019, "starch_share_of_kcal": 0.5366}, {"country": "Mauritania", "year": 2024, "kind": "forecast", "import_share_of_kcal": 0.7496, "starch_share_of_kcal": 0.5532}, {"country": "Mauritania", "year": 2030, "kind": "forecast", "import_share_of_kcal": 0.7788, "starch_share_of_kcal": 0.571}, {"country": "Botswana", "year": 2010, "kind": "actual", "import_share_of_kcal": 0.8344, "starch_share_of_kcal": 0.5392}, {"country": "Botswana", "year": 2011, "kind": "actual", "import_share_of_kcal": 0.8069, "starch_share_of_kcal": 0.5232}, {"country": "Botswana", "year": 2012, "kind": "actual", "import_share_of_kcal": 0.8593, "starch_share_of_kcal": 0.5374}, {"country": "Botswana", "year": 2013, "kind": "actual", "import_share_of_kcal": 0.8824, "starch_share_of_kcal": 0.5527}, {"country": "Botswana", "year": 2014, "kind": "actual", "import_share_of_kcal": 0.871, "starch_share_of_kcal": 0.5575}, {"country": "Botswana", "year": 2015, "kind": "actual", "import_share_of_kcal": 0.8588, "starch_share_of_kcal": 0.5688}, {"country": "Botswana", "year": 2016, "kind": "actual", "import_share_of_kcal": 0.8677, "starch_share_of_kcal": 0.5567}, {"country": "Botswana", "year": 2017, "kind": "actual", "import_share_of_kcal": 0.8608, "starch_share_of_kcal": 0.5485}, {"country": "Botswana", "year": 2018, "kind": "actual", "import_share_of_kcal": 0.8664, "starch_share_of_kcal": 0.5364}, {"country": "Botswana", "year": 2019, "kind": "actual", "import_share_of_kcal": 0.878, "starch_share_of_kcal": 0.5395}, {"country": "Botswana", "year": 2020, "kind": "actual", "import_share_of_kcal": 0.8658, "starch_share_of_kcal": 0.5363}, {"country": "Botswana", "year": 2021, "kind": "actual", "import_share_of_kcal": 0.8425, "starch_share_of_kcal": 0.4963}, {"country": "Botswana", "year": 2022, "kind": "actual", "import_share_of_kcal": 0.832, "starch_share_of_kcal": 0.5164}, {"country": "Botswana", "year": 2023, "kind": "actual", "import_share_of_kcal": 0.8404, "starch_share_of_kcal": 0.5154}, {"country": "Botswana", "year": 2024, "kind": "forecast", "import_share_of_kcal": 0.857, "starch_share_of_kcal": 0.5199}, {"country": "Botswana", "year": 2030, "kind": "forecast", "import_share_of_kcal": 0.8589, "starch_share_of_kcal": 0.5059}, {"country": "United States of America", "year": 2010, "kind": "actual", "import_share_of_kcal": 0.1454, "starch_share_of_kcal": 0.2388}, {"country": "United States of America", "year": 2011, "kind": "actual", "import_share_of_kcal": 0.1584, "starch_share_of_kcal": 0.2359}, {"country": "United States of America", "year": 2012, "kind": "actual", "import_share_of_kcal": 0.1581, "starch_share_of_kcal": 0.2363}, {"country": "United States of America", "year": 2013, "kind": "actual", "import_share_of_kcal": 0.1631, "starch_share_of_kcal": 0.2356}, {"country": "United States of America", "year": 2014, "kind": "actual", "import_share_of_kcal": 0.1893, "starch_share_of_kcal": 0.2379}, {"country": "United States of America", "year": 2015, "kind": "actual", "import_share_of_kcal": 0.1899, "starch_share_of_kcal": 0.2367}, {"country": "United States of America", "year": 2016, "kind": "actual", "import_share_of_kcal": 0.188, "starch_share_of_kcal": 0.2344}, {"country": "United States of America", "year": 2017, "kind": "actual", "import_share_of_kcal": 0.1888, "starch_share_of_kcal": 0.2334}, {"country": "United States of America", "year": 2018, "kind": "actual", "import_share_of_kcal": 0.1835, "starch_share_of_kcal": 0.2346}, {"country": "United States of America", "year": 2019, "kind": "actual", "import_share_of_kcal": 0.1897, "starch_share_of_kcal": 0.2338}, {"country": "United States of America", "year": 2020, "kind": "actual", "import_share_of_kcal": 0.189, "starch_share_of_kcal": 0.2346}, {"country": "United States of America", "year": 2021, "kind": "actual", "import_share_of_kcal": 0.1938, "starch_share_of_kcal": 0.2335}, {"country": "United States of America", "year": 2022, "kind": "actual", "import_share_of_kcal": 0.1996, "starch_share_of_kcal": 0.2348}, {"country": "United States of America", "year": 2023, "kind": "actual", "import_share_of_kcal": 0.2045, "starch_share_of_kcal": 0.2409}, {"country": "United States of America", "year": 2024, "kind": "forecast", "import_share_of_kcal": 0.2096, "starch_share_of_kcal": 0.235}, {"country": "United States of America", "year": 2030, "kind": "forecast", "import_share_of_kcal": 0.2322, "starch_share_of_kcal": 0.2344}, {"country": "Nigeria", "year": 2010, "kind": "actual", "import_share_of_kcal": 0.1885, "starch_share_of_kcal": 0.6504}, {"country": "Nigeria", "year": 2011, "kind": "actual", "import_share_of_kcal": 0.2068, "starch_share_of_kcal": 0.6482}, {"country": "Nigeria", "year": 2012, "kind": "actual", "import_share_of_kcal": 0.1856, "starch_share_of_kcal": 0.6379}, {"country": "Nigeria", "year": 2013, "kind": "actual", "import_share_of_kcal": 0.2152, "starch_share_of_kcal": 0.6503}, {"country": "Nigeria", "year": 2014, "kind": "actual", "import_share_of_kcal": 0.2164, "starch_share_of_kcal": 0.6407}, {"country": "Nigeria", "year": 2015, "kind": "actual", "import_share_of_kcal": 0.1771, "starch_share_of_kcal": 0.6494}, {"country": "Nigeria", "year": 2016, "kind": "actual", "import_share_of_kcal": 0.1551, "starch_share_of_kcal": 0.6531}, {"country": "Nigeria", "year": 2017, "kind": "actual", "import_share_of_kcal": 0.1819, "starch_share_of_kcal": 0.6375}, {"country": "Nigeria", "year": 2018, "kind": "actual", "import_share_of_kcal": 0.1596, "starch_share_of_kcal": 0.6426}, {"country": "Nigeria", "year": 2019, "kind": "actual", "import_share_of_kcal": 0.1707, "starch_share_of_kcal": 0.6469}, {"country": "Nigeria", "year": 2020, "kind": "actual", "import_share_of_kcal": 0.1675, "starch_share_of_kcal": 0.6418}, {"country": "Nigeria", "year": 2021, "kind": "actual", "import_share_of_kcal": 0.1697, "starch_share_of_kcal": 0.6289}, {"country": "Nigeria", "year": 2022, "kind": "actual", "import_share_of_kcal": 0.1357, "starch_share_of_kcal": 0.629}, {"country": "Nigeria", "year": 2023, "kind": "actual", "import_share_of_kcal": 0.1412, "starch_share_of_kcal": 0.627}, {"country": "Nigeria", "year": 2024, "kind": "forecast", "import_share_of_kcal": 0.1414, "starch_share_of_kcal": 0.6308}, {"country": "Nigeria", "year": 2030, "kind": "forecast", "import_share_of_kcal": 0.1134, "starch_share_of_kcal": 0.6221}, {"country": "Egypt", "year": 2010, "kind": "actual", "import_share_of_kcal": 0.418, "starch_share_of_kcal": 0.6187}, {"country": "Egypt", "year": 2011, "kind": "actual", "import_share_of_kcal": 0.4482, "starch_share_of_kcal": 0.6304}, {"country": "Egypt", "year": 2012, "kind": "actual", "import_share_of_kcal": 0.3785, "starch_share_of_kcal": 0.6297}, {"country": "Egypt", "year": 2013, "kind": "actual", "import_share_of_kcal": 0.4014, "starch_share_of_kcal": 0.6456}, {"country": "Egypt", "year": 2014, "kind": "actual", "import_share_of_kcal": 0.4465, "starch_share_of_kcal": 0.6371}, {"country": "Egypt", "year": 2015, "kind": "actual", "import_share_of_kcal": 0.4003, "starch_share_of_kcal": 0.6337}, {"country": "Egypt", "year": 2016, "kind": "actual", "import_share_of_kcal": 0.4248, "starch_share_of_kcal": 0.6305}, {"country": "Egypt", "year": 2017, "kind": "actual", "import_share_of_kcal": 0.4085, "starch_share_of_kcal": 0.6275}, {"country": "Egypt", "year": 2018, "kind": "actual", "import_share_of_kcal": 0.4146, "starch_share_of_kcal": 0.6098}, {"country": "Egypt", "year": 2019, "kind": "actual", "import_share_of_kcal": 0.4577, "starch_share_of_kcal": 0.6234}, {"country": "Egypt", "year": 2020, "kind": "actual", "import_share_of_kcal": 0.4043, "starch_share_of_kcal": 0.6332}, {"country": "Egypt", "year": 2021, "kind": "actual", "import_share_of_kcal": 0.3668, "starch_share_of_kcal": 0.6277}, {"country": "Egypt", "year": 2022, "kind": "actual", "import_share_of_kcal": 0.3373, "starch_share_of_kcal": 0.6394}, {"country": "Egypt", "year": 2023, "kind": "actual", "import_share_of_kcal": 0.3465, "starch_share_of_kcal": 0.6562}, {"country": "Egypt", "year": 2024, "kind": "forecast", "import_share_of_kcal": 0.3683, "starch_share_of_kcal": 0.6372}, {"country": "Egypt", "year": 2030, "kind": "forecast", "import_share_of_kcal": 0.34, "starch_share_of_kcal": 0.6417}, {"country": "Saudi Arabia", "year": 2010, "kind": "actual", "import_share_of_kcal": 0.8868, "starch_share_of_kcal": 0.4574}, {"country": "Saudi Arabia", "year": 2011, "kind": "actual", "import_share_of_kcal": 0.8907, "starch_share_of_kcal": 0.4425}, {"country": "Saudi Arabia", "year": 2012, "kind": "actual", "import_share_of_kcal": 0.9133, "starch_share_of_kcal": 0.4264}, {"country": "Saudi Arabia", "year": 2013, "kind": "actual", "import_share_of_kcal": 0.902, "starch_share_of_kcal": 0.4287}, {"country": "Saudi Arabia", "year": 2014, "kind": "actual", "import_share_of_kcal": 0.9396, "starch_share_of_kcal": 0.4764}, {"country": "Saudi Arabia", "year": 2015, "kind": "actual", "import_share_of_kcal": 0.9132, "starch_share_of_kcal": 0.4726}, {"country": "Saudi Arabia", "year": 2016, "kind": "actual", "import_share_of_kcal": 0.8952, "starch_share_of_kcal": 0.4638}, {"country": "Saudi Arabia", "year": 2017, "kind": "actual", "import_share_of_kcal": 0.9019, "starch_share_of_kcal": 0.4733}, {"country": "Saudi Arabia", "year": 2018, "kind": "actual", "import_share_of_kcal": 0.8305, "starch_share_of_kcal": 0.4721}, {"country": "Saudi Arabia", "year": 2019, "kind": "actual", "import_share_of_kcal": 0.8773, "starch_share_of_kcal": 0.4679}, {"country": "Saudi Arabia", "year": 2020, "kind": "actual", "import_share_of_kcal": 0.8493, "starch_share_of_kcal": 0.462}, {"country": "Saudi Arabia", "year": 2021, "kind": "actual", "import_share_of_kcal": 0.8348, "starch_share_of_kcal": 0.4612}, {"country": "Saudi Arabia", "year": 2022, "kind": "actual", "import_share_of_kcal": 0.8506, "starch_share_of_kcal": 0.4546}, {"country": "Saudi Arabia", "year": 2023, "kind": "actual", "import_share_of_kcal": 0.8192, "starch_share_of_kcal": 0.4475}, {"country": "Saudi Arabia", "year": 2024, "kind": "forecast", "import_share_of_kcal": 0.8303, "starch_share_of_kcal": 0.4661}, {"country": "Saudi Arabia", "year": 2030, "kind": "forecast", "import_share_of_kcal": 0.7914, "starch_share_of_kcal": 0.4729}], "fc": [{"iso3": "CPV", "country": "Cabo Verde", "import_share_of_kcal_last_obs": 0.8846, "import_share_of_kcal_2030_damped": 0.889, "import_share_of_kcal_2030_lo": 0.8218, "import_share_of_kcal_2030_hi": 0.9562, "import_share_of_kcal_slope": 0.0062, "import_share_of_kcal_trend_p": 0.0, "import_share_of_kcal_band": 0.0672, "starch_share_of_kcal_last_obs": 0.4886, "starch_share_of_kcal_2030_damped": 0.4892, "starch_share_of_kcal_2030_lo": 0.4456, "starch_share_of_kcal_2030_hi": 0.5328, "starch_share_of_kcal_slope": 0.0009, "starch_share_of_kcal_trend_p": 0.3467, "starch_share_of_kcal_band": 0.0436, "micronutrient_adequacy_index_last_obs": 1.3476, "micronutrient_adequacy_index_2030_damped": 1.339, "micronutrient_adequacy_index_2030_lo": 1.0568, "micronutrient_adequacy_index_2030_hi": 1.6213, "micronutrient_adequacy_index_slope": -0.0123, "micronutrient_adequacy_index_trend_p": 0.0002, "micronutrient_adequacy_index_band": 0.2823, "high_import_2030": true, "high_starch_2030": false, "low_micronutrient_2030": true, "starch_trap_2030": false, "starch_trap_now": false, "newly_trending_into_trap": false, "uncertainty_flags": "micronutrient_adequacy_index: crossing within uncertainty band"}, {"iso3": "HTI", "country": "Haiti", "import_share_of_kcal_last_obs": 0.6042, "import_share_of_kcal_2030_damped": 0.6119, "import_share_of_kcal_2030_lo": 0.5447, "import_share_of_kcal_2030_hi": 0.6792, "import_share_of_kcal_slope": 0.0111, "import_share_of_kcal_trend_p": 0.0003, "import_share_of_kcal_band": 0.0672, "starch_share_of_kcal_last_obs": 0.5764, "starch_share_of_kcal_2030_damped": 0.5798, "starch_share_of_kcal_2030_lo": 0.5362, "starch_share_of_kcal_2030_hi": 0.6234, "starch_share_of_kcal_slope": 0.0048, "starch_share_of_kcal_trend_p": 0.0, "starch_share_of_kcal_band": 0.0436, "micronutrient_adequacy_index_last_obs": 0.9672, "micronutrient_adequacy_index_2030_damped": 0.9407, "micronutrient_adequacy_index_2030_lo": 0.6585, "micronutrient_adequacy_index_2030_hi": 1.223, "micronutrient_adequacy_index_slope": -0.0378, "micronutrient_adequacy_index_trend_p": 0.0, "micronutrient_adequacy_index_band": 0.2823, "high_import_2030": false, "high_starch_2030": true, "low_micronutrient_2030": true, "starch_trap_2030": false, "starch_trap_now": false, "newly_trending_into_trap": false, "uncertainty_flags": NaN}, {"iso3": "MAR", "country": "Morocco", "import_share_of_kcal_last_obs": 0.6183, "import_share_of_kcal_2030_damped": 0.6274, "import_share_of_kcal_2030_lo": 0.5602, "import_share_of_kcal_2030_hi": 0.6946, "import_share_of_kcal_slope": 0.0129, "import_share_of_kcal_trend_p": 0.0, "import_share_of_kcal_band": 0.0672, "starch_share_of_kcal_last_obs": 0.5809, "starch_share_of_kcal_2030_damped": 0.5803, "starch_share_of_kcal_2030_lo": 0.5367, "starch_share_of_kcal_2030_hi": 0.6239, "starch_share_of_kcal_slope": -0.0008, "starch_share_of_kcal_trend_p": 0.1339, "starch_share_of_kcal_band": 0.0436, "micronutrient_adequacy_index_last_obs": 1.4604, "micronutrient_adequacy_index_2030_damped": 1.4565, "micronutrient_adequacy_index_2030_lo": 1.1742, "micronutrient_adequacy_index_2030_hi": 1.7388, "micronutrient_adequacy_index_slope": -0.0056, "micronutrient_adequacy_index_trend_p": 0.1872, "micronutrient_adequacy_index_band": 0.2823, "high_import_2030": false, "high_starch_2030": true, "low_micronutrient_2030": true, "starch_trap_2030": false, "starch_trap_now": false, "newly_trending_into_trap": false, "uncertainty_flags": "starch_share_of_kcal: trend not significant (p=0.13); micronutrient_adequacy_index: crossing within uncertainty band; micronutrient_adequacy_index: trend not significant (p=0.19)"}]};
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent, text){
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text != null) e.textContent = text;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const tip = document.getElementById("tip");
+function showTip(ev, html){
+  tip.innerHTML = html; tip.style.opacity = 1;
+  const pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = ev.clientX + pad, y = ev.clientY + pad;
+  if (x + w > innerWidth - 8) x = ev.clientX - w - pad;
+  if (y + h > innerHeight - 8) y = ev.clientY - h - pad;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+}
+function hideTip(){ tip.style.opacity = 0; }
+const pct = (v, d=1) => (v*100).toFixed(d) + "%";
+const lin = (d0,d1,r0,r1) => v => r0 + (v-d0)/(d1-d0)*(r1-r0);
+
+/* ---- 1. Trend ---- */
+(function(){
+  const svg = document.getElementById("chTrend");
+  const W=760,H=290,m={l:52,r:60,t:18,b:34};
+  const x = lin(2010,2023,m.l,W-m.r), y = lin(42,52,H-m.b,m.t);
+  for (let v=42; v<=52; v+=2){
+    el("line",{x1:m.l,x2:W-m.r,y1:y(v),y2:y(v),stroke:"var(--line)"},svg);
+    el("text",{x:m.l-10,y:y(v)+4,"text-anchor":"end"},svg,v+"%");
+  }
+  [2010,2013,2016,2019,2023].forEach(v=>el("text",{x:x(v),y:H-10,"text-anchor":"middle"},svg,v));
+  el("line",{x1:m.l,x2:W-m.r,y1:y(50),y2:y(50),stroke:"var(--blood)","stroke-dasharray":"4 4","stroke-width":1.2},svg);
+  el("text",{x:m.l+6,y:y(50)-7,style:"fill:var(--blood)"},svg,"half of all calories");
+  const pts = DATA.trend.map(d=>[x(d.year), y(d.import_share_of_kcal*100)]);
+  el("path",{d:"M"+pts.map(p=>p.join(",")).join("L")+`L${x(2023)},${H-m.b}L${x(2010)},${H-m.b}Z`,fill:"var(--plum)",opacity:.08},svg);
+  el("path",{d:"M"+pts.map(p=>p.join(",")).join("L"),fill:"none",stroke:"var(--plum)","stroke-width":2.2,"stroke-linejoin":"round"},svg);
+  const hover = el("line",{y1:m.t,y2:H-m.b,stroke:"var(--line-strong)",opacity:0},svg);
+  DATA.trend.forEach((d,i)=>{
+    const end = i===0||i===DATA.trend.length-1;
+    el("circle",{cx:pts[i][0],cy:pts[i][1],r:end?5:3.2,fill:"var(--plum)",stroke:"var(--surface)","stroke-width":2},svg);
+    if (end) el("text",{x:pts[i][0]+10,y:pts[i][1]+(i?4:-8),"text-anchor":"start",style:"fill:var(--ink);font-weight:600;font-size:13px"},svg,pct(d.import_share_of_kcal));
+    const hit = el("rect",{x:pts[i][0]-26,y:m.t,width:52,height:H-m.t-m.b,fill:"transparent"},svg);
+    hit.addEventListener("mousemove",ev=>{hover.setAttribute("x1",pts[i][0]);hover.setAttribute("x2",pts[i][0]);hover.setAttribute("opacity",1);showTip(ev,`<b>${d.year}</b>${pct(d.import_share_of_kcal)} of calories imported`);});
+    hit.addEventListener("mouseleave",()=>{hover.setAttribute("opacity",0);hideTip();});
+  });
+})();
+
+/* ---- 2. Food groups ---- */
+(function(){
+  const svg = document.getElementById("chGroups");
+  const short = {"Sweets and sugars":"Sugar & sweets","Fats and oils":"Fats & oils","Cereals and their products":"Cereals","Fish, shellfish and their products":"Fish & seafood","Milk and milk products":"Milk & dairy","Meat and meat products":"Meat","Vegetables and their products":"Vegetables","Pulses, seeds and nuts and their products":"Pulses, nuts, oilseeds","Fruits and their products":"Fruit","Eggs and their products":"Eggs","Roots, tubers, plantains and their products":"Roots & tubers"};
+  const rows = DATA.groups.slice().sort((a,b)=>b.import_share-a.import_share);
+  const top=46, rh=27, labW=178, aX0=labW+8, aX1=440, bX0=500, bX1=730;
+  const ax = lin(0,1,aX0,aX1), bx = lin(0,32,bX0,bX1);
+  el("text",{x:aX0,y:18,style:"fill:var(--ink);font-weight:600"},svg,"Import share of calories");
+  el("text",{x:bX0,y:18,style:"fill:var(--ink);font-weight:600"},svg,"Iron, mg per 1,000 kcal");
+  [0,.25,.5,.75,1].forEach(v=>{el("line",{x1:ax(v),x2:ax(v),y1:top-10,y2:top+rows.length*rh,stroke:"var(--line)"},svg); el("text",{x:ax(v),y:36,"text-anchor":"middle",style:"font-size:10px;fill:var(--muted)"},svg,(v*100)+"%");});
+  [0,10,20,30].forEach(v=>{el("line",{x1:bx(v),x2:bx(v),y1:top-10,y2:top+rows.length*rh,stroke:"var(--line)"},svg); el("text",{x:bx(v),y:36,"text-anchor":"middle",style:"font-size:10px;fill:var(--muted)"},svg,v);});
+  rows.forEach((d,i)=>{
+    const yc = top + i*rh + rh/2, bh=13;
+    const g = el("g",{},svg);
+    el("rect",{x:0,y:yc-rh/2,width:760,height:rh,fill:"transparent"},g);
+    el("text",{x:labW,y:yc+4,"text-anchor":"end",style:"fill:var(--ink);font-family:var(--serif);font-size:13.5px"},g,short[d.food_group]||d.food_group);
+    const wa = ax(d.import_share)-aX0, wb = bx(d.iron_per_1000)-bX0;
+    el("path",{d:`M${aX0},${yc-bh/2}h${Math.max(wa-3,0)}q3,0 3,3v${bh-6}q0,3 -3,3h-${Math.max(wa-3,0)}Z`,fill:"var(--grain)"},g);
+    el("text",{x:aX0+wa+6,y:yc+4},g,pct(d.import_share,0));
+    el("path",{d:`M${bX0},${yc-bh/2}h${Math.max(wb-3,0)}q3,0 3,3v${bh-6}q0,3 -3,3h-${Math.max(wb-3,0)}Z`,fill:"var(--leaf)"},g);
+    el("text",{x:bX0+Math.max(wb,0)+6,y:yc+4},g,d.iron_per_1000.toFixed(1));
+    g.addEventListener("mousemove",ev=>showTip(ev,`<b>${short[d.food_group]}</b>${pct(d.import_share,0)} of its calories imported<br>${pct(d.kcal_share)} of all calories<br>${pct(d.iron_share)} of all iron · ${pct(d.vita_share)} of vitamin A<br>${d.iron_per_1000.toFixed(1)} mg iron / 1,000 kcal`));
+    g.addEventListener("mouseleave",hideTip);
+  });
+})();
+
+/* ---- 3. Gap histogram ---- */
+(function(){
+  const svg = document.getElementById("chGap");
+  const W=760,H=260,m={l:44,r:20,t:22,b:36};
+  const bins = {}; DATA.gaps.forEach(v=>{const b=Math.floor(v/20)*20; bins[b]=(bins[b]||0)+1;});
+  const x = lin(-60,300,m.l,W-m.r), maxC = Math.max(...Object.values(bins)), y = lin(0,Math.ceil(maxC/10)*10,H-m.b,m.t);
+  for (let v=0; v<=Math.ceil(maxC/10)*10; v+=10){ el("line",{x1:m.l,x2:W-m.r,y1:y(v),y2:y(v),stroke:"var(--line)"},svg); el("text",{x:m.l-8,y:y(v)+4,"text-anchor":"end"},svg,v); }
+  for (let v=-60; v<=300; v+=60) el("text",{x:x(v),y:H-12,"text-anchor":"middle"},svg,(v>0?"+":"")+v);
+  Object.entries(bins).forEach(([b,c])=>{
+    b=+b; const x0=x(b)+1, w=x(b+20)-x(b)-2, yy=y(c);
+    const r = el("path",{d:`M${x0},${H-m.b}V${yy+3}q0,-3 3,-3h${w-6}q3,0 3,3V${H-m.b}Z`,fill:b<0?"var(--grain)":"var(--leaf)"},svg);
+    const hit = el("rect",{x:x0,y:m.t,width:w,height:H-m.t-m.b,fill:"transparent"},svg);
+    hit.addEventListener("mousemove",ev=>showTip(ev,`<b>${b} to ${b+20}</b>${c} countr${c>1?"ies":"y"}`)); hit.addEventListener("mouseleave",hideTip);
+  });
+  el("line",{x1:x(0),x2:x(0),y1:m.t-6,y2:H-m.b,stroke:"var(--ink)","stroke-width":1.2},svg);
+  const med = 32.6; el("line",{x1:x(med),x2:x(med),y1:m.t-6,y2:H-m.b,stroke:"var(--ink)","stroke-dasharray":"3 3"},svg);
+  el("text",{x:x(med)+6,y:m.t+4,style:"fill:var(--ink);font-weight:600"},svg,"median +33");
+  el("text",{x:x(160),y:y(maxC)+40,style:"fill:var(--leaf);font-weight:600"},svg,"146 countries: home-grown denser →");
+  el("text",{x:x(-58),y:y(maxC)+40,style:"fill:var(--grain);font-weight:600"},svg,"← 32");
+})();
+
+/* ---- Correlation matrix ---- */
+(function(){
+  const vars = ["Import share","Starch share","Micronutrients","Density gap","log GDP","Anemia"];
+  const M = [[1,-.448,-.029,.219,.401,-.184],[-.448,1,-.331,.186,-.759,.635],[-.029,-.331,1,.270,.311,-.234],[.219,.186,.270,1,-.327,.290],[.401,-.759,.311,-.327,1,-.617],[-.184,.635,-.234,.290,-.617,1]];
+  const t = document.getElementById("corrTable");
+  let h = "<thead><tr><th></th>"+vars.map(v=>`<th>${v}</th>`).join("")+"</tr></thead><tbody>";
+  M.forEach((row,i)=>{ h += `<tr><th style="text-align:left">${vars[i]}</th>`+row.map((r,j)=>{
+    if (i===j) return `<td style="color:var(--muted)">—</td>`;
+    const c = r>0?"var(--plum)":"var(--slate)", a = Math.round(Math.abs(r)*62);
+    const strong = (vars[i]==="Anemia"||vars[j]==="Anemia") ? "font-weight:600;" : "";
+    return `<td style="${strong}background:color-mix(in oklab, ${c} ${a}%, var(--surface)); color:${a>38?"var(--surface)":"var(--ink)"}">${r>0?"+":"−"}${Math.abs(r).toFixed(2)}</td>`;
+  }).join("")+"</tr>"; });
+  t.innerHTML = h + "</tbody>";
+})();
+
+/* ---- 4. Scatter ---- */
+(function(){
+  const svg = document.getElementById("chScatter");
+  const W=760,H=520,m={l:56,r:22,t:18,b:46};
+  const x = lin(15,85,m.l,W-m.r), y = lin(0,100,H-m.b,m.t);
+  const TI=63.7, TS=50.2;
+  el("rect",{x:x(TS),y:m.t,width:W-m.r-x(TS),height:y(TI)-m.t,fill:"var(--blood)",opacity:.06},svg);
+  for (let v=0; v<=100; v+=20){ el("line",{x1:m.l,x2:W-m.r,y1:y(v),y2:y(v),stroke:"var(--line)"},svg); el("text",{x:m.l-8,y:y(v)+4,"text-anchor":"end"},svg,v+"%"); }
+  for (let v=20; v<=80; v+=10){ el("line",{x1:x(v),x2:x(v),y1:m.t,y2:H-m.b,stroke:"var(--line)"},svg); el("text",{x:x(v),y:H-m.b+18,"text-anchor":"middle"},svg,v+"%"); }
+  el("text",{x:(m.l+W-m.r)/2,y:H-6,"text-anchor":"middle",style:"fill:var(--ink)"},svg,"Starch share of calories →");
+  el("text",{x:14,y:(m.t+H-m.b)/2,"text-anchor":"middle",transform:`rotate(-90 14 ${(m.t+H-m.b)/2})`,style:"fill:var(--ink)"},svg,"Imported share of calories →");
+  el("line",{x1:x(TS),x2:x(TS),y1:m.t,y2:H-m.b,stroke:"var(--ink-soft)","stroke-dasharray":"4 4"},svg);
+  el("line",{x1:m.l,x2:W-m.r,y1:y(TI),y2:y(TI),stroke:"var(--ink-soft)","stroke-dasharray":"4 4"},svg);
+  const corner = (tx,ty,anchor,txt,col)=>el("text",{x:tx,y:ty,"text-anchor":anchor,style:`fill:${col};font-weight:600;font-size:11.5px;letter-spacing:.04em`},svg,txt);
+  corner(W-m.r-8,m.t+16,"end","THE STARCH TRAP","var(--blood)");
+  corner(m.l+8,m.t+16,"start","TRADE HUBS · DIVERSE IMPORTS","var(--muted)");
+  corner(W-m.r-8,H-m.b-10,"end","HOME-GROWN STARCH","var(--muted)");
+  corner(m.l+8,H-m.b-10,"start","DIVERSE & DOMESTIC","var(--muted)");
+  const pts = DATA.scatter.filter(d=>d.starch_share_of_kcal!=null && d.import_share_of_kcal!=null).sort((a,b)=>(a.starch_trap?1:0)-(b.starch_trap?1:0));
+  pts.forEach(d=>{
+    const cx=x(d.starch_share_of_kcal*100), cy=y(d.import_share_of_kcal*100), a=d.anemia_prev_women_pct;
+    const p = a==null?0:Math.max(0,Math.min(100,(a-10)/50*100));
+    const c = el("circle",{cx,cy,r:d.starch_trap?6.5:4.8,
+      style: a==null ? "fill:var(--surface);stroke:var(--muted);stroke-width:1.5" : `fill:color-mix(in oklab, var(--seq-hi) ${p.toFixed(0)}%, var(--seq-lo));stroke:${d.starch_trap?"var(--ink)":"var(--surface)"};stroke-width:${d.starch_trap?2:1.2}`},svg);
+    c.addEventListener("mousemove",ev=>showTip(ev,`<b>${d.country}</b>Starch ${pct(d.starch_share_of_kcal)} · Imported ${pct(d.import_share_of_kcal)}<br>Anemia ${a==null?"n/a":a+"%"}${d.gdp_per_capita_ppp?` · GDP $${Math.round(d.gdp_per_capita_ppp).toLocaleString()}`:""}${d.starch_trap?"<br>● In the starch trap":""}`));
+    c.addEventListener("mouseleave",hideTip);
+  });
+  const labels = {"Djibouti":[9,4,"start"],"Botswana":[9,4,"start"],"Lesotho":[9,4,"start"],"Gambia":[9,4,"start"],"Yemen":[-9,4,"end"],"Bhutan":[9,4,"start"],"Liberia":[9,4,"start"],"Mauritania":[-9,4,"end"],
+    "Belgium":[8,16,"start"],"Democratic Republic of the Congo":[-8,-9,"end","DR Congo"],"India":[8,4,"start"],"Gabon":[8,4,"start"],"Madagascar":[-8,-9,"end"]};
+  pts.forEach(d=>{ const L = labels[d.country]; if(!L) return;
+    el("text",{x:x(d.starch_share_of_kcal*100)+L[0],y:y(d.import_share_of_kcal*100)+L[1],"text-anchor":L[2],style:`fill:var(--ink);font-size:11px;${d.starch_trap?"font-weight:600":""};pointer-events:none;paint-order:stroke;stroke:var(--surface);stroke-width:3px`},svg,L[3]||d.country);
+  });
+})();
+
+/* ---- trap table ---- */
+(function(){
+  const rows = DATA.scatter.filter(d=>d.starch_trap).sort((a,b)=>b.anemia_prev_women_pct-a.anemia_prev_women_pct);
+  document.getElementById("trapBody").innerHTML = rows.map(d=>`<tr><td><strong>${d.country}</strong></td>
+   <td class="n"><span class="minibar" style="width:${d.import_share_of_kcal*60}px;background:var(--grain)"></span>${pct(d.import_share_of_kcal)}</td>
+   <td class="n">${pct(d.starch_share_of_kcal)}</td><td class="n">${d.micronutrient_adequacy_index.toFixed(2)}</td>
+   <td class="n">${d.composite_density_gap>0?"+":""}${d.composite_density_gap.toFixed(1)}</td>
+   <td class="n"><span class="minibar" style="width:${d.anemia_prev_women_pct*1.1}px;background:var(--blood)"></span>${d.anemia_prev_women_pct.toFixed(1)}%</td></tr>`).join("");
+})();
+
+/* ---- iron ledger ---- */
+(function(){
+  const R = [["Niger",24.2,.037,47.1,1713],["India",16.9,.060,53.7,8871],["Mauritania",14.0,.206,54.5,6276],["Guatemala",14.0,.191,10.5,12380],["Australia",18.1,.331,11.1,60685]];
+  document.getElementById("ironBody").innerHTML = R.map(r=>`<tr><td><strong>${r[0]}</strong></td>
+  <td class="n" style="text-align:left"><span class="minibar" style="width:${r[1]*4.5}px;background:var(--leaf)"></span>${r[1].toFixed(1)}</td>
+  <td class="n" style="text-align:left"><span class="minibar" style="width:${r[2]*300}px;background:var(--plum)"></span>${Math.round(r[2]*100)}%</td>
+  <td class="n" style="text-align:left"><span class="minibar" style="width:${r[3]*1.6}px;background:var(--blood)"></span>${r[3]}%</td>
+  <td class="n">$${r[4].toLocaleString()}</td></tr>`).join("");
+})();
+
+/* ---- 5. Forest ---- */
+(function(){
+  const svg = document.getElementById("chForest");
+  const rows = [["Base: starch + imports + income",.315,.056,168,"***","var(--plum)"],["+ malaria",.271,.051,168,"***","var(--plum)"],["+ water & sanitation",.256,.059,123,"***","var(--plum)"],["+ fertility & stunting",.235,.099,70,"*","var(--plum)"],null,
+    ["53 poorer countries: base",.298,.135,53,"*","var(--slate)"],["+ malaria",.259,.127,53,"*","var(--slate)"],["+ iron supplementation",.241,.132,53,"n.s.","var(--slate)"]];
+  const W=760, lx=232, x = lin(-.1,.6,lx+10,640);
+  let yy = 44;
+  [-.1,0,.1,.2,.3,.4,.5,.6].forEach(v=>{ el("line",{x1:x(v),x2:x(v),y1:26,y2:330,stroke:v===0?"var(--blood)":"var(--line)","stroke-width":v===0?1.5:1},svg); el("text",{x:x(v),y:18,"text-anchor":"middle"},svg,v===0?"0":v.toFixed(1)); });
+  rows.forEach(r=>{
+    if(!r){ yy+=22; return; }
+    const lo=r[1]-1.96*r[2], hi=r[1]+1.96*r[2];
+    el("text",{x:lx,y:yy+4,"text-anchor":"end",style:"fill:var(--ink);font-family:var(--serif);font-size:13.5px"},svg,r[0]);
+    el("line",{x1:x(lo),x2:x(hi),y1:yy,y2:yy,stroke:r[5],"stroke-width":2.4,"stroke-linecap":"round",opacity:.55},svg);
+    el("circle",{cx:x(r[1]),cy:yy,r:6,fill:r[5],stroke:"var(--surface)","stroke-width":2},svg);
+    el("text",{x:650,y:yy+4},svg,`+${r[1].toFixed(3)} ${r[4]}  n=${r[3]}`);
+    const hit = el("rect",{x:0,y:yy-15,width:W,height:30,fill:"transparent"},svg);
+    hit.addEventListener("mousemove",ev=>showTip(ev,`<b>${r[0]}</b>coef +${r[1].toFixed(3)} (95% CI ${lo.toFixed(2)} to ${hi.toFixed(2)})<br>n = ${r[3]} · ${r[4]}`)); hit.addEventListener("mouseleave",hideTip);
+    yy += 38;
+  });
+})();
+
+/* ---- 6. Forecast small multiples ---- */
+function fcChart(id, key, dom, thr, ticks){
+  const svg = document.getElementById(id);
+  const W=380,H=260,m={l:44,r:14,t:22,b:30};
+  const x = lin(2010,2030,m.l,W-m.r), y = lin(dom[0],dom[1],H-m.b,m.t);
+  ticks.forEach(v=>{ el("line",{x1:m.l,x2:W-m.r,y1:y(v),y2:y(v),stroke:"var(--line)"},svg); el("text",{x:m.l-6,y:y(v)+4,"text-anchor":"end"},svg,v+"%"); });
+  [2010,2020,2030].forEach(v=>el("text",{x:x(v),y:H-10,"text-anchor":"middle"},svg,v));
+  el("rect",{x:x(2023),y:m.t,width:W-m.r-x(2023),height:H-m.t-m.b,fill:"var(--sunk)",opacity:.6},svg);
+  el("text",{x:x(2026.5),y:m.t+12,"text-anchor":"middle",style:"font-size:10px;fill:var(--muted)"},svg,"projection");
+  el("line",{x1:m.l,x2:W-m.r,y1:y(thr),y2:y(thr),stroke:"var(--blood)","stroke-dasharray":"4 3","stroke-width":1.3},svg);
+  el("text",{x:m.l+4,y:y(thr)-5,style:"fill:var(--blood);font-size:10px"},svg,`trap ${thr}%`);
+  const title = key==="import_share_of_kcal"?"Imported share of calories":"Starch share of calories";
+  el("text",{x:m.l,y:12,style:"fill:var(--ink);font-weight:600"},svg,title);
+  [["Haiti","HTI","var(--plum)"],["Cabo Verde","CPV","var(--ink-soft)"]].forEach(([name,iso,col])=>{
+    const s = DATA.series.filter(d=>d.country===name && d.kind==="actual" && d[key]!=null).sort((a,b)=>a.year-b.year);
+    const f = DATA.fc.find(d=>d.iso3===iso);
+    const last = s[s.length-1], lv = last[key]*100;
+    const d2030 = f[key+"_2030_damped"]*100, lo=f[key+"_2030_lo"]*100, hi=f[key+"_2030_hi"]*100;
+    el("path",{d:`M${x(last.year)},${y(lv)}L${x(2030)},${y(Math.min(hi,dom[1]))}L${x(2030)},${y(Math.max(lo,dom[0]))}Z`,style:`fill:${col};opacity:.13`},svg);
+    el("path",{d:"M"+s.map(d=>`${x(d.year)},${y(d[key]*100)}`).join("L"),fill:"none",stroke:col,"stroke-width":2,"stroke-linejoin":"round"},svg);
+    el("line",{x1:x(last.year),y1:y(lv),x2:x(2030),y2:y(d2030),stroke:col,"stroke-width":2,"stroke-dasharray":"5 4"},svg);
+    el("circle",{cx:x(2030),cy:y(d2030),r:4,fill:col,stroke:"var(--surface)","stroke-width":1.5},svg);
+    s.forEach(d=>{ const hit = el("circle",{cx:x(d.year),cy:y(d[key]*100),r:7,fill:"transparent"},svg);
+      hit.addEventListener("mousemove",ev=>showTip(ev,`<b>${name} ${d.year}</b>${(d[key]*100).toFixed(1)}%`)); hit.addEventListener("mouseleave",hideTip); });
+    const end = el("circle",{cx:x(2030),cy:y(d2030),r:9,fill:"transparent"},svg);
+    end.addEventListener("mousemove",ev=>showTip(ev,`<b>${name} 2030 (damped)</b>${d2030.toFixed(1)}% · range ${lo.toFixed(1)}–${hi.toFixed(1)}%`)); end.addEventListener("mouseleave",hideTip);
+  });
+}
+fcChart("chFcImp","import_share_of_kcal",[35,100],63.7,[40,60,80,100]);
+fcChart("chFcSt","starch_share_of_kcal",[40,66],50.2,[40,45,50,55,60,65]);
+
+/* ---- watch list ---- */
+(function(){
+  const R = [["Morocco",.07,"Imports 61.8% → 63.7%",2,"toward · closes in ~1.5 yrs"],["Cabo Verde",.09,"Starch 48.9% → 50.2%",2,"toward"],["Haiti",.12,"Imports 60.4% → 63.7%",2,"toward · closes in ~3 yrs"],["El Salvador",.21,"Starch 47.2% → 50.2%",2,"toward"],["Saudi Arabia",.38,"Starch 44.7% → 50.2%",2,"toward"],["Comoros",.38,"Imports 53.5% → 63.7%",2,"toward"],["Georgia",.39,"Starch 44.5% → 50.2%",2,"away"],["Afghanistan",.55,"Imports 49.0% → 63.7%",2,"toward · closes in ~9 yrs"]];
+  document.getElementById("watchBody").innerHTML = R.map(r=>`<tr><td><strong>${r[0]}</strong></td>
+   <td class="n" style="text-align:left"><span class="minibar" style="width:${r[1]*220}px;background:${r[1]<.15?"var(--blood)":"var(--grain)"}"></span>${r[1].toFixed(2)}</td>
+   <td>${r[2]}</td><td class="n">${r[3]} / 3</td><td style="color:${r[4].startsWith("away")?"var(--leaf)":"var(--ink-soft)"}">${r[4]}</td></tr>`).join("");
+})();
+
+/* ---- malaria split ---- */
+(function(){
+  const row = r => `<tr><td><strong>${r[0]}</strong></td><td class="n" style="text-align:left"><span class="minibar" style="width:${Math.max(r[1]*0.28,1.5)}px;background:var(--slate)"></span>${r[1]===0?"0":r[1]<10?r[1].toFixed(1):Math.round(r[1])}</td><td class="n">${r[2].toFixed(1)}%</td></tr>`;
+  document.getElementById("malTrap").innerHTML = [["Iraq",0,27.1],["Timor-Leste",0,29.7],["Botswana",0.7,30.9],["Eswatini",1.5,28.3],["Namibia",9.6,24.9],["Mauritania",26.3,54.5],["Liberia",216.1,42.5]].map(row).join("");
+  document.getElementById("malOther").innerHTML = [["Mozambique",312.5,47.0],["Niger",304.2,47.1],["Côte d’Ivoire",283.6,51.4],["Gabon",189.2,59.9],["India",2.5,53.7]].map(row).join("");
+})();
+
+/* ---- GDP ---- */
+(function(){
+  const R=[["Afghanistan","Watch list",2849,1984],["Haiti","Watch list",3205,2939],["Namibia","Trap",10615,10126],["Lesotho","Trap",2651,2592],["Botswana","Trap",14545,18932],["Bhutan","Trap",9985,14610]];
+  document.getElementById("gdpBody").innerHTML = R.map(r=>{ const c=(r[3]/r[2]-1)*100, neg=c<0;
+    return `<tr><td><strong>${r[0]}</strong></td><td>${r[1]}</td><td class="n">$${r[2].toLocaleString()}</td><td class="n">$${r[3].toLocaleString()}</td>
+    <td class="n" style="text-align:left"><span class="minibar" style="width:${Math.abs(c)*2.2}px;background:${neg?"var(--blood)":"var(--leaf)"}"></span>${neg?"↓ ":"↑ "}${neg?"−":"+"}${Math.abs(c).toFixed(0)}%</td></tr>`; }).join("");
+})();
+
+/* ---- local WFP prices ---- */
+(function(){
+  const R=[["Timor-Leste","Trap",22],["Afghanistan","Watch list",15.5],["Iraq","Trap",-1.5],["Yemen","Trap",-3.7],["Djibouti","Trap",-4],["Lesotho","Trap",-6],["Mauritania","Trap",-7.2],["Eswatini","Trap",-11]];
+  document.getElementById("wfpBody").innerHTML = R.map(r=>`<tr><td><strong>${r[0]}</strong></td><td>${r[1]}</td>
+   <td class="n" style="text-align:left"><span class="minibar" style="width:${Math.abs(r[2])*4}px;background:${r[2]>0?"var(--blood)":"var(--leaf)"}"></span>${r[2]>0?"↑ +":"↓ −"}${Math.abs(r[2]).toFixed(1)}%</td></tr>`).join("");
+})();
+
+/* ---- price outlook dot plot ---- */
+(function(){
+  const svg = document.getElementById("chPrice");
+  const R=[["Wheat, US hard red",56.9,32.2,.471],["Maize",40.6,19.9,.366],["Wheat, US soft red",40.1,17.0,.318],["Soybeans",27.9,14.3,.270],["Beef",27.8,21.2,.754],["Rice, Thai 5%",13.7,18.5,.413],["Groundnuts",12.4,12.3,.270],["Lamb",-6.7,-15.6,.324],["Chicken",-13.6,-13.8,.502]];
+  const top=48, rh=32, x=lin(-20,60,200,590);
+  const fmt = v => (v>=0?"+":"−")+Math.abs(v).toFixed(0)+"%";
+  el("text",{x:200,y:14,style:"fill:var(--ink);font-weight:600"},svg,"Change in price, 2023–25 average → 2030");
+  el("text",{x:612,y:14,style:"fill:var(--ink);font-weight:600"},svg,"Trend / growth");
+  el("text",{x:748,y:14,"text-anchor":"end",style:"fill:var(--ink);font-weight:600"},svg,"Fit R²");
+  [-20,0,20,40,60].forEach(v=>{ el("line",{x1:x(v),x2:x(v),y1:top-10,y2:top+R.length*rh-6,stroke:v===0?"var(--ink-soft)":"var(--line)","stroke-width":v===0?1.2:1},svg); el("text",{x:x(v),y:34,"text-anchor":"middle",style:"font-size:10px;fill:var(--muted)"},svg,(v>0?"+":v<0?"−":"")+Math.abs(v)+"%"); });
+  R.forEach((r,i)=>{
+    const yc=top+i*rh+8, g=el("g",{},svg);
+    el("rect",{x:0,y:yc-rh/2,width:760,height:rh,fill:"transparent"},g);
+    el("text",{x:188,y:yc+4,"text-anchor":"end",style:"fill:var(--ink);font-family:var(--serif);font-size:13.5px"},g,r[0]);
+    el("line",{x1:x(Math.min(r[1],r[2])),x2:x(Math.max(r[1],r[2])),y1:yc,y2:yc,stroke:"var(--line-strong)","stroke-width":3,"stroke-linecap":"round"},g);
+    el("circle",{cx:x(r[2]),cy:yc,r:6,fill:"var(--slate)",stroke:"var(--surface)","stroke-width":2},g);
+    el("circle",{cx:x(r[1]),cy:yc,r:6,fill:"var(--plum)",stroke:"var(--surface)","stroke-width":2},g);
+    el("text",{x:612,y:yc+4},g,`${fmt(r[1])} / ${fmt(r[2])}`);
+    el("text",{x:748,y:yc+4,"text-anchor":"end",style:r[3]>=.5?"fill:var(--ink);font-weight:600":"fill:var(--muted)"},g,r[3].toFixed(2));
+    g.addEventListener("mousemove",ev=>showTip(ev,`<b>${r[0]}</b>Trend line: ${fmt(r[1])}<br>Growth rate: ${fmt(r[2])}<br>Trend fit R² ${r[3].toFixed(2)}`));
+    g.addEventListener("mouseleave",hideTip);
+  });
+})();
+</script>
+
+</body></html>
