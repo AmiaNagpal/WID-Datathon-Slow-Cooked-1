@@ -113,7 +113,8 @@ strong{font-weight:600; color:var(--ink)}
 .chapter{padding:72px 0 24px; border-top:1px solid var(--line)}
 .ch-head{display:grid; grid-template-columns:140px minmax(0,1fr); gap:24px; margin-bottom:32px; align-items:baseline}
 @media (max-width:760px){.ch-head{grid-template-columns:1fr; gap:6px}}
-.ch-no{font-family:var(--mono); font-size:12px; color:var(--plum); letter-spacing:.08em; text-transform:uppercase; font-weight:600}
+.ch-no{font-family:var(--mono); font-size:12px; color:var(--plum); letter-spacing:.08em; text-transform:uppercase; font-weight:600; line-height:1.5}
+.ch-no .name{display:block; color:var(--muted); font-weight:400}
 .ch-head h2{font-size:clamp(30px,4vw,46px); font-weight:800; letter-spacing:-.02em}
 .ch-head .kicker{font-size:18px; color:var(--ink-soft); margin-top:12px; max-width:62ch}
 .body{margin-left:164px}
@@ -190,17 +191,15 @@ tbody tr:hover td{background:color-mix(in oklab, var(--plum-wash) 45%, transpare
 
 /* recommendations */
 .recs{display:flex; flex-direction:column; gap:0; border-top:2px solid var(--ink)}
-.rec{display:grid; grid-template-columns:62px minmax(0,1.3fr) minmax(0,1fr); gap:22px; padding:22px 0; border-bottom:1px solid var(--line-strong)}
-@media (max-width:820px){.rec{grid-template-columns:44px 1fr} .rec .evidence{grid-column:2}}
+.rec{display:grid; grid-template-columns:62px minmax(0,1fr); gap:22px; padding:22px 0; border-bottom:1px solid var(--line-strong)}
+@media (max-width:820px){.rec{grid-template-columns:44px 1fr}}
 .rec .idx{font-family:var(--display); font-weight:800; font-size:34px; color:var(--plum); line-height:1}
 .rec h4{font-size:21px; font-weight:600; letter-spacing:-.01em; margin-bottom:6px}
 .rec .who{font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; margin-bottom:8px}
 .rec p{font-size:15.5px; color:var(--ink-soft)}
 .rec ul{margin:8px 0 0; padding-left:18px; font-size:15px; color:var(--ink-soft)}
 .rec ul li{margin:3px 0}
-.evidence{background:var(--sunk); padding:12px 14px; font-size:14px; color:var(--ink-soft); align-self:start; line-height:1.5}
-.evidence .label{display:block; margin-bottom:5px}
-.strength{display:inline-block; font-family:var(--mono); font-size:10.5px; font-weight:600; padding:1px 7px; border-radius:20px; margin-left:6px; vertical-align:2px}
+.rec .cite{margin-top:10px; font-family:var(--mono); font-size:12px; color:var(--muted)}
 
 .archetypes{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line)}
 @media (max-width:980px){.archetypes{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -247,7 +246,7 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
       <div>
         <div class="eyebrow">Women in Data Datathon 2026 · “What’s Cooking?”</div>
         <h1>The world trades <span class="cal">calories</span>, not <span class="nut">nutrition</span>.</h1>
-        <p class="question">Half of all dietary energy now crosses a border before it’s eaten. <em>Which countries have traded their way into a starch-rich, micronutrient-poor food supply — does it show up in women’s anemia — and who is heading there by 2030?</em></p>
+        <p class="question">Half of all dietary energy now crosses a border before it’s eaten. <em>Which countries have traded their way into a starch-rich, micronutrient-poor food supply — does it show up in women’s anemia — and who is heading into a starch trap by 2030?</em></p>
       </div>
       <div class="labels" aria-label="Nutrient density of imported versus home-grown calories">
         <div class="nf imp">
@@ -317,10 +316,10 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
 <section class="chapter" id="premise">
   <div class="wrap">
     <div class="ch-head">
-      <div class="ch-no">Chapter 1 of 7</div>
+      <div class="ch-no">Chapter 1 of 7<span class="name">Premise</span></div>
       <div>
         <h2>First, test the premise</h2>
-        <p class="kicker">Before asking who is trapped, we checked the two claims the question takes for granted: that half the world’s calories cross a border, and that those calories are less nourishing.</p>
+        <p class="kicker">Before going further, we checked two assumptions built into that question: that half the world’s calories now cross a border, and that those calories are less nourishing.</p>
       </div>
     </div>
     <div class="body">
@@ -355,22 +354,6 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
       </div>
 
       <div class="block">
-        <h3 class="step">Carbohydrates cross borders most, and trap countries import far more of everything</h3>
-        <div class="prose"><p>Splitting the food supply by macronutrient instead of food group gives the same picture. In the typical country, the imported share of carbohydrates rose from 46.6% to 55.0% between 2010 and 2023, the fastest rise of the three. In the 12 trap countries (Chapter 2), about three-quarters of carbohydrates and fat are imported.</p></div>
-        <figure>
-          <div class="tbl-wrap"><table>
-            <thead><tr><th>Share imported (median)</th><th class="n">2010</th><th class="n">2023</th><th class="n">Change, pts</th><th class="n">Trap countries</th><th class="n">All other countries</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Carbohydrates</strong></td><td class="n">46.6%</td><td class="n">55.0%</td><td class="n">+8.4</td><td class="n">75.5%</td><td class="n">52.5%</td></tr>
-              <tr><td><strong>Fat</strong></td><td class="n">42.7%</td><td class="n">50.0%</td><td class="n">+7.3</td><td class="n">77.4%</td><td class="n">48.9%</td></tr>
-              <tr><td><strong>Protein</strong></td><td class="n">39.5%</td><td class="n">47.0%</td><td class="n">+7.5</td><td class="n">69.4%</td><td class="n">45.2%</td></tr>
-            </tbody>
-          </table></div>
-          <figcaption>Imports as a share of each nutrient’s national supply. Trap and other-country columns use each country’s latest year. Djibouti’s ratios exceed 100% because it re-exports food; the median is not affected.</figcaption>
-        </figure>
-      </div>
-
-      <div class="block">
         <h3 class="step">In 82% of countries, home-grown calories are the denser half</h3>
         <div class="prose">
           <p>No FAO file labels a calorie as imported <em>and</em> reports its nutrients, so the team built a new metric. Each food group’s calories and nutrients are split using that group’s own import share; the pieces are summed; and nutrient density per 1,000 kcal is compared between the imported and domestic halves. Iron, zinc, vitamins A, B12 and C are each scaled to a woman’s daily requirement, then averaged.</p>
@@ -387,18 +370,7 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
         </figure>
       </div>
 
-      <div class="block">
-        <h3 class="step">The first surprise in the data: importing a lot is not the same as eating starch</h3>
-        <div class="prose"><p>The correlation matrix across 178 countries shows that the obvious chain — more imports, starchier diet, more anemia — does not run in a straight line. Import share is <em>negatively</em> linked to starch share (r = −0.45) and barely linked to anemia at all (r = −0.18). Starch share is the variable that tracks anemia (+0.64), though it is tangled with income (−0.76). The next chapters have to separate those threads.</p></div>
-        <figure>
-          <div class="tbl-wrap">
-            <table class="corr" id="corrTable" aria-label="Correlation matrix"></table>
-          </div>
-          <figcaption>Pearson r, 2023 snapshot. Plum = positive, slate = negative; intensity = strength.</figcaption>
-        </figure>
-      </div>
-
-      <div class="so-what"><span class="label">So what</span><p>The premise is real: trade has pushed half the world’s plate across borders, and what crosses is the nutritionally thinner half. But trade alone doesn’t make a diet starchy. We need to find where the two overlap.</p></div>
+      <div class="so-what"><span class="label">So what</span><p>The premise is real: trade has pushed half the world’s plate across borders, and what crosses is the nutritionally thinner half. But trade alone doesn’t make a diet starchy — import share is in fact <em>negatively</em> linked to starch share (r = −0.45; full correlation picture in Chapter 7). Chapter 2 finds where the two overlap.</p></div>
     </div>
   </div>
 </section>
@@ -407,10 +379,10 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
 <section class="chapter" id="who">
   <div class="wrap">
     <div class="ch-head">
-      <div class="ch-no">Chapter 2 of 7</div>
+      <div class="ch-no">Chapter 2 of 7<span class="name">Who's trapped</span></div>
       <div>
-        <h2>Who has traded their way in</h2>
-        <p class="kicker">We call it the starch trap: a country in the top third for imported calories, the top third for starch share, <em>and</em> the bottom third for micronutrient supply — all three at once.</p>
+        <h2>Who has traded their way into the trap</h2>
+        <p class="kicker">We define the starch trap as a country that is simultaneously in the top third for imported calories, the top third for starch share, <em>and</em> the bottom third for micronutrient supply.</p>
       </div>
     </div>
     <div class="body">
@@ -428,7 +400,7 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
       </figure>
 
       <div class="block">
-        <h3 class="step">The twelve</h3>
+        <h3 class="step">The twelve countries in the starch trap</h3>
         <div class="tbl-wrap">
           <table>
             <thead><tr><th>Country</th><th class="n">Calories imported</th><th class="n">Starch share</th><th class="n">Micronutrient index</th><th class="n">Density gap</th><th class="n">Anemia, women</th></tr></thead>
@@ -470,32 +442,15 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
 <section class="chapter" id="women">
   <div class="wrap">
     <div class="ch-head">
-      <div class="ch-no">Chapter 3 of 7</div>
+      <div class="ch-no">Chapter 3 of 7<span class="name">Women's outcomes</span></div>
       <div>
-        <h2>Does it show up in women?</h2>
+        <h2>Does the starch trap show up in women?</h2>
         <p class="kicker">Across countries, yes, and it survives the obvious alternative explanations. Anemia in women 15–49 is where a thin diet becomes measurable.</p>
       </div>
     </div>
     <div class="body">
 
-      <div class="three">
-        <div class="stat"><div class="big num">19.4<small>%</small></div><p>median anemia in countries with the <strong>least</strong> starchy diets (bottom tercile)</p></div>
-        <div class="stat"><div class="big num">34.2<small>%</small></div><p>median anemia in the <strong>starchiest</strong> third, 1.8× higher</p></div>
-        <div class="stat"><div class="big num">+3.2<small>pts</small></div><p>anemia per +10 points of starch share, <strong>holding income, imports and micronutrients fixed</strong> (p &lt; 0.001, R² = 0.46, n = 167)</p></div>
-      </div>
-      <figcaption>Cross-country regression (OLS, robust standard errors).</figcaption>
-
-      <div class="block">
-        <h3 class="step">Three more tests, same answer</h3>
-        <div class="prose"><p>A second strand of the team’s work used FAO’s food-security indicators and different statistical tests, and reached the same conclusion. The third result reframes the role of money: richer countries have less anemia partly <em>because</em> income buys a less starchy plate.</p></div>
-        <div class="three" style="margin-top:20px">
-          <div class="stat"><div class="big num">1.35</div><p><strong>Effect size</strong> (Cohen’s d) separating starch-heavy from diversified-diet countries, conventionally a large effect. t-test and Mann-Whitney both p &lt; 10⁻⁹.</p></div>
-          <div class="stat"><div class="big num">F = 29.1</div><p>Grouping countries by <strong>income × diet</strong>, diet, not import dependence, is what separates their anemia levels (ANOVA, p &lt; 10⁻¹⁴).</p></div>
-          <div class="stat"><div class="big num">26<small>%</small></div><p>of income’s <strong>protective effect</strong> on anemia runs through a less starchy diet (Sobel mediation test, p = 0.004).</p></div>
-        </div>
-      </div>
-
-      <div class="block">
+      <div class="block" style="margin-top:0">
         <h3 class="step">Is it really diet, or is starch standing in for poverty or disease?</h3>
         <div class="prose">
           <p>Starchy diets go with poverty, and poverty goes with malaria, dirty water and weak health systems. So we added WHO and DHS controls one at a time. Adding malaria leaves <strong>86%</strong> of the starch effect in place. Water, sanitation, adolescent fertility and child stunting leave <strong>74%</strong>.</p>
@@ -513,6 +468,16 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
       </div>
 
       <div class="block">
+        <h3 class="step">Starch, in three numbers</h3>
+        <div class="three">
+          <div class="stat"><div class="big num">19.4<small>%</small></div><p>median anemia in countries with the <strong>least</strong> starchy diets (bottom tercile)</p></div>
+          <div class="stat"><div class="big num">34.2<small>%</small></div><p>median anemia in the <strong>starchiest</strong> third, 1.8× higher</p></div>
+          <div class="stat"><div class="big num">+3.2<small>pts</small></div><p>anemia per +10 points of starch share, <strong>holding income, imports and micronutrients fixed</strong> (p &lt; 0.001, R² = 0.46, n = 167)</p></div>
+        </div>
+        <figcaption>Cross-country regression (OLS, robust standard errors).</figcaption>
+      </div>
+
+      <div class="block">
         <h3 class="step">Malaria splits the high-anemia countries into two groups</h3>
         <div class="prose"><p>Malaria destroys red blood cells, so it causes anemia whatever people eat. If malaria were quietly driving the trap countries’ anemia, the diet story would fall apart. It isn’t: of the seven trap countries with a malaria figure, six have low rates. The countries combining very high anemia with heavy malaria (Mozambique, Niger, Côte d’Ivoire, Gabon) sit outside the trap. Liberia is the one trap country where malaria is clearly part of the picture, and India has neither a trade nor a malaria explanation.</p></div>
         <figure>
@@ -525,9 +490,9 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
       </div>
 
       <div class="block">
-        <h3 class="step">It’s not how much iron — it’s what the iron comes attached to</h3>
+        <h3 class="step">It’s not how much iron is in the food supply — it’s whether the body can absorb it</h3>
         <div class="prose">
-          <p>Niger’s food supply delivers <strong>24.2 mg of iron per person per day</strong>, above the commonly cited 18 mg target, yet 47% of its women are anemic. Only 4% of that iron comes from meat, fish, eggs or dairy. The rest comes from cereals and beans, and the body absorbs non-heme iron far less well. Across countries, total iron supply barely tracks anemia (r = −0.21). The <em>share</em> of iron from animal sources tracks it 2.7× more strongly (r = −0.55).</p>
+          <p>Niger’s food supply delivers <strong>24.2 mg of iron per person per day</strong>, above the commonly cited 18 mg target, yet 47% of its women are anemic. The reason is absorption, not supply: iron from meat, fish, eggs and dairy (“heme” iron) is efficiently absorbed, while iron from cereals and beans (“non-heme” iron) is not. Only 4% of Niger’s iron comes from animal sources — the rest is the poorly absorbed kind. Across countries, total iron supply barely tracks anemia (r = −0.21). The <em>share</em> of iron that comes from animal sources tracks it 2.7× more strongly (r = −0.55).</p>
           <p>The same pattern shows up over time. Between 2010 and 2023 the typical country’s iron supply edged up from 15.4 to 16.0 mg a day, and it rose in 102 of 162 countries. <strong>Anemia rose anyway in 73 of those 102.</strong> Burkina Faso (24.8 mg a day, 44% anemia) matches Niger’s pattern.</p>
         </div>
         <figure>
@@ -542,7 +507,7 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
       </div>
 
       <div class="block">
-        <h3 class="step">Why this is a women’s story, not just a national one</h3>
+        <h3 class="step">Why this is a women’s story</h3>
         <div class="prose"><p>National food supply is an average, and women often don’t receive the average. Iron needs peak during the reproductive years, nutrient-dense foods cost more, and women are more likely to go without them.</p></div>
         <div class="three" style="margin-top:20px">
           <div class="stat"><div class="big num">98<small>/135</small></div><p>countries where <strong>women are more food-insecure than men</strong> (73%)</p></div>
@@ -560,10 +525,10 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
 <section class="chapter" id="refused">
   <div class="wrap">
     <div class="ch-head">
-      <div class="ch-no">Chapter 4 of 7</div>
+      <div class="ch-no">Chapter 4 of 7<span class="name">What didn't hold</span></div>
       <div>
-        <h2>What the data refused to say</h2>
-        <p class="kicker">Across three notebooks and fifteen scripts, the team tested roughly nine explanations. Some held and some collapsed. Saying which is which is what makes the rest credible.</p>
+        <h2>What held up, and what didn't</h2>
+        <p class="kicker">Across three notebooks and fifteen scripts, the team tested roughly nine explanations. Some held up; some collapsed.</p>
       </div>
     </div>
     <div class="body">
@@ -616,7 +581,7 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
       </div>
 
       <div class="block">
-        <h3 class="step">Economic growth alone doesn’t get a country out</h3>
+        <h3 class="step">Economic growth alone doesn’t get a country out of the trap</h3>
         <div class="prose"><p>Income is falling in several countries this story flags, most sharply Afghanistan, where GDP per person fell by nearly a third. But growth is no escape either: Bhutan and Botswana grew fast and are still in the trap.</p></div>
         <figure>
           <div class="tbl-wrap"><table><thead><tr><th>Country</th><th>Group</th><th class="n">GDP per person, 2010</th><th class="n">2023</th><th>Change</th></tr></thead><tbody id="gdpBody"></tbody></table></div>
@@ -635,9 +600,9 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
 <section class="chapter" id="outlook">
   <div class="wrap">
     <div class="ch-head">
-      <div class="ch-no">Chapter 5 of 7</div>
+      <div class="ch-no">Chapter 5 of 7<span class="name">2030 outlook</span></div>
       <div>
-        <h2>Who’s heading there by 2030</h2>
+        <h2>Who’s heading into the trap by 2030</h2>
         <p class="kicker">A straight-line extrapolation named two new trap countries. We back-tested it, found it did worse than assuming no change, and replaced the forecast with a watch list.</p>
       </div>
     </div>
@@ -720,10 +685,38 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
         <figcaption>WHO public-health bands for anemia prevalence: 20–39.9% moderate, 40% or more severe.</figcaption>
       </div>
 
+      <div class="so-what"><span class="label">So what</span><p><strong>Can trade composition serve as an early-warning signal?</strong> As a <em>screen</em>, yes: it reliably flags which countries are structurally exposed. As a <em>timer</em>, no: in this data, shifts in a country’s import mix do not precede shifts in its anemia. Use it to decide where to look, then track anemia directly.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 6 ================= -->
+<section class="chapter" id="act">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-no">Chapter 6 of 7<span class="name">What to do</span></div>
+      <div>
+        <h2>What to do about the starch trap</h2>
+        <p class="kicker">The evidence says the risk is structural, concentrated and gendered. So the fixes should target the imported plate where it enters a country, protect what’s grown at home, and reach women directly.</p>
+      </div>
+    </div>
+    <div class="body">
+
+      <div class="block" style="margin-top:0">
+        <h3 class="step">Start by sorting countries — one policy doesn’t fit all</h3>
+        <div class="archetypes">
+          <div class="arch"><span class="pri" style="color:var(--blood)">Act now</span><h4>In the starch trap</h4><div class="ex">Lesotho · Gambia · Mauritania · Liberia · Yemen · Djibouti · Botswana · Eswatini · Namibia · Iraq · Bhutan · Timor-Leste</div><p>Fix the imported basket. Actions 1, 2, 4, 5</p></div>
+          <div class="arch"><span class="pri" style="color:var(--grain)">Prevent</span><h4>On the watch list</h4><div class="ex">Morocco · Cabo Verde · Haiti · El Salvador · Comoros · Afghanistan</div><p>Monitor, and hold the last unmet condition. Actions 3, 5</p></div>
+          <div class="arch"><span class="pri" style="color:var(--grain)">Diversify</span><h4>Home-grown starch</h4><div class="ex">DR Congo · Madagascar · Ethiopia · India · Cambodia</div><p>Trade isn’t the route; the local diet is. Actions 3, 4</p></div>
+          <div class="arch"><span class="pri" style="color:var(--slate)">Treat other causes</span><h4>High anemia, other drivers</h4><div class="ex">Gabon · Côte d’Ivoire · Niger · Mozambique</div><p>Malaria (190–312 cases per 1,000 at risk), sanitation, health access. Actions 4, 6</p></div>
+          <div class="arch"><span class="pri" style="color:var(--leaf)">Low priority</span><h4>Imports diversity</h4><div class="ex">Belgium · Netherlands · Luxembourg · Malta</div><p>High imports, but a diverse, low-starch plate.</p></div>
+        </div>
+      </div>
+
       <div class="block">
-        <h3 class="step">Step 4 — what imported staples may cost by 2030</h3>
+        <h3 class="step">The price case for acting now</h3>
         <div class="prose">
-          <p>Trap countries buy most of their grain abroad, so world prices reach them through the import bill. If the last decade’s pattern continues, wheat rises 17–57% by 2030 depending on grade and method, maize 20–41% and rice 14–19%. Chicken is the exception, falling about 14%, which would make one well-absorbed source of iron cheaper.</p>
+          <p>Trap countries buy most of their grain abroad, so world prices reach them through the import bill. If the last decade’s pattern continues, wheat rises 17–57% by 2030 depending on grade and method, maize 20–41% and rice 14–19%. Chicken is the exception, falling about 14%, which would make one well-absorbed source of iron cheaper — a reason to move on rebalancing (Action 2) alongside fortification (Action 1) rather than after it.</p>
           <p>Local markets are calmer today: staple prices are falling in six of the eight trap and watch-list countries with current data, and prices showed no link to anemia (Chapter 4). History backs that up: between 2010 and 2023, world prices showed no measurable link to what countries ate (r ≈ −0.14, not significant), and only for beef did trade volumes and prices rise together. Read this as budget pressure on import-dependent governments, not as a cause of anemia.</p>
         </div>
         <figure>
@@ -741,91 +734,85 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
         </figure>
       </div>
 
-      <div class="so-what"><span class="label">So what</span><p><strong>Can trade composition serve as an early-warning signal?</strong> As a <em>screen</em>, yes: it reliably flags which countries are structurally exposed. As a <em>timer</em>, no: in this data, shifts in a country’s import mix do not precede shifts in its anemia. Use it to decide where to look, then track anemia directly.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CHAPTER 6 ================= -->
-<section class="chapter" id="act">
-  <div class="wrap">
-    <div class="ch-head">
-      <div class="ch-no">Chapter 6 of 7</div>
-      <div>
-        <h2>What to do about it</h2>
-        <p class="kicker">The evidence says the risk is structural, concentrated and gendered. So the fixes should target the imported plate where it enters a country, protect what’s grown at home, and reach women directly.</p>
-      </div>
-    </div>
-    <div class="body">
-
-      <div class="block" style="margin-top:0">
-        <h3 class="step">Start by sorting countries — one policy doesn’t fit all</h3>
-        <div class="archetypes">
-          <div class="arch"><span class="pri" style="color:var(--blood)">Act now</span><h4>In the starch trap</h4><div class="ex">Lesotho · Gambia · Mauritania · Liberia · Yemen · Djibouti · Botswana · Eswatini · Namibia · Iraq · Bhutan · Timor-Leste</div><p>Fix the imported basket. Actions 1, 2, 4, 5</p></div>
-          <div class="arch"><span class="pri" style="color:var(--grain)">Prevent</span><h4>On the watch list</h4><div class="ex">Morocco · Cabo Verde · Haiti · El Salvador · Comoros · Afghanistan</div><p>Monitor, and hold the last unmet condition. Actions 3, 5</p></div>
-          <div class="arch"><span class="pri" style="color:var(--grain)">Diversify</span><h4>Home-grown starch</h4><div class="ex">DR Congo · Madagascar · Ethiopia · India · Cambodia</div><p>Trade isn’t the route; the local diet is. Actions 3, 4</p></div>
-          <div class="arch"><span class="pri" style="color:var(--slate)">Treat other causes</span><h4>High anemia, other drivers</h4><div class="ex">Gabon · Côte d’Ivoire · Niger · Mozambique</div><p>Malaria (190–312 cases per 1,000 at risk), sanitation, health access. Actions 4, 6</p></div>
-          <div class="arch"><span class="pri" style="color:var(--leaf)">Low priority</span><h4>Imports diversity</h4><div class="ex">Belgium · Netherlands · Luxembourg · Malta</div><p>High imports, but a diverse, low-starch plate.</p></div>
-        </div>
-      </div>
-
+      <h3 class="step">Summary of recommendations</h3>
       <div class="recs">
         <div class="rec">
           <div class="idx">1</div>
           <div>
             <div class="who">Governments of trap countries · port &amp; standards authorities</div>
             <h4>Fortify the imported staples at the border</h4>
-            <p>Make iron, folic acid and vitamin A fortification a condition of import for wheat flour, rice, maize and edible oil. These are the calories trap countries import most, so the imported half can deliver micronutrients instead of diluting them.</p>
-            <ul><li>Supply is concentrated. The top three exporters ship 68–78% of traded rice, 61–66% of maize and 83–86% of palm oil, so a handful of supplier standards reach most plates.</li><li>First movers: Gambia and Liberia (rice ≈100% imported), Lesotho (maize and wheat), Djibouti (≈98% of calories).</li></ul>
+            <ul>
+              <li>Make iron, folic acid and vitamin A fortification a condition of import for wheat flour, rice, maize and edible oil — the calories trap countries import most, so the imported half can deliver micronutrients instead of diluting them.</li>
+              <li>Supply is concentrated: the top three exporters ship 68–78% of traded rice, 61–66% of maize and 83–86% of palm oil, so a handful of supplier standards reach most plates.</li>
+              <li>First movers: Gambia and Liberia (rice ≈100% imported), Lesotho (maize and wheat), Djibouti (≈98% of calories).</li>
+            </ul>
+            <p class="cite">(Ch. 1, Ch. 2)</p>
           </div>
-          <div class="evidence"><span class="label">Evidence<span class="strength chip-yes">Strong</span></span>Cereals, oils and sugar = 60% of calories but 37% of iron (Ch. 1). The trap is defined by exactly these imports (Ch. 2). Trade concentration: <span class="mono">Analysis.xlsx › Trade concentration</span>. Price outlook: wheat +17% to +57% and maize +20% to +41% by 2030 in US dollars if recent trends continue, a growing bill for grain-importing trap countries (Ch. 5).</div>
         </div>
         <div class="rec">
           <div class="idx">2</div>
           <div>
             <div class="who">Trade &amp; finance ministries · public food procurement</div>
             <h4>Rebalance the import basket toward iron-rich foods</h4>
-            <p>Cut tariffs and VAT on pulses, dried fish, eggs and milk powder. Use state procurement and food-aid contracts to buy these, not only grain. Spread purchases across several suppliers so a single shock can’t empty the shelf. Chicken is the one iron-rich import projected to get cheaper (about −14% by 2030), a chance to widen access to well-absorbed iron.</p>
-            <ul><li>Watch concentration risk: 78% of traded lentils come from three exporters, and India buys 79% of its imported beans from Myanmar.</li></ul>
+            <ul>
+              <li>Cut tariffs and VAT on pulses, dried fish, eggs and milk powder; use state procurement and food-aid contracts to buy these, not only grain.</li>
+              <li>Spread purchases across several suppliers so a single shock can’t empty the shelf. Chicken is the one iron-rich import projected to get cheaper (about −14% by 2030) — a chance to widen access to well-absorbed iron.</li>
+              <li>Watch concentration risk: 78% of traded lentils come from three exporters, and India buys 79% of its imported beans from Myanmar.</li>
+            </ul>
+            <p class="cite">(Ch. 3, Ch. 4)</p>
           </div>
-          <div class="evidence"><span class="label">Evidence<span class="strength chip-part">Moderate</span></span>Animal-source iron share tracks anemia 2.7× better than iron quantity (Ch. 3). Price levers are uncertain: relative prices of iron-dense foods already fell in most checked countries (Ch. 4), so access, not price alone, is the barrier. <span class="mono">Analysis.xlsx › Supplier dependency</span>.</div>
         </div>
         <div class="rec">
           <div class="idx">3</div>
           <div>
             <div class="who">Agriculture ministries · development partners</div>
-            <h4>Protect the nutrient-dense half grown at home</h4>
-            <p>Invest in vegetables, pulses, small livestock and eggs: home and school gardens, cold chains, extension services. Screen trade and food-security policies so cheap imported staples don’t push out diverse local crops. For watch-list countries this is how to hold the last unmet threshold.</p>
+            <h4>Invest in home-grown nutrition, not just imports</h4>
+            <ul>
+              <li>Fund home and school gardens, cold chains and extension services for vegetables, pulses, small livestock and eggs.</li>
+              <li>Screen trade and food-security policy so cheap imports don’t crowd out local crops.</li>
+              <li>For the watch list (Morocco, Cabo Verde, Haiti): this is how to hold the last unmet threshold.</li>
+            </ul>
+            <p class="cite">(Ch. 1, Ch. 5)</p>
           </div>
-          <div class="evidence"><span class="label">Evidence<span class="strength chip-yes">Strong</span></span>Domestic calories are denser in 82% of countries; vegetables are 2% of calories but 26% of vitamin A (Ch. 1). Morocco, Cabo Verde and Haiti each have one condition left (Ch. 5).</div>
         </div>
         <div class="rec">
           <div class="idx">4</div>
           <div>
             <div class="who">Health &amp; social-protection ministries · NGOs</div>
             <h4>Put women 15–49 first, directly</h4>
-            <p>National supply averages hide who goes without. Reach women directly with weekly iron–folic acid supplementation through antenatal care, schools and workplaces, plus cash or vouchers earmarked for eggs, fish, meat and pulses. Measure intake by sex, not just by household.</p>
+            <ul>
+              <li>National supply averages hide who goes without — reach women directly with weekly iron–folic acid supplementation through antenatal care, schools and workplaces.</li>
+              <li>Add cash or vouchers earmarked for eggs, fish, meat and pulses.</li>
+              <li>Measure intake by sex, not just by household.</li>
+            </ul>
+            <p class="cite">(Ch. 3)</p>
           </div>
-          <div class="evidence"><span class="label">Evidence<span class="strength chip-yes">Strong</span></span>Women are more food-insecure than men in 73% of countries; animal-source foods cost 1.8× staples; unaffordability ↔ anemia r = +0.63; anemia rose in 123 of 162 countries (Ch. 3).</div>
         </div>
         <div class="rec">
           <div class="idx">5</div>
           <div>
             <div class="who">FAO · WHO · WFP · national statistics offices</div>
             <h4>Run the starch-trap monitor every year</h4>
-            <p>Turn this analysis into a standing screen using the FAO Food Balance Sheets FAO already publishes. Recompute the three conditions each year, and flag any country within 0.25 SD of its last threshold for a nutrition review (today: Morocco, Cabo Verde, Haiti, El Salvador). Pair the screen with the anchored anemia forecast and the WFP price feed.</p>
-            <ul><li>Use it to decide <em>where</em> to act. Confirm <em>when</em> with anemia data itself.</li></ul>
+            <ul>
+              <li>Turn this analysis into a standing screen using the FAO Food Balance Sheets FAO already publishes; recompute the three conditions each year.</li>
+              <li>Flag any country within 0.25 SD of its last threshold for a nutrition review (today: Morocco, Cabo Verde, Haiti, El Salvador).</li>
+              <li>Pair the screen with the anchored anemia forecast and the WFP price feed — use it to decide <em>where</em> to act, and confirm <em>when</em> with anemia data itself.</li>
+            </ul>
+            <p class="cite">(Ch. 5)</p>
           </div>
-          <div class="evidence"><span class="label">Evidence<span class="strength chip-part">Screening only</span></span>Proximity measure and anchored anemia model (RMSE 1.14) are back-tested (Ch. 5). The lag-3 test shows trade mix doesn’t time anemia shifts, hence “screen”, not “alarm”.</div>
         </div>
         <div class="rec">
           <div class="idx">6</div>
           <div>
             <div class="who">Health ministries · researchers</div>
             <h4>Treat the non-food causes, and close the data gaps</h4>
-            <p>Where anemia is high but trade isn’t the route, pair nutrition with malaria control (bed nets, seasonal chemoprevention) and water and sanitation. To sharpen this analysis next: split anemia by cause with IHME GBD data, pull a malaria time series, and study when fortification mandates were adopted as a natural experiment.</p>
+            <ul>
+              <li>Where anemia is high but trade isn’t the route, pair nutrition with malaria control (bed nets, seasonal chemoprevention) and water and sanitation.</li>
+              <li>Split anemia by cause with IHME GBD data and pull a malaria time series.</li>
+              <li>Study when fortification mandates were adopted as a natural experiment.</li>
+            </ul>
+            <p class="cite">(Ch. 3, Ch. 4)</p>
           </div>
-          <div class="evidence"><span class="label">Evidence<span class="strength chip-yes">Strong</span></span>Malaria r = 0.525 with anemia and remains significant alongside starch (Ch. 3–4). Mozambique, Niger, Côte d’Ivoire and Gabon combine very high anemia with 190–312 malaria cases per 1,000 at risk, while most trap countries have almost none (Ch. 3).</div>
         </div>
       </div>
     </div>
@@ -836,7 +823,7 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
 <section class="chapter" id="sources">
   <div class="wrap">
     <div class="ch-head">
-      <div class="ch-no">Chapter 7 of 7</div>
+      <div class="ch-no">Chapter 7 of 7<span class="name">Sources &amp; limits</span></div>
       <div>
         <h2>Sources, method notes &amp; limits</h2>
         <p class="kicker">Every number above traces to a file in the team’s findings folder. Here is what to read before citing one.</p>
@@ -857,6 +844,17 @@ footer{padding:40px 0 70px; color:var(--muted); font-size:13.5px; border-top:1px
           <li><strong>Malaria is one year (2021)</strong> and missing for five trap countries, so it explains differences between countries, not change over time.</li>
           <li><strong>Price projections are simple extrapolations</strong> of world US-dollar prices, not adjusted for inflation and not what any country pays.</li>
         </ol>
+      </div>
+
+      <div class="block">
+        <h3 class="step">Supporting detail: the full correlation picture</h3>
+        <div class="prose"><p>Chapter 1 notes that the obvious chain — more imports, starchier diet, more anemia — doesn’t run in a straight line. Here is the full matrix behind that claim. Import share is <em>negatively</em> linked to starch share (r = −0.45) and barely linked to anemia at all (r = −0.18). Starch share is the variable that tracks anemia (+0.64), though it is tangled with income (−0.76). The rest of the story is spent separating those threads.</p></div>
+        <figure>
+          <div class="tbl-wrap">
+            <table class="corr" id="corrTable" aria-label="Correlation matrix"></table>
+          </div>
+          <figcaption>Pearson r, 2023 snapshot, 178 countries. Plum = positive, slate = negative; intensity = strength.</figcaption>
+        </figure>
       </div>
 
       <div class="block">
