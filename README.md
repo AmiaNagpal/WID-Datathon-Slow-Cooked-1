@@ -6,8 +6,8 @@
 
 | | |
 |---|---|
-| 🌐 **Live website (data story)** | **[https://amianagpal.github.io/WID-Datathon-Slow-Cooked/](https://amianagpal.github.io/WID-Datathon-Slow-Cooked/)** |
-| 🎤 **Live presentation (7-minute pitch)** | **[https://amianagpal.github.io/WID-Datathon-Slow-Cooked/presentation.html](https://amianagpal.github.io/WID-Datathon-Slow-Cooked/presentation.html)** — press **N** for speaker notes, **F** for full screen |
+| 🌐 **Live website (data story)** | **[https://amianagpal.github.io/WID-Datathon-Slow-Cooked-1/](https://amianagpal.github.io/WID-Datathon-Slow-Cooked-1/)** |
+| 🎤 **Live presentation (7-minute pitch)** | **[https://amianagpal.github.io/WID-Datathon-Slow-Cooked-1/presentation.html](https://amianagpal.github.io/WID-Datathon-Slow-Cooked-1/presentation.html)** — press **N** for speaker notes, **F** for full screen |
 | 📁 **Source files** | [`index.html`](index.html) · [`presentation.html`](presentation.html) |
 
 ---
